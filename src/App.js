@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-import Home from './components/Home/Home';
+import "boxicons/css/boxicons.css";
+import Home from './components/Home';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <div clasName="App">
        <Routes>
          <Route path='/' element={<Home />}/>
        </Routes>
