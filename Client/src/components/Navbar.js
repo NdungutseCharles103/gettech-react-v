@@ -1,11 +1,13 @@
 import React from "react";
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-const Navbar = () => {
+const Navbar = (props) => {
+    const {wishCount, cartCount} = props;
   return (
-    <nav className="navbar bg-slate-100 text-black h-[60px] flex items-center justify-center">
+    <nav className="navbar bg-slate-100 text-black h-[60px] flex items-center justify-center sticky top-0">
       <div className="navbar__container items-center justify-between w-[90%] max-w-[1500px] flex px-6">
         <a href="/" id="navbar__logo" className="w-[80px]">
           <img src={require("../Images/logo.png")} alt="" />
@@ -21,21 +23,25 @@ const Navbar = () => {
               Home
             </a>
           </li>
-          <li className="mx-7">
-            <a href="/" className="navbar__links" id="about-page">
+          <li className="ml-7">
+            <a href="/products" className="navbar__links" id="about-page">
               Products
             </a>
           </li>
-          <IconButton className="ml-7" aria-label="cart">
-            <Badge badgeContent={4} color="secondary">
-              <ShoppingCartIcon />
-            </Badge>
-          </IconButton>
-          <li className="ml-7">
-            <a href="/" className="navbar__links" id="services-page">
-              Wishlist
-            </a>
-          </li>
+          <a href="/cart">
+            <IconButton className="ml-7 navitem" aria-label="cart">
+              <Badge max={99} badgeContent={cartCount} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
+          </a>
+          <a href="wishlist">
+            <IconButton className="ml-7 navitem" aria-label="cart">
+              <Badge max={99} badgeContent={wishCount} color="secondary">
+                <FavoriteIcon />
+              </Badge>
+            </IconButton>
+          </a>
           <li className="ml-7">
             <a href="/" className="button">
               Sign Up

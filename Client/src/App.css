@@ -10,8 +10,17 @@
 :root{
   --color1: #F6F6FA;
   --color2: #FFF;
-  --color2: #000;
+  --color3: #000;
 }
 .navbar{
   background-color: var(--color1)
+}
+.navitem{
+  margin-left: 1.3em !important;
+}
+.auto-col-1{
+  grid-auto-columns: 27%;
+}
+.auto-col-1::-webkit-scrollbar {
+  display: none;
 }
