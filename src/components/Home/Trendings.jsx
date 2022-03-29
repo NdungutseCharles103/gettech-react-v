@@ -21,7 +21,7 @@ const Trendings = (props) => {
     const cartHandler = () => {
       setProducts(
         products.map((pro) => {
-          if (pro.id === product.id) {
+          if (pro._id === product._id) {
             return {
               ...pro,
               cart: !pro.cart,
@@ -39,7 +39,7 @@ const Trendings = (props) => {
     const wishHandler = () => {
       setProducts(
         products.map((pro) => {
-          if (pro.id === product.id) {
+          if (pro._id === product._id) {
             return {
               ...pro,
               wish: !pro.wish,
@@ -54,29 +54,29 @@ const Trendings = (props) => {
         wishDecrement();
       }
     };
-    const cartBtnClass = product.cart ? 'added' : '';
-    const cartBtnText = product.cart ? 'Remove From Cart':'Add To Cart'
-    const wishBtnClass = product.wish ? 'addedwish' : '';
-    const wishBtnText = product.wish ? 'Remove from Wishlist':'Add To Wishlist'
+    const cartBtnClass = product.cart ? 'bx bx-check added' : 'bx bx-cart-add';
+    const cartBtnTitle = product.cart ? "remove from cart" : "add to cart";
+    const wishBtnClass = product.wish ? "bx bx-list-minus addedwish" : "bx bx-list-plus";
+    const wishBtnTitle = product.wish ? 'remove from wishlist':'add to wishlist'
     return (
       <div
         key={product.id}
-        className="card justify-between bg-slate-100 cursor-pointer hover:scale-[1.05] duration-300 shadow-xl
+        className="card justify-between bg-slate-300 cursor-pointer hover:scale-[1.05] duration-300 shadow-xl
             mt-3 flex flex-col items-center p-2"
       >
         <img className="w-full" src={product.image} alt="" />
         <p className="py-2">{product.name}</p>
-        <div className="acts flex item-center w-[100%] px-2 justify-center">
-          <button
+        <div className="acts flex item-center w-[80%] px-2 justify-between">
+          <button title={wishBtnTitle}
             onClick={wishHandler}
-            className={`flex py-2 px-3 bg-slate-400 items-center ${wishBtnClass}`}>
-            {wishBtnText}
-          </button>
-          <button
-            onClick={cartHandler}
-            className={`flex items-center ml-2 bg-orange-300 py-2 px-3 ${cartBtnClass}`}
+            className={`flex px-1 text-3xl bg-slate-300 items-center ${wishBtnClass}`}
           >
-            {cartBtnText}
+          </button>
+          <p>{product.price}</p>
+          <button title={cartBtnTitle}
+            onClick={cartHandler}
+            className={`flex px-1 text-3xl items-center ml-2 bg-orange-300 ${cartBtnClass}`}
+          >
           </button>
         </div>
       </div>
@@ -88,7 +88,7 @@ const Trendings = (props) => {
       <h1 className="text-center text-2xl">Trendings</h1>
       <div className="grid gap-4 auto-col-1 overflow-x-scroll grid-flow-col">
         {products.map((product) => (
-          <Trends key={product.id} setProducts={setProducts} 
+          <Trends key={product._id} setProducts={setProducts} 
           product={product} products={products} cartIncrement={cartIncrement}
           cartDecrement={cartDecrement} wishDecrement={wishDecrement}
           wishIncrement={wishIncrement}/>

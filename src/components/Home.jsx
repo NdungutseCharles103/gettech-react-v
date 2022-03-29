@@ -1,10 +1,19 @@
 import React from "react";
 import Navbar from "./Navbar";
-import Trendings from './Home/Trendings'
+import Trendings from "./Home/Trendings";
 
 const Home = (props) => {
-  const {wishCount, wishDecrement, cartCount, products, setProducts,
-   wishIncrement,cartIncrement, cartDecrement} = props;
+  const {
+    wishCount,
+    wishDecrement,
+    cartCount,
+    products,
+    setProducts,
+    wishIncrement,
+    cartIncrement,
+    cartDecrement,
+  } = props;
+
   return (
     <div className="main ">
       <Navbar cartCount={cartCount} wishCount={wishCount} />
@@ -100,7 +109,8 @@ const Home = (props) => {
         wishDecrement={wishDecrement}
         cartDecrement={cartDecrement}
         wishIncrement={wishIncrement}
-        products={products} setProducts={setProducts}
+        products={products}
+        setProducts={setProducts}
       />
     </div>
   );
