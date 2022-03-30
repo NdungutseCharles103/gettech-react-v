@@ -6,6 +6,13 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const Navbar = (props) => {
     const {wishCount, cartCount} = props;
+
+    // const Dropdown = () =>{
+    //   return (
+    //         <div className="flex flex-col"></div>
+    //   )
+    // }
+
   return (
     <nav className="navbar bg-slate-100 text-black h-[60px] flex items-center justify-center sticky top-0">
       <div className="navbar__container items-center justify-between w-[90%] max-w-[1500px] flex px-6">
