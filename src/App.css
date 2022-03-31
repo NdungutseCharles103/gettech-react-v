@@ -19,7 +19,7 @@
   margin-left: 1.3em !important;
 }
 .auto-col-1{
-  grid-auto-columns: 27%;
+  grid-auto-columns: 23%;
 }
 .auto-col-1::-webkit-scrollbar {
   display: none;

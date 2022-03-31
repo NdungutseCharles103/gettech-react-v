@@ -16,10 +16,11 @@ const Navbar = (props) => {
     const Dropdown = () =>{
       return (
             <div className="flex flex-col absolute bg-slate-100 py-3 translate-x-[-15px] text-[.9em]">
+              <a href="/products" className="flex hover:bg-slate-400  pr-6 pl-5">All</a>
               <a href="/" className="flex hover:bg-slate-400  pr-6 pl-5">Home</a>
               <a href="/gaming" className="flex  hover:bg-slate-400   pl-5">PCs</a>
               <a href="/" className="flex  hover:bg-slate-400   pl-5">Phones</a>
-              <a href="" className="flex  hover:bg-slate-400   pl-5">Gaming</a>
+              <a href="/" className="flex  hover:bg-slate-400   pl-5">Gaming</a>
             </div>
       )
     }
