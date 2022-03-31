@@ -1,17 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const Navbar = (props) => {
-    const {wishCount, cartCount} = props;
+  const [show, setShow]=useState(false)
+  const {wishCount, cartCount} = props;
 
-    // const Dropdown = () =>{
-    //   return (
-    //         <div className="flex flex-col"></div>
-    //   )
-    // }
+  const showHandler = () =>{
+    setShow(!show)
+  }
+  // const dropshow = show? <Dropdown /> : ''
+
+    const Dropdown = () =>{
+      return (
+            <div className="flex flex-col absolute bg-slate-100 py-3 translate-x-[-15px] text-[.9em]">
+              <a href="/" className="flex hover:bg-slate-400  pr-6 pl-5">Home</a>
+              <a href="/gaming" className="flex  hover:bg-slate-400   pl-5">PCs</a>
+              <a href="/" className="flex  hover:bg-slate-400   pl-5">Phones</a>
+              <a href="" className="flex  hover:bg-slate-400   pl-5">Gaming</a>
+            </div>
+      )
+    }
 
   return (
     <nav className="navbar bg-slate-100 text-black h-[60px] flex items-center justify-center sticky top-0">
@@ -31,9 +42,10 @@ const Navbar = (props) => {
             </a>
           </li>
           <li className="ml-7">
-            <a href="/products" className="navbar__links" id="about-page">
+            <div onClick={showHandler} className="navbar__links cursor-pointer" id="about-page ">
               Products
-            </a>
+            </div>
+              {show?<Dropdown />:''}
           </li>
           <a href="/cart">
             <IconButton className="ml-7 navitem" aria-label="cart">
