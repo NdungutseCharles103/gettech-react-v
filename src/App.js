@@ -8,16 +8,19 @@ import Products from "./products/Products";
 import Cart from "./components/Cart/Cart";
 import Favs from "./components/Favs/Favs";
 import Signup from "./components/Sign/Signup";
+// import { app } from './firebaseConfig'
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
   const [wishCount, setWishCount] = useState(0);
   const [products, setProducts] = useState([])
+  const [filter, setFilter] = useState([]);
 
   const fetchProducts = async () => {
     const data = await fetch("http://localhost:8080/products");
     const products = await data.json();
     setProducts(products)
+    setFilter(products)
   };
 
   useEffect(()=>{
@@ -62,7 +65,7 @@ function App() {
           />
           <Route
             path="/products"
-            element={<Products 
+            element={<Products  filter={filter} setFilter={setFilter}
               cartCount={cartCount} wishCount={wishCount}  products={products}/>}
           />
           <Route

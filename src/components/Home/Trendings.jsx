@@ -61,7 +61,7 @@ const Trendings = (props) => {
     return (
       <div
         key={product.id}
-        className="card justify-between bg-slate-100 cursor-pointer hover:scale-[1.05] duration-300 shadow-xl
+        className="card justify-between h-[45vh] bg-slate-100 cursor-pointer hover:scale-[1.05] duration-300 shadow-xl
             mt-3 flex flex-col items-center p-2"
       >
        <div className="flex h-[65%] items-center flex-col w-full bg-white"><img className="h-full" src={product.image} alt="" /></div> 

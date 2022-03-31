@@ -3,9 +3,8 @@ import Nav from "../components/Navbar";
 import Filter from '../components/filter'
 
 const Products = (props) => {
-  const [category, setCategory]= useState('all')
-  const { cartCount, wishCount, products } = props;
-  const [filter, setFilter] = useState(products);
+  const [category, setCategory]= useState('gaming')
+  const { cartCount, filter, setFilter, wishCount, products } = props;
   return (
     <div className="">
       <Nav cartCount={cartCount} wishCount={wishCount} />
@@ -13,7 +12,7 @@ const Products = (props) => {
       <div className="grid  auto-col grid-cols-5 gap-4">
         {filter.map((product) => (
           <div
-            key={product.id}
+                  key={product._id}
             className="card justify-between  bg-slate-100 cursor-pointer hover:scale-[1.05] duration-300 shadow-xl
             mt-3 flex flex-col items-center p-2"
           >
