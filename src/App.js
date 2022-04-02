@@ -7,7 +7,8 @@ import AddProduct from "./products/AddProduct";
 import Products from "./products/Products";
 import Cart from "./components/Cart/Cart";
 import Favs from "./components/Favs/Favs";
-import Signup from "./components/Sign/Signup";
+import Signup from "./components/Sign/signup";
+const axios = require('axios');
 // import { app } from './firebaseConfig'
 
 function App() {
@@ -17,32 +18,56 @@ function App() {
   const [filter, setFilter] = useState([]);
 
   const fetchProducts = async () => {
-    const data = await fetch("http://localhost:8080/products");
+    const data = await fetch("https://hitech1.herokuapp.com/products");
     const products = await data.json();
     setProducts(products)
     setFilter(products)
   };
-
+  const fetchCounts = async () => {
+    const data = await fetch("https://hitech1.herokuapp.com/user/counts");
+    const counts = await data.json()
+    setCartCount(counts[0].cart);
+    setWishCount(counts[0].wish)
+  }
   useEffect(()=>{
     fetchProducts();
   }, [])
+  useEffect(()=>{
+    fetchCounts();
+  }, [])
+ 
+  const updateCounts = async () => {
+    const data = await fetch("https://hitech1.herokuapp.com/user/counts");
+    const newdata = await data.json();
+    console.log(newdata);
+    newdata[0].wish = wishCount
+    newdata[0].cart = cartCount
+     axios.put(`https://hitech1.herokuapp.com/user/counts/:${newdata[0]._id}`, newdata);
+  }
+  // const updateWish = async () => {
+  //    axios.put(`https://hitech1.herokuapp.com/user/counts/:${newdata._id}`, cartCount);
+  // }
 
-  const cartIncrement = () => {
+  const cartIncrement = async () => {
     setCartCount((prevCount) => prevCount + 1);
+    updateCounts()
   };
   const cartDecrement = () => {
     setCartCount((prevCount) =>
       prevCount <= 0 ? (prevCount = 0) : prevCount - 1
     );
+    updateCounts()
   };
 
   const wishIncrement = () => {
     setWishCount((prevCount) => prevCount + 1);
+    updateCounts()
   };
   const wishDecrement = () => {
     setWishCount((prevCount) =>
       prevCount <= 0 ? (prevCount = 0) : prevCount - 1
     );
+    updateCounts()
   };
   
   return (
@@ -65,8 +90,11 @@ function App() {
           />
           <Route
             path="/products"
-            element={<Products  filter={filter} setFilter={setFilter}
-              cartCount={cartCount} wishCount={wishCount}  products={products}/>}
+            element={<Products  filter={filter} setFilter={setFilter} wishDecrement={wishDecrement}
+            cartDecrement={cartDecrement}
+            wishIncrement={wishIncrement}
+            setProducts={setProducts}  cartIncrement={cartIncrement}
+              cartCount={cartCount} wishCount={wishCount}  products ={products}/>}
           />
           <Route
             path="/cart"

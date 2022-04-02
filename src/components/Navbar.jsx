@@ -63,7 +63,7 @@ const Navbar = (props) => {
             </IconButton>
           </a>
           <li className="ml-7">
-            <a href="/" className="button">
+            <a href="/signup" className="button">
               Sign Up
             </a>
           </li>

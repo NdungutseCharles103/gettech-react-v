@@ -26,12 +26,12 @@ const Filter = (props) => {
             </label>
           </form>
           <div className="flex items-center">
-              <p onClick={()=> setCategory('all')} className='ml-7 mt-3 cursor-pointer'>All</p>
-              <p onClick={()=> setCategory('home')}  className='ml-7 mt-3 cursor-pointer'>Home equipments</p>
-              <p onClick={()=> setCategory('Phones')}  className='ml-7 mt-3 cursor-pointer'>Phones</p>
-              <p onClick={()=> setCategory('Pcs')}  className='ml-7 mt-3 cursor-pointer'>Computers</p>
-              
-              <p onClick={()=> setCategory('others')}  className='ml-7 mt-3 cursor-pointer'>Others</p>
+              <p onClick={()=> setCategory('all')} className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>All</p>
+              <p onClick={()=> setCategory('home')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Home equipments</p>
+              <p onClick={()=> setCategory('Phones')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Phones</p>
+              <p onClick={()=> setCategory('Pcs')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Computers</p>
+              <p onClick={()=> setCategory('gaming')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Gaming</p>
+              <p onClick={()=> setCategory('others')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Others</p>
           </div>
     </div>
   )
