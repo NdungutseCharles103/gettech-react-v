@@ -58,6 +58,8 @@ const Trendings = (props) => {
     const cartBtnTitle = product.cart ? "view cart" : "add to cart";
     const wishBtnClass = product.wish ? "bx bx-list-minus added wish" : "bx bx-list-plus";
     const wishBtnTitle = product.wish ? 'remove from wishlist':'add to wishlist'
+
+    if (!products) return  `Loading...`;
     return (
       <div
         key={product.id}

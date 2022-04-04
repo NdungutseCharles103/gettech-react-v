@@ -24,3 +24,15 @@
 .auto-col-1::-webkit-scrollbar {
   display: none;
 }
+.css-jcn4dz-MuiBadge-badge{
+  background-color: rgb(56, 56, 236)!important;
+}
+.navbar__links:hover{
+  color: rgb(7, 7, 143);
+}
+.navbar__links{
+  transition: all 0.3s;
+}
+.active{
+  color: rgb(7, 7, 143);
+}

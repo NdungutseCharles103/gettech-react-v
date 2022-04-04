@@ -14,6 +14,7 @@ const axios = require('axios');
 function App() {
   const [cartCount, setCartCount] = useState(0);
   const [wishCount, setWishCount] = useState(0);
+  const [counts, setCounts] = useState([])
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState([]);
 
@@ -26,6 +27,7 @@ function App() {
   const fetchCounts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/user/counts");
     const counts = await data.json()
+    setCounts(counts)
     setCartCount(counts[0].cart);
     setWishCount(counts[0].wish)
   }
@@ -36,13 +38,14 @@ function App() {
     fetchCounts();
   }, [])
  
+  const api = axios.create({baseURL: `https://hitech1.herokuapp.com/user/counts`})
   const updateCounts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/user/counts");
     const newdata = await data.json();
     console.log(newdata);
     newdata[0].wish = wishCount
     newdata[0].cart = cartCount
-     axios.put(`https://hitech1.herokuapp.com/user/counts/:${newdata[0]._id}`, newdata);
+     api.put(`/${newdata[0]._id}`, newdata);
   }
   // const updateWish = async () => {
   //    axios.put(`https://hitech1.herokuapp.com/user/counts/:${newdata._id}`, cartCount);
