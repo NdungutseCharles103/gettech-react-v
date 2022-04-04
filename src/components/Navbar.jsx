@@ -26,9 +26,9 @@ const Navbar = (props) => {
         </div>
         <ul className="navbar__menu flex items-center text-[1.2em]  justify-center">
           <li className="ml-7">
-            <a onClick={activeHandler} href="/" className="navbar__links" id="home-page">
+            <Link onClick={activeHandler} to="/" className="navbar__links" id="home-page">
               Home
-            </a>
+            </Link>
           </li>
           <li className="ml-7">
             <Link to='/products' className="navbar__links cursor-pointer" id="about-page ">

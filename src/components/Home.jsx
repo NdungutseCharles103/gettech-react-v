@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import Trendings from "./Home/Trendings";
+import { Link } from "react-router-dom";
 
 const Home = (props) => {
   const {
@@ -8,11 +9,24 @@ const Home = (props) => {
     wishDecrement,
     cartCount,
     products,
+    setFilter,
+    category,
+    setCategory,
     setProducts,
     wishIncrement,
     cartIncrement,
     cartDecrement,
   } = props;
+
+  useEffect(() => {
+    if (category === "all") {
+      setFilter(products);
+      return;
+    }
+    const filtered = products.filter((pro) => pro.category.includes(category));
+    setFilter(filtered);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category]);
 
   return (
     <div className="main ">
@@ -47,61 +61,91 @@ const Home = (props) => {
       <div className="cat flex flex-col items-center mt-3">
         <h2 className="text-center text-2xl">Categories</h2>
         <div className="grid gap-4 auto-col grid-cols-5">
-          <div
+          <Link
+            to="products/home"
             className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl
             mt-3 flex gap-3 flex-col items-center px-2"
           >
-            <img
-              className="w-full"
-              src={require("../Images/home.jpg")}
-              alt=""
-            />
-            <p>Home Appliances</p>
-          </div>
-          <div
+            <div
+              onClick={() => setCategory("home")}
+              className="flex flex-col items-center py-2 justify-between h-full"
+            >
+              <img
+                className="w-full"
+                src={require("../Images/home.jpg")}
+                alt=""
+              />
+              <p>Home Appliances</p>
+            </div>
+          </Link>
+          <Link
+            to="products/gaming"
             className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl
-            mt-3 flex flex-col items-center px-2"
+            mt-3 flex gap-3 flex-col items-center px-2"
           >
-            <img
-              className="w-full"
-              src={require("../Images/gaming.jpg")}
-              alt=""
-            />
-            <p>Gaming</p>
-          </div>
-          <div
+            <div
+              onClick={() => setCategory("gaming")}
+              className="flex flex-col items-center py-2 justify-between h-full"
+            >
+              <img
+                className="w-full"
+                src={require("../Images/gaming.jpg")}
+                alt=""
+              />
+              <p>Gaming</p>
+            </div>
+          </Link>
+          <Link
+            to="products/phones"
             className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl
-            mt-3 flex flex-col items-center px-2"
+            mt-3 flex gap-3 flex-col items-center px-2"
           >
-            <img
-              className="w-full"
-              src={require("../Images/phone-pc.jpg")}
-              alt=""
-            />
-            <p>Phones and Pcs</p>
-          </div>
-          <div
+            <div
+              onClick={() => setCategory("phones")}
+              className="flex flex-col items-center py-2 justify-between h-full"
+            >
+              <img
+                className="w-full"
+                src={require("../Images/phone-pc.jpg")}
+                alt=""
+              />
+              <p>Phones and Pcs</p>
+            </div>
+          </Link>
+          <Link
+            to="products/accessories"
             className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl
-            mt-3 flex flex-col items-center px-2"
+            mt-3 flex gap-3 flex-col items-center px-2"
           >
-            <img
-              className="w-full"
-              src={require("../Images/acess.jpg")}
-              alt=""
-            />
-            <p>Accesories</p>
-          </div>
-          <div
+            <div
+              onClick={() => setCategory("accessories")}
+              className="flex flex-col items-center py-2 justify-between h-full"
+            >
+              <img
+                className="w-full"
+                src={require("../Images/acess.jpg")}
+                alt=""
+              />
+              <p>Accesories</p>
+            </div>
+          </Link>
+          <Link
+            to="products/others"
             className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl
-            mt-3 flex flex-col items-center px-2"
+            mt-3 flex gap-3 flex-col items-center px-2"
           >
-            <img
-              className="w-full"
-              src={require("../Images/others.jpg")}
-              alt=""
-            />
-            <p>Others</p>
-          </div>
+            <div
+              onClick={() => setCategory("others")}
+              className="flex flex-col items-center py-2 justify-between h-full"
+            >
+              <img
+                className="w-full"
+                src={require("../Images/others.jpg")}
+                alt=""
+              />
+              <p>Others</p>
+            </div>
+          </Link>
         </div>
       </div>
       <Trendings

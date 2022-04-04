@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Nav from "../components/Navbar";
 import Filter from '../components/filter'
+import { api } from "../components/utilities/one";
 
 const Products = (props) => {
-  const [category, setCategory]= useState('gaming')
- const { cartCount, filter, setFilter, wishCount, cartDecrement, wishIncrement, wishDecrement,  cartIncrement, setProducts, products } = props;
+ const { cartCount, filter,category, setCategory, setFilter, wishCount, cartDecrement, wishIncrement, wishDecrement,  cartIncrement, setProducts, products } = props;
 
   return (
     <div className="">
@@ -38,8 +38,12 @@ function Test (props){
     );
     if (!product.cart) {
       cartIncrement();
+      product.cart = true;
+      api.put(`/products/${product._id}`, product);
     } else {
       cartDecrement();
+      product.cart = false;
+      api.put(`/products/${product._id}`, product);
     }
   };
   const wishHandler = () => {
@@ -56,8 +60,12 @@ function Test (props){
     );
     if (!product.wish) {
       wishIncrement();
+      product.wish = true;
+      api.put(`/products/${product._id}`, product);
     } else {
       wishDecrement();
+      product.wish = false;
+      api.put(`/products/${product._id}`, product);
     }
   };
   const cartBtnClass = product.cart ? 'bx bx-x added' : 'bx bx-cart-add';
@@ -71,7 +79,7 @@ className="card justify-between  bg-slate-100 cursor-pointer hover:scale-[1.05] 
 mt-3 flex flex-col items-center p-2"
 >
 <div className="flex h-[65%] items-center flex-col w-full bg-white"><img className="h-full" src={product.image} alt="" /></div>
-<p className="py-2">{product.name}</p>
+<p className="py-2 text-center">{product.name}</p>
 <div className="acts flex item-center w-[80%] px-2 justify-between">
 <button onClick={wishHandler} title={wishBtnTitle}
   className={`flex p-2 text-3xl bg-slate-300 items-center rounded-full  ${wishBtnClass}`}

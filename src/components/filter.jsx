@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import { Link } from 'react-router-dom';
 
 const Filter = (props) => {
     const { products, setFilter,category, setCategory} = props;
@@ -26,12 +27,13 @@ const Filter = (props) => {
             </label>
           </form>
           <div className="flex items-center">
-              <p onClick={()=> setCategory('all')} className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>All</p>
-              <p onClick={()=> setCategory('home')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Home equipments</p>
-              <p onClick={()=> setCategory('Phones')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Phones</p>
-              <p onClick={()=> setCategory('Pcs')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Computers</p>
-              <p onClick={()=> setCategory('gaming')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Gaming</p>
-              <p onClick={()=> setCategory('others')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Others</p>
+              <Link to='/products/all'><p onClick={()=> setCategory('all')} className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>All</p></Link>
+              <Link to='/products/home'><p onClick={()=> setCategory('home')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Home equipments</p></Link>
+              <Link to='/products/phones'><p onClick={()=> setCategory('Phones')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Phones</p></Link>
+              <Link to='/products/pcs'><p onClick={()=> setCategory('Pcs')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Computers</p></Link>
+              <Link to='/products/gaming'><p onClick={()=> setCategory('gaming')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Gaming</p></Link>
+              <Link to='/products/accessories'><p onClick={()=> setCategory('accessories')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Accessories</p></Link>
+              <Link to='/products/others'><p onClick={()=> setCategory('others')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Others</p></Link>
           </div>
     </div>
   )

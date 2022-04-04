@@ -8,16 +8,17 @@ import Products from "./products/Products";
 import Cart from "./components/Cart/Cart";
 import Favs from "./components/Favs/Favs";
 import Signup from "./components/Sign/signup";
-const axios = require('axios');
+import { api } from './components/utilities/one'
+// const axios = require('axios');
 // import { app } from './firebaseConfig'
 
 function App() {
+  const [category, setCategory] = useState("all");
   const [cartCount, setCartCount] = useState(0);
   const [wishCount, setWishCount] = useState(0);
   const [counts, setCounts] = useState([])
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState([]);
-
   const fetchProducts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/products");
     const products = await data.json();
@@ -38,39 +39,33 @@ function App() {
     fetchCounts();
   }, [])
  
-  const api = axios.create({baseURL: `https://hitech1.herokuapp.com/user/counts`})
-  const updateCounts = async () => {
-    const data = await fetch("https://hitech1.herokuapp.com/user/counts");
-    const newdata = await data.json();
-    console.log(newdata);
-    newdata[0].wish = wishCount
-    newdata[0].cart = cartCount
-     api.put(`/${newdata[0]._id}`, newdata);
+  const updateCounts = async (id, newdata) => {
+    const response = await api.put(`/user/counts/${id}`, newdata);
+     console.log(response);
   }
-  // const updateWish = async () => {
-  //    axios.put(`https://hitech1.herokuapp.com/user/counts/:${newdata._id}`, cartCount);
-  // }
 
   const cartIncrement = async () => {
     setCartCount((prevCount) => prevCount + 1);
-    updateCounts()
+    counts[0].cart = cartCount + 1
+    updateCounts(counts[0]._id, counts[0]);
   };
   const cartDecrement = () => {
     setCartCount((prevCount) =>
-      prevCount <= 0 ? (prevCount = 0) : prevCount - 1
-    );
-    updateCounts()
+      prevCount <= 0 ? (prevCount = 0) : prevCount - 1);
+    counts[0].cart = cartCount - 1;
+    updateCounts(counts[0]._id, counts[0]);
   };
 
   const wishIncrement = () => {
     setWishCount((prevCount) => prevCount + 1);
-    updateCounts()
+    counts[0].wish = wishCount + 1;
+    updateCounts(counts[0]._id, counts[0]);
   };
   const wishDecrement = () => {
     setWishCount((prevCount) =>
-      prevCount <= 0 ? (prevCount = 0) : prevCount - 1
-    );
-    updateCounts()
+      prevCount <= 0 ? (prevCount = 0) : prevCount - 1);
+    counts[0].wish = wishCount - 1;
+    updateCounts(counts[0]._id, counts[0]);
   };
   
   return (
@@ -83,21 +78,31 @@ function App() {
               <Home
                 cartIncrement={cartIncrement}
                 cartCount={cartCount}
-                wishCount={wishCount}
+                wishCount={wishCount} category={category} setCategory={setCategory}
                 wishDecrement={wishDecrement}
                 cartDecrement={cartDecrement}
                 wishIncrement={wishIncrement}
-                products = {products} setProducts={setProducts}
+                products={products} filter={filter} setFilter={setFilter}
+                setProducts={setProducts}
               />
             }
           />
           <Route
             path="/products"
-            element={<Products  filter={filter} setFilter={setFilter} wishDecrement={wishDecrement}
-            cartDecrement={cartDecrement}
-            wishIncrement={wishIncrement}
-            setProducts={setProducts}  cartIncrement={cartIncrement}
-              cartCount={cartCount} wishCount={wishCount}  products ={products}/>}
+            element={
+              <Products
+                filter={filter}  category={category} setCategory={setCategory}
+                setFilter={setFilter}
+                wishDecrement={wishDecrement}
+                cartDecrement={cartDecrement}
+                wishIncrement={wishIncrement}
+                setProducts={setProducts}
+                cartIncrement={cartIncrement}
+                cartCount={cartCount}
+                wishCount={wishCount}
+                products={products}
+              />
+            }
           />
           <Route
             path="/cart"
@@ -109,6 +114,21 @@ function App() {
           />
           <Route path="/signup" element={<Signup />} />
           <Route path="/addproduct" element={<AddProduct />} />
+          {/* crazzy stufss*/}
+          <Route path="/products/gaming" element={ <Products filter={filter} setFilter={setFilter} wishDecrement={wishDecrement} cartDecrement={cartDecrement} category={category} setCategory={setCategory}
+                wishIncrement={wishIncrement} setProducts={setProducts} cartIncrement={cartIncrement} cartCount={cartCount}  wishCount={wishCount} products={products}/> } />
+          <Route path="/products/all" element={ <Products filter={filter} setFilter={setFilter} wishDecrement={wishDecrement} cartDecrement={cartDecrement} category={category} setCategory={setCategory}
+                wishIncrement={wishIncrement} setProducts={setProducts} cartIncrement={cartIncrement} cartCount={cartCount}  wishCount={wishCount} products={products}/> } />
+          <Route path="/products/phones" element={ <Products filter={filter} setFilter={setFilter} wishDecrement={wishDecrement} cartDecrement={cartDecrement} category={category} setCategory={setCategory}
+                wishIncrement={wishIncrement} setProducts={setProducts} cartIncrement={cartIncrement} cartCount={cartCount}  wishCount={wishCount} products={products}/> } />
+          <Route path="/products/pcs" element={ <Products filter={filter} setFilter={setFilter} wishDecrement={wishDecrement} cartDecrement={cartDecrement} category={category} setCategory={setCategory}
+                wishIncrement={wishIncrement} setProducts={setProducts} cartIncrement={cartIncrement} cartCount={cartCount}  wishCount={wishCount} products={products}/> } />
+          <Route path="/products/others" element={ <Products filter={filter} setFilter={setFilter} wishDecrement={wishDecrement} cartDecrement={cartDecrement} category={category} setCategory={setCategory}
+                wishIncrement={wishIncrement} setProducts={setProducts} cartIncrement={cartIncrement} cartCount={cartCount}  wishCount={wishCount} products={products}/> } />
+          <Route path="/products/accessories" element={ <Products filter={filter} setFilter={setFilter} wishDecrement={wishDecrement} cartDecrement={cartDecrement} category={category} setCategory={setCategory}
+                wishIncrement={wishIncrement} setProducts={setProducts} cartIncrement={cartIncrement} cartCount={cartCount}  wishCount={wishCount} products={products}/> } />
+          <Route path="/products/home" element={ <Products filter={filter} setFilter={setFilter} wishDecrement={wishDecrement} cartDecrement={cartDecrement} category={category} setCategory={setCategory}
+                wishIncrement={wishIncrement} setProducts={setProducts} cartIncrement={cartIncrement} cartCount={cartCount}  wishCount={wishCount} products={products}/> } />
         </Routes>
       </div>
     </BrowserRouter>
