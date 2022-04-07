@@ -109,7 +109,7 @@ function App() {
           />
           <Route
             path="/cart"
-            element={<Cart cartCount={cartCount} wishCount={wishCount} products={products}/>}
+            element={<Cart cartCount={cartCount} wishCount={wishCount} payment={payment}/>}
           />
           <Route
             path="/wishlist"

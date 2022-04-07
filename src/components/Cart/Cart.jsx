@@ -3,7 +3,7 @@ import Nav from "../Navbar";
 import { api } from "../utilities/one";
 
 const Cart = (props) => {
-  const { cartCount, wishCount} = props;
+  const { cartCount, wishCount, payment} = props;
   const [ onCart, setOnCart] = useState([])
      const fetchProducts = async () => {
        const data = await api.get("/user/cart");
@@ -35,6 +35,11 @@ const Cart = (props) => {
           <h2 className="w-full text-center text font-bold">
             Product currently on your Cart
           </h2>
+          <div className="flex w-full items-center justify-center mt-7">
+            <p>Products: {onCart.length}</p>
+            <p className="mx-[20px]">Total Cost: {payment} USD</p>
+            <button className="px-2 py-1 bg-blue-600 text-white">Order Now</button>
+          </div>
           <table className="w-full mt-8">
             <thead>
               <tr>
@@ -46,7 +51,7 @@ const Cart = (props) => {
             </thead>
             <tbody>
             {onCart.map((c) => (
-              <tr key={onCart._id}>
+              <tr key={c._id}>
                 <td className="flex w-full items-center justify-center flex-col">
                   <div className="flex w-full items-center justify-center flex-col py-2">
                     <img className="w-[90px] mx-auto" src={c.image} alt="" />

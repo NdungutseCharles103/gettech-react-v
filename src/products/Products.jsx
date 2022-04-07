@@ -3,7 +3,6 @@ import Nav from "../components/Navbar";
 import Filter from '../components/filter'
 import { api } from "../components/utilities/one";
 import Sort from "../components/sort";
-import { payHandler } from "../components/utilities/one";
 
 const Products = (props) => {
  const { cartCount, filter,category,payment, setPayment,counts, updateCounts,
@@ -29,7 +28,7 @@ const Products = (props) => {
 export default Products;
 
 function Test (props){
-  const {product, cartDecrement, setPayment,
+  const {product, cartDecrement,
     wishIncrement, filter, setFilter,cartIncrement, wishDecrement} = props;
   const cartHandler = () => {
     setFilter(
@@ -46,12 +45,10 @@ function Test (props){
     if (!product.cart) {
       cartIncrement()
       product.cart = true;
-      payHandler(setPayment, product.price, "+");
       api.put(`/products/${product._id}`, product);
     } else {
       cartDecrement();
       product.cart = false;
-      payHandler(setPayment, product.price, "-");
       api.put(`/products/${product._id}`, product);
     }
   };
