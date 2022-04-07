@@ -19,7 +19,7 @@
   margin-left: 1.3em !important;
 }
 .auto-col-1{
-  grid-auto-columns: 23%;
+  grid-auto-columns: 19%;
 }
 .auto-col-1::-webkit-scrollbar {
   display: none;
@@ -35,4 +35,45 @@
 }
 .active{
   color: rgb(7, 7, 143);
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background-image: none;
+  height: 4vh;
+  background-color: rgb(207, 219, 230);
+}
+
+/* Custom Select */
+.select {
+  margin: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+select {
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  width: 8rem;
+}
+
+/* Arrow */
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.3rem;
+  background: rgb(49, 68, 241);
+  cursor: pointer;
+  pointer-events: none;
+}
+td{
+  background-color: aliceblue;
 }

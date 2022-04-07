@@ -8,9 +8,7 @@ import Products from "./products/Products";
 import Cart from "./components/Cart/Cart";
 import Favs from "./components/Favs/Favs";
 import Signup from "./components/Sign/signup";
-import { api } from './components/utilities/one'
-// const axios = require('axios');
-// import { app } from './firebaseConfig'
+import { api } from './components/utilities/one';
 
 function App() {
   const [category, setCategory] = useState("all");
@@ -19,6 +17,8 @@ function App() {
   const [counts, setCounts] = useState([])
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState([]);
+  const [payment, setPayment] = useState(0)
+
   const fetchProducts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/products");
     const products = await data.json();
@@ -29,6 +29,7 @@ function App() {
     const data = await fetch("https://hitech1.herokuapp.com/user/counts");
     const counts = await data.json()
     setCounts(counts)
+    setPayment(counts[0].payment)
     setCartCount(counts[0].cart);
     setWishCount(counts[0].wish)
   }
@@ -38,7 +39,8 @@ function App() {
   useEffect(()=>{
     fetchCounts();
   }, [])
- 
+  
+
   const updateCounts = async (id, newdata) => {
     const response = await api.put(`/user/counts/${id}`, newdata);
      console.log(response);
@@ -46,6 +48,7 @@ function App() {
 
   const cartIncrement = async () => {
     setCartCount((prevCount) => prevCount + 1);
+    counts[0].payment = payment
     counts[0].cart = cartCount + 1
     updateCounts(counts[0]._id, counts[0]);
   };
@@ -92,21 +95,21 @@ function App() {
             element={
               <Products
                 filter={filter}  category={category} setCategory={setCategory}
-                setFilter={setFilter}
+                setFilter={setFilter} counts={counts}
                 wishDecrement={wishDecrement}
                 cartDecrement={cartDecrement}
                 wishIncrement={wishIncrement}
                 setProducts={setProducts}
                 cartIncrement={cartIncrement}
-                cartCount={cartCount}
-                wishCount={wishCount}
-                products={products}
+                cartCount={cartCount} setPayment={setPayment}
+                wishCount={wishCount} payment={payment}
+                products={products} updateCounts={updateCounts}
               />
             }
           />
           <Route
             path="/cart"
-            element={<Cart cartCount={cartCount} wishCount={wishCount} />}
+            element={<Cart cartCount={cartCount} wishCount={wishCount} products={products}/>}
           />
           <Route
             path="/wishlist"

@@ -4,3 +4,14 @@
 .addedwish{
     background-color: rgb(194, 194, 194);
 }
+/* .bx-x,
+.bx-cart-add,
+.bx-list-plus{
+    transform: scale(0.8);
+} */
+.lbtns, .rbtns{
+    transform: scale(0.8);
+}
+.rbtns{
+    transform: scale(0.8) translateX(0%);
+}

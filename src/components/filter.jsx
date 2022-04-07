@@ -15,7 +15,7 @@ const Filter = (props) => {
     },[category])
   return (
     <div className='w-full flex justify-center'>
-         <form className="search bg-slate-100 rounded-3xl mt-4 p-2 flex items-center w-[30%] justify-between pr-4">
+         <form className="search bg-slate-100 rounded-2xl mt-4 px-2 flex items-center w-[30%] justify-between pr-4">
             <input
               className="ml-2 w-[90%] outline-none border-none bg-transparent focus:border-sky-100"
               type="text"

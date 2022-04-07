@@ -3,6 +3,7 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import {Link} from 'react-router-dom'
+import { Products } from "./utilities/one";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const Navbar = (props) => {
@@ -36,7 +37,7 @@ const Navbar = (props) => {
               {/* {show?<Dropdown />:''} */}
           </li>
           <Link to='/cart'>
-            <IconButton className="ml-7 navitem" aria-label="cart">
+            <IconButton className="ml-7 navitem" aria-label="cart" onClick={Products}>
               <Badge max={99} badgeContent={cartCount} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
