@@ -96,7 +96,7 @@ const Home = (props) => {
             </div>
           </Link>
           <Link
-            onClick={() => setCategory("phones")}
+            onClick={() => setCategory("Phones")}
             to="products/phones"
             className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl
             mt-3 flex gap-3 flex-col items-center px-2"
