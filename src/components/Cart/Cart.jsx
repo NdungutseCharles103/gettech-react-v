@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from "react";
 import Nav from "../Navbar";
 import { api } from "../utilities/one";
+import Loader from '../Loaders/Loader'
 
 const Cart = (props) => {
   const { cartCount, wishCount, payment} = props;
   const [ onCart, setOnCart] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
      const fetchProducts = async () => {
        const data = await api.get("/user/cart");
        const products = await data.data;
-       console.log(data);
        setOnCart(products);
+       setIsLoading(true)
      };
   
      useEffect(()=>{
@@ -84,7 +86,7 @@ const Cart = (props) => {
                   <div className="flex w-full items-center justify-center">
                     <i
                       title="remove"
-                      className=" text-red-500 text-3xl rounded-md px-1 bx bx-x"
+                      className=" text-red-500 text-3xl cursor-pointer rounded-md px-1 bx bx-x"
                     ></i>
                   </div>
                 </td>
@@ -112,7 +114,7 @@ const Cart = (props) => {
           </label>
         </form>
       </div>
-      <Test />
+      {isLoading? <Test />:<Loader />}
     </div>
   );
 };

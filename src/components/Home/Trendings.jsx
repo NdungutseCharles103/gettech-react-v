@@ -63,7 +63,7 @@ const Trendings = (props) => {
       }
     };
     const cartBtnClass = product.cart ? 'bx bx-x added' : 'bx bx-cart-add';
-    const cartBtnTitle = product.cart ? "view cart" : "add to cart";
+    const cartBtnTitle = product.cart ? "remove from cart" : "add to cart";
     const wishBtnClass = product.wish ? "bx bx-list-minus added wish" : "bx bx-list-plus";
     const wishBtnTitle = product.wish ? 'remove from wishlist':'add to wishlist'
 

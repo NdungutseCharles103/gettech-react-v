@@ -43,7 +43,7 @@ const Navbar = (props) => {
               </Badge>
             </IconButton>
           </Link>
-          <Link to='/favs'>
+          <Link to='/wishlist'>
             <IconButton className="ml-7 navitem" aria-label="cart">
               <Badge max={99} badgeContent={wishCount} color="secondary">
                 <FavoriteIcon />

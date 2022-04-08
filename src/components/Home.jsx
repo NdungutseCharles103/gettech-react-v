@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import Navbar from "./Navbar";
-import Trendings from "./Home/Trendings";
-import { Link } from "react-router-dom";
+import React from "react";
+import HomeLoader from "./Loaders/HomeLoader";
+import Trans from "./Home/Trans";
 
 const Home = (props) => {
   const {
@@ -16,146 +15,16 @@ const Home = (props) => {
     wishIncrement,
     cartIncrement,
     cartDecrement,
+    isHomeLoader,
   } = props;
 
-  useEffect(() => {
-    if (category === "all") {
-      setFilter(products);
-      return;
-    }
-    const filtered = products.filter((pro) => pro.category.includes(category));
-    setFilter(filtered);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category]);
 
   return (
     <div className="main ">
-      <Navbar cartCount={cartCount} wishCount={wishCount} />
-      <div className="flex flex-col overflow-x-hidden">
-        <div className="flex items-center justify-center w-full">
-          <form className="search bg-slate-100 rounded-3xl mt-4 p-2 flex items-center w-[30%] justify-between pr-4">
-            <input
-              className="ml-2 w-[90%] outline-none border-none bg-transparent focus:border-sky-100"
-              type="text"
-              placeholder="Search Products"
-            />
-            <input type="submit" className="hidden" id="submit" />{" "}
-            <label htmlFor="submit">
-              <i className="bx bx-search text-xl cursor-pointer mt-2"></i>
-            </label>
-          </form>
-        </div>
-        <div className="flex items-center px-10">
-          <div className="w-[70%]">
-            <span className="text-3xl">
-              Home of All Technological products, Trends and Tech Tips
-            </span>
-          </div>
-          <img
-            className="w-[30%]"
-            src={require("../Images/intro.png")}
-            alt=""
-          />
-        </div>
-      </div>
-      <div className="cat flex flex-col items-center mt-3">
-        <h2 className="text-center text-2xl">Categories</h2>
-        <div className="grid gap-4 auto-col grid-cols-5">
-          <Link
-            to="products/home"
-            className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl
-            mt-3 flex gap-3 flex-col items-center px-2"
-          >
-            <div
-              onClick={() => setCategory("home")}
-              className="flex flex-col items-center py-2 justify-between h-full"
-            >
-              <img
-                className="w-full"
-                src={require("../Images/home.jpg")}
-                alt=""
-              />
-              <p>Home Appliances</p>
-            </div>
-          </Link>
-          <Link
-            to="products/gaming"
-            className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl
-            mt-3 flex gap-3 flex-col items-center px-2"
-          >
-            <div
-              onClick={() => setCategory("gaming")}
-              className="flex flex-col items-center py-2 justify-between h-full"
-            >
-              <img
-                className="w-full"
-                src={require("../Images/gaming.jpg")}
-                alt=""
-              />
-              <p>Gaming</p>
-            </div>
-          </Link>
-          <Link
-            onClick={() => setCategory("Phones")}
-            to="products/phones"
-            className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl
-            mt-3 flex gap-3 flex-col items-center px-2"
-          >
-            <div
-              className="flex flex-col items-center py-2 justify-between h-full"
-            >
-              <img
-                className="w-full"
-                src={require("../Images/phone-pc.jpg")}
-                alt=""
-              />
-              <p>Phones and Pcs</p>
-            </div>
-          </Link>
-          <Link
-            to="products/accessories"
-            className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl
-            mt-3 flex gap-3 flex-col items-center px-2"
-          >
-            <div
-              onClick={() => setCategory("accessories")}
-              className="flex flex-col items-center py-2 justify-between h-full"
-            >
-              <img
-                className="w-full"
-                src={require("../Images/acess.jpg")}
-                alt=""
-              />
-              <p>Accesories</p>
-            </div>
-          </Link>
-          <Link
-            to="products/others"
-            className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl
-            mt-3 flex gap-3 flex-col items-center px-2"
-          >
-            <div
-              onClick={() => setCategory("others")}
-              className="flex flex-col items-center py-2 justify-between h-full"
-            >
-              <img
-                className="w-full"
-                src={require("../Images/others.jpg")}
-                alt=""
-              />
-              <p>Others</p>
-            </div>
-          </Link>
-        </div>
-      </div>
-      <Trendings
-        cartIncrement={cartIncrement}
-        wishDecrement={wishDecrement}
-        cartDecrement={cartDecrement}
-        wishIncrement={wishIncrement}
-        products={products}
-        setProducts={setProducts}
-      />
+      {isHomeLoader? <Trans wishCount={wishCount} wishDecrement={wishDecrement} cartCount={cartCount} products={products} setFilter={setFilter}
+      category={category} setCategory={setCategory} setProducts={setProducts} wishIncrement={wishIncrement}
+      cartIncrement={cartIncrement} cartDecrement={cartDecrement} isHomeLoader={isHomeLoader}/>
+      :<HomeLoader />}
     </div>
   );
 };

@@ -18,12 +18,14 @@ function App() {
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState([]);
   const [payment, setPayment] = useState(0)
+  const [isHomeLoader, setHomeLoader] = useState(false)
 
   const fetchProducts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/products");
     const products = await data.json();
     setProducts(products)
     setFilter(products)
+    setHomeLoader(true)
   };
   const fetchCounts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/user/counts");
@@ -80,7 +82,7 @@ function App() {
             element={
               <Home
                 cartIncrement={cartIncrement}
-                cartCount={cartCount}
+                cartCount={cartCount} isHomeLoader={isHomeLoader} setHomeLoader={setHomeLoader}
                 wishCount={wishCount} category={category} setCategory={setCategory}
                 wishDecrement={wishDecrement}
                 cartDecrement={cartDecrement}
