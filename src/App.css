@@ -12,6 +12,7 @@
   --color2: #FFF;
   --color3: #000;
 }
+
 .navbar{
   background-color: var(--color1)
 }
@@ -58,18 +59,17 @@ select {
 
 select {
   color: #000;
-  font-family: "Poppins", sans-serif;
   cursor: pointer;
   width: 8rem;
 }
 
-/* Arrow */
 .select::after {
   content: "\25BC";
-  position: absolute;
+  /* position: relative; */
+  z-index: 1;
   top: 0;
   right: 0;
-  padding: 0.3rem;
+  padding: 0.4rem;
   background: rgb(49, 68, 241);
   cursor: pointer;
   pointer-events: none;

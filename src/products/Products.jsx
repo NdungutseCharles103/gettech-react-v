@@ -21,12 +21,12 @@ const Products = (props) => {
 
   return (
     <div className="">
-      <Nav cartCount={cartCount} wishCount={wishCount} />
+      <Nav className='z-10' cartCount={cartCount} wishCount={wishCount} />
       <Filter  filter={filter} setFilter={setFilter} products={products} category={category} setCategory={setCategory}/>
       <div className="w-full flex items-center justify-center">
         <Sort/>
       </div> 
-      {isProLoader? <div className="grid  auto-col grid-cols-6 gap-4">
+      {isProLoader? <div className="grid pro auto-col grid-cols-6 gap-4">
         { filter.map((product) => (
           <Test  key={product._id} product={product}  setProducts={setProducts} products={products} cartIncrement={cartIncrement}
           cartDecrement={cartDecrement} wishDecrement={wishDecrement} payment={payment} counts={counts} updateCounts={updateCounts}

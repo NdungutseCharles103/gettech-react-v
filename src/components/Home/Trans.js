@@ -29,11 +29,11 @@ const Trans = (props) => {
   }, [category]);
 
   return (
-    <div className="main ">
+    <div className="main">
       <Navbar cartCount={cartCount} wishCount={wishCount} />
       <div className="flex flex-col overflow-x-hidden">
         <div className="flex items-center justify-center w-full">
-          <form className="search bg-slate-100 rounded-3xl mt-4 p-2 flex items-center w-[30%] justify-between pr-4">
+          <form className="s-home search bg-slate-100 rounded-3xl mt-4 p-2 flex items-center w-[30%] justify-between pr-4">
             <input
               className="ml-2 w-[90%] outline-none border-none bg-transparent focus:border-sky-100"
               type="text"
@@ -45,9 +45,9 @@ const Trans = (props) => {
             </label>
           </form>
         </div>
-        <div className="flex items-center px-10">
+        <div className="flex items-center px-10 mt-7 intro">
           <div className="w-[70%]">
-            <span className="text-3xl">
+            <span className="text-3xl intro-s">
               Home of All Technological products, Trends and Tech Tips
             </span>
           </div>
@@ -58,9 +58,9 @@ const Trans = (props) => {
           />
         </div>
       </div>
+        <h2 className="text-center text-2xl mt-3">Categories</h2>
       <div className="cat flex flex-col items-center mt-3">
-        <h2 className="text-center text-2xl">Categories</h2>
-        <div className="grid gap-4 auto-col grid-cols-5">
+        <div className="grid homegrid gap-4 auto-col grid-cols-5">
           <Link
             to="products/home"
             className="card justify-between cursor-pointer bg-slate-100 hover:scale-110 duration-300 shadow-xl

@@ -14,8 +14,8 @@ const Filter = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[category])
   return (
-    <div className='w-full flex justify-center'>
-         <form className="search bg-slate-100 rounded-2xl mt-4 px-2 flex items-center w-[30%] justify-between pr-4">
+    <div className='s-filter w-full flex justify-center'>
+         <form className="psearch -z-[0] bg-slate-100 rounded-2xl mt-4 px-2 flex items-center w-[30%] justify-between pr-4">
             <input
               className="ml-2 w-[90%] outline-none border-none bg-transparent focus:border-sky-100"
               type="text"
@@ -26,7 +26,7 @@ const Filter = (props) => {
               <i className="bx bx-search text-xl cursor-pointer mt-2"></i>
             </label>
           </form>
-          <div className="flex items-center">
+          <div className="filter flex items-center">
               <Link to='/products/all'><p onClick={()=> setCategory('all')} className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>All</p></Link>
               <Link to='/products/home'><p onClick={()=> setCategory('home')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Home equipments</p></Link>
               <Link to='/products/phones'><p onClick={()=> setCategory('Phones')}  className='ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer'>Phones</p></Link>
