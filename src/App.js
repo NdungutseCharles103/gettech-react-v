@@ -20,7 +20,6 @@ function App() {
   const [filter, setFilter] = useState([]);
   const [payment, setPayment] = useState(0)
   const [isHomeLoader, setHomeLoader] = useState(false)
-  const [isProLoader, setProLoader] = useState(false)
   
 
   const fetchProducts = async () => {
@@ -29,7 +28,6 @@ function App() {
     setProducts(products)
     setFilter(products)
     setHomeLoader(true)
-    setProLoader(true)
   };
   const fetchCounts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/user/counts");
@@ -100,7 +98,6 @@ function App() {
             path="/products"
             element={
               <Products
-                isProLoader={isProLoader}
                 filter={filter}  category={category} setCategory={setCategory}
                 setFilter={setFilter} counts={counts}
                 wishDecrement={wishDecrement}

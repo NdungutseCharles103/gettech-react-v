@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Nav from "../components/Navbar";
 import Filter from '../components/filter'
 import { api } from "../components/utilities/one";
@@ -6,8 +6,18 @@ import Sort from "../components/sort";
 import ProLoader from "../components/Loaders/ProLoader";
 
 const Products = (props) => {
- const { cartCount, filter,category,payment, setPayment,counts, updateCounts, isProLoader,
+  const [isProLoader, setProLoader] = useState(false);
+ const { cartCount, filter,category,payment, setPayment,counts, updateCounts,
    setCategory, setFilter, wishCount, cartDecrement, wishIncrement, wishDecrement,  cartIncrement, setProducts, products } = props;
+  const fetchProducts = async () => {
+    const data = await fetch("https://hitech1.herokuapp.com/products");
+    await data.json();
+    console.log(data);
+    setProLoader(true);
+  };
+  useEffect(()=>{
+    fetchProducts();
+  },[])
 
   return (
     <div className="">
