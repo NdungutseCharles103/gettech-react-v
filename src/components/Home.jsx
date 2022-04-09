@@ -21,10 +21,10 @@ const Home = (props) => {
 
   return (
     <div className="main ">
-      {/* {isHomeLoader?  */}<Trans wishCount={wishCount} wishDecrement={wishDecrement} cartCount={cartCount} products={products} setFilter={setFilter}
+      {isHomeLoader? <Trans wishCount={wishCount} wishDecrement={wishDecrement} cartCount={cartCount} products={products} setFilter={setFilter}
       category={category} setCategory={setCategory} setProducts={setProducts} wishIncrement={wishIncrement}
       cartIncrement={cartIncrement} cartDecrement={cartDecrement} isHomeLoader={isHomeLoader}/>
-{/*       :<HomeLoader />} */}
+       :<HomeLoader />}
     </div>
   );
 };
