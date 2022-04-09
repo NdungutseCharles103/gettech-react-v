@@ -8,6 +8,7 @@ import Products from "./products/Products";
 import Cart from "./components/Cart/Cart";
 import Favs from "./components/Favs/Favs";
 import Signup from "./components/Sign/signup";
+import Login from './components/Sign/Login'
 import { api } from './components/utilities/one';
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
   const [filter, setFilter] = useState([]);
   const [payment, setPayment] = useState(0)
   const [isHomeLoader, setHomeLoader] = useState(false)
+  const [isProLoader, setProLoader] = useState(false)
+  
 
   const fetchProducts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/products");
@@ -26,6 +29,7 @@ function App() {
     setProducts(products)
     setFilter(products)
     setHomeLoader(true)
+    setProLoader(true)
   };
   const fetchCounts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/user/counts");
@@ -96,6 +100,7 @@ function App() {
             path="/products"
             element={
               <Products
+                isProLoader={isProLoader}
                 filter={filter}  category={category} setCategory={setCategory}
                 setFilter={setFilter} counts={counts}
                 wishDecrement={wishDecrement}
@@ -118,6 +123,7 @@ function App() {
             element={<Favs cartCount={cartCount} wishCount={wishCount} />}
           />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/addproduct" element={<AddProduct />} />
           {/* crazzy stufss*/}
           <Route path="/products/gaming" element={ <Products filter={filter} setFilter={setFilter} wishDecrement={wishDecrement} cartDecrement={cartDecrement} category={category} setCategory={setCategory}

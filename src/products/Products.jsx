@@ -3,9 +3,10 @@ import Nav from "../components/Navbar";
 import Filter from '../components/filter'
 import { api } from "../components/utilities/one";
 import Sort from "../components/sort";
+import ProLoader from "../components/Loaders/ProLoader";
 
 const Products = (props) => {
- const { cartCount, filter,category,payment, setPayment,counts, updateCounts,
+ const { cartCount, filter,category,payment, setPayment,counts, updateCounts, isProLoader,
    setCategory, setFilter, wishCount, cartDecrement, wishIncrement, wishDecrement,  cartIncrement, setProducts, products } = props;
 
   return (
@@ -15,12 +16,13 @@ const Products = (props) => {
       <div className="w-full flex items-center justify-center">
         <Sort/>
       </div> 
-      <div className="grid  auto-col grid-cols-6 gap-4">
-        {filter.map((product) => (
+      {isProLoader? <div className="grid  auto-col grid-cols-6 gap-4">
+        { filter.map((product) => (
           <Test  key={product._id} product={product}  setProducts={setProducts} products={products} cartIncrement={cartIncrement}
           cartDecrement={cartDecrement} wishDecrement={wishDecrement} payment={payment} counts={counts} updateCounts={updateCounts}
-          wishIncrement={wishIncrement} filter={filter} setFilter={setFilter} setPayment={setPayment} cartCount={cartCount}/>))}
-          </div>
+          wishIncrement={wishIncrement} filter={filter} setFilter={setFilter} setPayment={setPayment} cartCount={cartCount}
+          />))}
+          </div>: <ProLoader />}
     </div>
   );
 };

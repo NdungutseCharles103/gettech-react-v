@@ -31,13 +31,12 @@ h1{
     cursor: pointer;
     align-items: center;
     justify-content: center;
-   background-color: #190692e8;
-    border-radius: 5px;
+    background-color: #190692e8;
     padding: 3px 7px;
     transition: all 0.3s;
   
   }
-  .signsub:hover{
+  .button input[type=submit]:hover {
     cursor: pointer;
     background: #2403fde8;
   }
@@ -116,11 +115,10 @@ h1{
   
   .loback{
     background: 
-#d0cdff 
+#f3f2f7 
   ;
   }
   .forform{
-    /* background: rgba(5, 7, 15, 0.363); */
     color: #000;
   }
   .inmaterial label{

@@ -4,6 +4,7 @@ import  './signup.css';
 import Footer from './Footer';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -28,9 +29,9 @@ const Signup = () => {
   <div className='loback flex flex-col'>
       <Body className=''>
         <Main className='w-1/2'>
-            <Form className='shadow-lg forform'>
+            <Form className=' forform'>
                 <Logo ><img src={require("../../Images/logo.png")} alt="logo" /></Logo>
-                <h1>Sign Up to HiTech</h1>
+                <h1 className='text-black'>Sign Up to HiTech</h1>
                 <div className="labels">
                     <TextField className="inmaterial insign" label="Full Name"
           id="standard-password-input" variant="filled" type="text" placeholder="First Name"required />
@@ -52,19 +53,19 @@ const Signup = () => {
                 <div className="label">
                 <Checkbox {...label}  onClick={handleClickShowPassword}
               onMouseDown={handleMouseDownPassword} type="checkbox"/>
-                    <label>Show password</label>
+                    <label className='text-black'>Show password</label>
                 </div>
                 <div className="label">
                     <Checkbox {...label} type="checkbox" required/>
-                    <label>I agree with terms and conditions</label>
+                    <label className='text-black'>I agree with terms and conditions</label>
                 </div>
 
                 <div className="button">
-                  <input className='signsub bg-blue-500' type='submit' value='Submit'  />
+                  <input className='signsub bg-blue-500' type='submit' value='Sign Up'  />
                 </div>
-                <div className="alt">
+                <div className="alt text-black">
                     <p>Already have an account?</p>
-                    <a href="./login">  Log in</a>
+                   <Link to='/login'><div  className='text-blue-500'>Log in</div></Link> 
                 </div>
             </Form>
         </Main>
