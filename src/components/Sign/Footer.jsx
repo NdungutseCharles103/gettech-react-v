@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="flex flex-col footer text-white p-4 text-md w-full">
+    <div className="flex flex-col footer text-white justify-between p-4 text-md w-full h-[30vh]">
       <div className="flex justify-between w-full">
         <div className="foot flex flex-col">
           <h1>About Us</h1>
@@ -21,7 +21,7 @@ const Footer = () => {
           <a href="/">Instagram</a>
           <a href="/">Youtube</a>
         </div>
-        <div className="foot flex flex-col">
+        <div className="foot flex flex-col  w-[20%]">
           <h1>Partners</h1>
           <div className="flex">
             <img className='w-[20%]'
@@ -40,7 +40,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="flex items-center">
-        <p>&copy; HiTech 2022 All rights reserved</p>
+        <p className="text-center w-full">&copy; HiTech 2022 All rights reserved</p>
       </div>
     </div>
   );
