@@ -9,6 +9,7 @@ import Cart from "./components/Cart/Cart";
 import Favs from "./components/Favs/Favs";
 import Signup from "./components/Sign/signup";
 import Login from './components/Sign/Login'
+import Account from "./components/account/Account";
 import { api } from './components/utilities/one';
 
 function App() {
@@ -118,6 +119,10 @@ function App() {
           <Route
             path="/wishlist"
             element={<Favs cartCount={cartCount} wishCount={wishCount} />}
+          />
+          <Route
+            path="/account"
+            element={<Account cartCount={cartCount} wishCount={wishCount} />}
           />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

@@ -17,7 +17,6 @@ const Favs = (props) => {
      useEffect(()=>{
        fetchProducts();
      }, [])
-  console.log(onWish.length);
   function Test() {
   
     if (onWish.length === 0) {

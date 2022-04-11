@@ -17,7 +17,6 @@ const Cart = (props) => {
      useEffect(()=>{
        fetchProducts();
      }, [])
-  console.log(onCart.length);
   function Test() {
   
     if (onCart.length === 0) {

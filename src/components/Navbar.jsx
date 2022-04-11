@@ -5,11 +5,13 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import {Link} from 'react-router-dom'
 import { Products } from "./utilities/one";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { getLocal } from "./utilities/useLocal";
 
 const Navbar = (props) => {
   // const [active, seActive] = useState("")
   const [toggle, setToggle] = useState("")
   const {wishCount, cartCount} = props;
+  const name = getLocal('username')
 
   const activeHandler = (e) => {
     e.target.classList.add('active');
@@ -38,24 +40,33 @@ const Navbar = (props) => {
               {/* {show?<Dropdown />:''} */}
           </li>
           <Link to='/cart'>
-            <IconButton className="ml-7 navitem" aria-label="cart" onClick={Products}>
+            <IconButton title="Cart" className="ml-7 navitem" aria-label="cart" onClick={Products}>
               <Badge max={99} badgeContent={cartCount} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
           </Link>
           <Link to='/wishlist'>
-            <IconButton className="ml-7 navitem" aria-label="cart">
+            <IconButton title="wishlist" className="ml-7 navitem" aria-label="cart">
               <Badge max={99} badgeContent={wishCount} color="secondary">
                 <FavoriteIcon />
               </Badge>
             </IconButton>
           </Link>
+          {name===''?
           <li className="ml-7">
             <Link to="/signup" className="">
               Sign Up
             </Link>
+          </li>:
+          <li className="ml-9 flex w-[35px] h-[35px]">
+            <Link to="/account" className="">
+              <div title="Account" className="flex rounded-full h-full w-full bg-slate-400 items-center justify-center">
+                <img className="w-[70%]" src="https://img.icons8.com/ios-glyphs/60/user--v1.png" alt="" />
+              </div>
+            </Link>
           </li>
+          }
         </ul>
       </div>
     </nav>
