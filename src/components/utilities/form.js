@@ -25,7 +25,10 @@ export const regUser = async (e) => {
 
   const done = await api.post("/user/register", newUser);
   console.log(done);
-  if(done) window.location.replace('http://localhost:4040/')
+  if(done){
+       window.localStorage.setItem('username', username);
+       window.location.replace("https://hitech1.vercel.app/");
+    }
 };
 
 
@@ -38,5 +41,7 @@ export const logUser = async (e) => {
     };
     const done = await api.post('/user/login', backUser);
     console.log(done);
-    if(done) window.location.replace("http://localhost:4040/");
+    if(done){
+         window.localStorage.setItem("username", username);
+         window.location.replace("https://hitech1.vercel.app/");}
 }
