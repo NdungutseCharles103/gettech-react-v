@@ -114,11 +114,15 @@ function App() {
           />
           <Route
             path="/cart"
-            element={<Cart cartCount={cartCount} wishCount={wishCount} payment={payment}/>}
+            element={<Cart  cartCount={cartCount} wishIncrement={wishIncrement}
+             cartDecrement={cartDecrement} wishDecrement={wishDecrement} products={products}
+             wishCount={wishCount} cartIncrement={cartIncrement} payment={payment}/>}
           />
           <Route
             path="/wishlist"
-            element={<Favs cartCount={cartCount} wishCount={wishCount} />}
+            element={<Favs cartCount={cartCount} wishIncrement={wishIncrement}
+             cartDecrement={cartDecrement} wishDecrement={wishDecrement}
+             wishCount={wishCount} cartIncrement={cartIncrement} products={products}/>}
           />
           <Route
             path="/account"

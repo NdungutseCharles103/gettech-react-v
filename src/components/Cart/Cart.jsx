@@ -4,7 +4,7 @@ import { api } from "../utilities/one";
 import Loader from '../Loaders/Loader'
 
 const Cart = (props) => {
-  const { cartCount, wishCount, payment} = props;
+  const { cartCount, wishCount, payment, products, cartDecrement} = props;
   const [ onCart, setOnCart] = useState([])
   const [isLoading, setIsLoading] = useState(false)
      const fetchProducts = async () => {
@@ -17,6 +17,19 @@ const Cart = (props) => {
      useEffect(()=>{
        fetchProducts();
      }, [])
+
+     const cartRemover = async(e)=>{
+       const id = e.target.id;
+       const parent = document.getElementsByClassName(id)
+       parent[0].style.display = 'none';
+        cartDecrement();
+        const prorem = await products.find((p)=> p._id===id)
+         prorem.cart = false;
+        const remove = await api.put(`/products/${id}`, prorem) 
+        console.log(remove);
+        parent[0].style.display = "none";
+     }
+
   function Test() {
   
     if (onCart.length === 0) {
@@ -55,7 +68,7 @@ const Cart = (props) => {
               </thead>
               <tbody>
                 {onCart.map((c) => (
-                  <tr key={c._id}>
+                  <tr key={c._id} className={c._id}>
                     <td className="flex w-full items-center justify-center flex-col">
                       <div className="flex w-full items-center justify-center flex-col py-2">
                         <img
@@ -90,10 +103,10 @@ const Cart = (props) => {
                     </td>
                     <td>
                       <div className="flex w-full items-center justify-center">
-                        <i
-                          title="remove"
+                        <p id={c._id}
+                          title="remove" onClick={cartRemover}
                           className=" text-red-500 text-3xl cursor-pointer rounded-md px-1 bx bx-x"
-                        ></i>
+                        ></p>
                       </div>
                     </td>
                   </tr>

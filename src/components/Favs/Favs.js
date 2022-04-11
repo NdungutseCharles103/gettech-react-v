@@ -4,7 +4,7 @@ import { api } from "../utilities/one";
 import Loader from '../Loaders/Loader'
 
 const Favs = (props) => {
-  const { cartCount, wishCount} = props;
+  const { cartCount, wishCount, products, cartIncrement, wishDecrement} = props;
   const [ onWish, setOnWish] = useState([])
   const [isLoading, setIsLoading] = useState(false)
      const fetchProducts = async () => {
@@ -17,6 +17,48 @@ const Favs = (props) => {
      useEffect(()=>{
        fetchProducts();
      }, [])
+     const wishRemover = async (e) => {
+       const id = e.target.id;
+       const parent = document.getElementsByClassName(id);
+       parent[0].style.display = "none";
+       wishDecrement();
+       const prorem = await products.find((p) => p._id === id);
+       prorem.wish = false;
+       const remove = await api.put(`/products/${id}`, prorem);
+       console.log(remove);
+       parent[0].style.display = "none";
+     };
+    
+     const AddCart = async(e) =>{
+       const id = e.target.name;
+       const btn = document.getElementById("wishtocart");
+       const parent = document.getElementsByClassName(id);
+       const prorem = await products.find((p) => p._id === id);
+       prorem.cart = true;
+       prorem.wish = false;
+       const add = await api.put(`/products/${id}`, prorem);
+       console.log(add);
+       btn.innerText = 'Added To Cart';
+       cartIncrement();
+       wishDecrement();
+       parent[0].style.display = 'none';
+     }
+     const AddAllCart = async()=>{
+        const all = document.getElementsByName('row');
+        for(let i=0; i<onWish.length; i++){
+          let id = onWish[i]._id
+          onWish[i].cart = true;
+          onWish[i].wish = false;
+          await api.put(`/products/${id}`, onWish[i]);
+          cartIncrement();
+          wishDecrement();
+        }
+        
+        for(let i=0; i<all.length; i++){
+          all[i].style.display = 'none';
+        }
+        console.log(all);
+     }
   function Test() {
   
     if (onWish.length === 0) {
@@ -39,7 +81,8 @@ const Favs = (props) => {
           <div className="flex w-full items-center justify-center mt-7">
             <p>Products: {onWish.length}</p>
             {/* <p className="mx-[20px]">Total Cost: {payment} USD</p> */}
-            <button className="px-2 ml-10 py-1 bg-blue-600 text-white">
+            <button onClick={AddAllCart}
+            className="px-2 ml-10 py-1 bg-blue-600 text-white">
               Add all To Cart
             </button>
           </div>
@@ -55,7 +98,7 @@ const Favs = (props) => {
               </thead>
               <tbody>
                 {onWish.map((c) => (
-                  <tr key={c._id}>
+                  <tr key={c._id} className={c._id} name='row'>
                     <td className="flex w-full items-center justify-center flex-col">
                       <div className="flex w-full items-center justify-center flex-col py-2">
                         <img
@@ -73,9 +116,9 @@ const Favs = (props) => {
                     </td>
                     <td>
                       <div className="flex w-full mx-auto items-center justify-center">
-                        <button
-                          title="Add To Cart"
-                          className="bg-green-200 py-2 px-5"
+                        <button onClick={AddCart}
+                          title="Add To Cart" id="wishtocart" name={c._id}
+                          className={`bg-green-200 py-2 px-5 $`}
                         >
                           Add To Cart
                         </button>
@@ -84,7 +127,7 @@ const Favs = (props) => {
                     <td>
                       <div className="flex w-full items-center justify-center">
                         <i
-                          title="remove"
+                          title="remove" id={c._id} onClick={wishRemover}
                           className=" text-red-500 text-3xl rounded-md cursor-pointer px-1 bx bx-x"
                         ></i>
                       </div>
