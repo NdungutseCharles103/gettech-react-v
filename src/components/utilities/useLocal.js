@@ -27,7 +27,7 @@ export default function useLocalStorage(key, inValue){
 // const [name, setName] = useLocalStorage('name', ()=>'')
 
 export const getLocal = (key) =>{
-    const savedValue = JSON.parse(localStorage.getItem(key));
+    const savedValue = localStorage.getItem(key);
     if (savedValue) return savedValue;
     return 
 }
