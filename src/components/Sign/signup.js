@@ -60,7 +60,7 @@ const Signup = () => {
                     <label className='text-black'>Show password</label>
                 </div>
                 <div className="label">
-                    <Checkbox {...label} type="checkbox" required/>
+                    <Checkbox {...label} type="checkbox" required={true}/>
                     <label className='text-black'>I agree with terms and conditions</label>
                 </div>
 

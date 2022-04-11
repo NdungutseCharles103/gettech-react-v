@@ -1,28 +1,42 @@
-import { api } from './one';
+import { api } from "./one";
 
 let username, email, password;
 
 export const getuname = (e) => {
-    username = e.target.value;
-}
-// export const getfname = (e) => {
-//     username = e.target.value;
-// }
-export const getemail = (e) => {
-    email = e.target.value;
-}
-export const getpassw = (e) => {
-    password = e.target.value;
-}
+  username = e.target.value;
+};
 
-export const regUser =  async (e) => {
-    e.preventDefault()
-    // console.log(`${username}, ${email}, ${password}`);
-    const newUser = {
+export const getemail = (e) => {
+  email = e.target.value;
+};
+export const getpassw = (e) => {
+  password = e.target.value;
+};
+
+export const regUser = async (e) => {
+  e.preventDefault();
+  console.log(`${username}, ${email}, ${password}`);
+  const newUser = {
+    username: username,
+    email: email,
+    password: password,
+  };
+  console.log(newUser);
+
+  const done = await api.post("/user/register", newUser);
+  console.log(done);
+  if(done) window.location.replace('http://localhost:4040/')
+};
+
+
+export const logUser = async (e) => {
+    e.preventDefault();
+    console.log(`${username}, ${email}, ${password}`);
+    const backUser = {
         username: username,
-        email: email,
-        passsword: password
-    }
-   const done = await api.post('/user/register', newUser)
-   console.log(done);
+        password: password
+    };
+    const done = await api.post('/user/login', backUser);
+    console.log(done);
+    if(done) window.location.replace("http://localhost:4040/");
 }
