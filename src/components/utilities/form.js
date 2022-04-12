@@ -43,5 +43,5 @@ export const logUser = async (e) => {
     console.log(done);
     if(done){
          window.localStorage.setItem("username", JSON.stringify(username));
-         window.location.replace("http://localhost:4040/");}
+         window.location.replace("https://hitech1.vercel.app/");}
 }
