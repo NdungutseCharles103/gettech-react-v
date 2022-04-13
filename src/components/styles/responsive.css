@@ -1,0 +1,10 @@
+@media screen and (max-width: 1050px) {
+    .pro{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media screen and (max-width: 750px) {
+    .pro{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

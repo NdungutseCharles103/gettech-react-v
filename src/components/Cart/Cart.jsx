@@ -56,70 +56,82 @@ const Cart = (props) => {
               Order Now
             </button>
           </div>
-          <div className="table mt-4">
-            <table className="w-full mt-8 cwish">
-              <thead>
-                <tr>
-                  <th className="w-[15%] bg-yellow-200 h-[40px]">Product</th>
-                  <th className="w-[15%] bg-yellow-200 h-[40px]">Price</th>
-                  <th className="w-[15%] bg-yellow-200 h-[40px]">Quantity</th>
-                  <th className="w-[15%] bg-yellow-200 h-[40px]">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {onCart.map((c) => (
-                  <tr key={c._id} className={c._id}>
-                    <td className="flex w-full items-center justify-center flex-col">
-                      <div className="flex w-full items-center justify-center flex-col py-2">
-                        <img
-                          className="w-[90px] mx-auto"
-                          src={c.image}
-                          alt=""
-                        />
-                        <p className="w-full text-center">{c.name}</p>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex w-full items-center justify-center">
-                        <p> {c.price} USD</p>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex w-full mx-auto items-center justify-center">
-                        <button
-                          title=" Decrease quantity"
-                          className="cbtns bg-red-200 px-5"
-                        >
-                          -
-                        </button>
-                        <p className="cp mx-6">3</p>
-                        <button
-                          title=" Increase quantity"
-                          className="cbtns bg-green-200 px-5"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex w-full items-center justify-center">
-                        <p id={c._id}
-                          title="remove" onClick={cartRemover}
-                          className=" text-red-500 text-3xl cursor-pointer rounded-md px-1 bx bx-x"
-                        ></p>
-                      </div>
-                    </td>
+          <div className=" overflow-auto">
+            <div className="table mt-4   overflow-scroll">
+              <table className="w-full mt-8 cwish">
+                <thead>
+                  <tr>
+                    <th className="w-[15%] text-center bg-yellow-200 h-[40px]">
+                      Product
+                    </th>
+                    <th className="w-[15%] text-center bg-yellow-200 h-[40px]">
+                      Price
+                    </th>
+                    <th className="w-[15%] text-center bg-yellow-200 h-[40px]">
+                      Quantity
+                    </th>
+                    <th className="w-[15%] text-center bg-yellow-200 h-[40px]">
+                      Action
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {onCart.map((c) => (
+                    <tr key={c._id} className={c._id}>
+                      <td className="flex w-full items-center justify-center flex-col">
+                        <div className="flex w-full items-center justify-center flex-col py-2">
+                          <img
+                            className="w-[90px] mx-auto"
+                            src={c.image}
+                            alt=""
+                          />
+                          <p className="w-full text-center">{c.name}</p>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex w-full items-center justify-center">
+                          <p> {c.price} USD</p>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex w-full mx-auto items-center justify-center">
+                          <button
+                            title=" Decrease quantity"
+                            className="cbtns bg-red-200 px-5"
+                          >
+                            -
+                          </button>
+                          <p className="cp mx-6">3</p>
+                          <button
+                            title=" Increase quantity"
+                            className="cbtns bg-green-200 px-5"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex w-full items-center justify-center">
+                          <p
+                            id={c._id}
+                            title="remove"
+                            onClick={cartRemover}
+                            className=" text-red-500 text-3xl cursor-pointer rounded-md px-1 bx bx-x"
+                          ></p>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       );
     }
   }
   return (
-    <div className="w-full flex flex-col overflow-x-hidden">
+    <div className="w-full flex flex-col">
       <Nav cartCount={cartCount} wishCount={wishCount} />
       <div className="flex justify-center items-center">
         <form className="search z-[1] psearch bg-slate-100 rounded-3xl mt-4 p-2 flex items-center w-[30%] justify-between pr-4">

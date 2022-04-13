@@ -93,7 +93,7 @@
     }
     .trend div,
     .pro {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr)!important;
     }
     /* .cdiv{
         overflow-x: hidden;
@@ -108,10 +108,17 @@
     .cp{
         margin: 0 8px;
     }
+    .table{
+        width: 650px!important;
+        overflow: auto;
+    }
+    .App{
+        overflow: hidden;
+    }
 }
 @media screen and (max-width: 400px) {
     .trend div, .pro {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr!important;
         padding: 6px 6%;
     }
     .cbtns{
@@ -150,4 +157,8 @@
 }
 .filter{
     color: rgb(7, 37, 94);
+}
+a{
+    text-decoration: none!important;
+    color: black !important;
 }

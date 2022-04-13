@@ -16,7 +16,7 @@ const HomeLoader = () => {
         <div className="w-full flex mt-3 items-center justify-center">
           <div className="h-[30px] w-[10%] anim"></div>
         </div>
-        <div className="grid gap-4 auto-col grid-cols-5 w-full px-4">
+        <div className="grid pro gap-4 auto-col grid-cols-5 w-full px-4">
           <div className="mt-3 h-[200px] flex gap-3 flex-col items-center anim"> </div>
           <div className="mt-3 h-[200px] flex gap-3 flex-col items-center anim"> </div>
           <div className="mt-3 h-[200px] flex gap-3 flex-col items-center anim"> </div>

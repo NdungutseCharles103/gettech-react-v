@@ -81,61 +81,78 @@ const Favs = (props) => {
           <div className="flex w-full items-center justify-center mt-7">
             <p>Products: {onWish.length}</p>
             {/* <p className="mx-[20px]">Total Cost: {payment} USD</p> */}
-            <button onClick={AddAllCart}
-            className="px-2 ml-10 py-1 bg-blue-600 text-white">
+            <button
+              onClick={AddAllCart}
+              className="px-2 ml-10 py-1 bg-blue-600 text-white"
+            >
               Add all To Cart
             </button>
           </div>
-          <div className="table mt-4">
-            <table className="w-full mt-8 cwish">
-              <thead>
-                <tr>
-                  <th className="w-[15%] bg-yellow-200 h-[40px]">Product</th>
-                  <th className="w-[15%] bg-yellow-200 h-[40px]">Price</th>
-                  <th className="w-[15%] bg-yellow-200 h-[40px]">Cart</th>
-                  <th className="w-[15%] bg-yellow-200 h-[40px]">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {onWish.map((c) => (
-                  <tr key={c._id} className={c._id} name='row'>
-                    <td className="flex w-full items-center justify-center flex-col">
-                      <div className="flex w-full items-center justify-center flex-col py-2">
-                        <img
-                          className="w-[90px] mx-auto"
-                          src={c.image}
-                          alt=""
-                        />
-                        <p className="w-full text-center">{c.name}</p>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex w-full items-center justify-center">
-                        <p> {c.price} USD</p>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex w-full mx-auto items-center justify-center">
-                        <button onClick={AddCart}
-                          title="Add To Cart" id="wishtocart" name={c._id}
-                          className={`bg-green-200 py-2 px-5 $`}
-                        >
-                          Add To Cart
-                        </button>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex w-full items-center justify-center">
-                        <i
-                          title="remove" id={c._id} onClick={wishRemover}
-                          className=" text-red-500 text-3xl rounded-md cursor-pointer px-1 bx bx-x"
-                        ></i>
-                      </div>
-                    </td>
+          <div className=" overflow-auto">
+            <div className="table mt-4 overflow-scroll">
+              <table className="w-full mt-8 cwish">
+                <thead>
+                  <tr>
+                    <th className="w-[15%] text-center bg-yellow-200 h-[40px]">
+                      Product
+                    </th>
+                    <th className="w-[15%] text-center bg-yellow-200 h-[40px]">
+                      Price
+                    </th>
+                    <th className="w-[15%] text-center bg-yellow-200 h-[40px]">
+                      Cart
+                    </th>
+                    <th className="w-[15%] text-center bg-yellow-200 h-[40px]">
+                      Action
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {onWish.map((c) => (
+                    <tr key={c._id} className={c._id} name="row">
+                      <td className="flex w-full items-center justify-center flex-col">
+                        <div className="flex w-full items-center justify-center flex-col py-2">
+                          <img
+                            className="w-[90px] mx-auto"
+                            src={c.image}
+                            alt=""
+                          />
+                          <p className="w-full text-center">{c.name}</p>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex w-full items-center justify-center">
+                          <p> {c.price} USD</p>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex w-full mx-auto items-center justify-center">
+                          <button
+                            onClick={AddCart}
+                            title="Add To Cart"
+                            id="wishtocart"
+                            name={c._id}
+                            className={`bg-green-200 py-2 px-5 $`}
+                          >
+                            Add To Cart
+                          </button>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex w-full items-center justify-center">
+                          <i
+                            title="remove"
+                            id={c._id}
+                            onClick={wishRemover}
+                            className=" text-red-500 text-3xl rounded-md cursor-pointer px-1 bx bx-x"
+                          ></i>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       );

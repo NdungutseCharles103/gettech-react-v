@@ -34,8 +34,11 @@ function App() {
     const data = await fetch("https://hitech1.herokuapp.com/user/counts");
     const counts = await data.json()
     setCounts(counts)
+
     setPayment(counts[0].payment)
+    if (counts[0].cart < 0) counts[0].cart = 0;
     setCartCount(counts[0].cart);
+    if (counts[0].wish<0) counts[0].wish = 0;
     setWishCount(counts[0].wish)
   }
   useEffect(()=>{

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getLocal } from "./useLocal";
 
 export const api = axios.create({
   baseURL: `https://hitech1.herokuapp.com`,
@@ -19,3 +20,40 @@ export const payHandler = (fun, con, op) => {
 };
 
 export const PriceHandler = () => {};
+
+let price, Pname, image, category, desc;
+
+export const getprice = (e) => {
+  price = e.target.value;
+};
+
+export const getPname = (e) => {
+  Pname = e.target.value;
+};
+export const getimage = (e) => {
+  image = e.target.value;
+};
+export const getcat = (e) => {
+  category = e.target.value;
+};
+export const getdesc = (e) => {
+  desc = e.target.value;
+};
+
+const owner = getLocal("username")
+
+export const submitProduct = async (e) =>{
+  e.preventDefault();
+  console.log(Pname, price, category, image, owner, desc);
+  const product = {
+    name: Pname,
+    price: price,
+    category: category,
+    image: image,
+    owner: owner,
+    description: desc
+  }
+
+  const done = await api.post('/products', product)
+  if(done) console.log(done);
+}

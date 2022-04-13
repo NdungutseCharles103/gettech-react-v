@@ -4,11 +4,40 @@ import Filter from '../components/filter'
 import { api } from "../components/utilities/one";
 import Sort from "../components/sort";
 import ProLoader from "../components/Loaders/ProLoader";
+import { compDates } from "../components/utilities/two";
+import { comPrice } from "../components/utilities/two";
 
 const Products = (props) => {
   const [isProLoader, setProLoader] = useState(false);
- const { cartCount, filter,category,payment, setPayment,counts, updateCounts,
-   setCategory, setFilter, wishCount, cartDecrement, wishIncrement, wishDecrement,  cartIncrement, setProducts, products } = props;
+  const [sorted, setSorted] = React.useState("");
+  const { cartCount, filter,category,payment, setPayment,counts, updateCounts,
+    setCategory, setFilter, wishCount, cartDecrement, wishIncrement, wishDecrement,  cartIncrement, setProducts, products } = props;
+ 
+    useEffect(() => {
+      handleSorted();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [filter, sorted]);
+    
+
+  const handleSorted = () => {
+   switch (sorted) {
+     case "none":
+       setFilter(filter);
+       break;
+
+     case "price":
+       setFilter(filter.sort(compDates));
+       break;
+       case "date":
+         setFilter(filter.sort(comPrice));
+         break;
+
+     default:
+       setFilter(filter);
+       break;
+   }
+ }; 
+
   const fetchProducts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/products");
     await data.json();
@@ -24,9 +53,9 @@ const Products = (props) => {
       <Nav className='z-10' cartCount={cartCount} wishCount={wishCount} />
       <Filter  filter={filter} setFilter={setFilter} products={products} category={category} setCategory={setCategory}/>
       <div className="w-full flex items-center justify-center">
-        <Sort/>
+        <Sort  filter={filter} setFilter={setFilter} sorted={sorted} setSorted={setSorted} />
       </div> 
-      {isProLoader? <div className="grid pro auto-col grid-cols-6 gap-4">
+      {isProLoader? <div className="grid px-2 pro auto-col grid-cols-6 gap-4">
         { filter.map((product) => (
           <Test  key={product._id} product={product}  setProducts={setProducts} products={products} cartIncrement={cartIncrement}
           cartDecrement={cartDecrement} wishDecrement={wishDecrement} payment={payment} counts={counts} updateCounts={updateCounts}
@@ -94,11 +123,11 @@ function Test (props){
     <div
    
 className="card text-sm  justify-between  bg-slate-100 cursor-pointer hover:scale-[1.05] duration-300 shadow-xl
-mt-3 flex flex-col items-center p-2"
+mt-3 flex flex-col items-center p-2 w-full"
 >
 <div className="flex h-[65%] items-center flex-col w-full bg-white"><img className="h-full" src={product.image} alt="" /></div>
 <p className="py-2 text-center">{product.name}</p>
-<div className="acts flex item-center w-[80%] px-2 justify-between">
+<div className="acts mx-auto flex items-center w-full px-2 justify-between">
 <button onClick={wishHandler} title={wishBtnTitle}
   className={`flex rbtns p-2 text-3xl bg-slate-300 items-center rounded-full  ${wishBtnClass}`}
 >
