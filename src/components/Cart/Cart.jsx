@@ -29,7 +29,7 @@ const Cart = (props) => {
         console.log(remove);
         parent[0].style.display = "none";
      }
-
+            
   function Test() {
   
     if (onCart.length === 0) {
