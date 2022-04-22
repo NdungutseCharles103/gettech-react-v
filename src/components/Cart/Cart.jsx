@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import Nav from "../Navbar";
 import { api } from "../utilities/one";
 import Loader from '../Loaders/Loader'
+import { Link } from "react-router-dom";
 
 const Cart = (props) => {
   const { cartCount, wishCount,
@@ -173,20 +174,22 @@ const Cart = (props) => {
   return (
     <div className="w-full flex flex-col">
       <Nav cartCount={cartCount} wishCount={wishCount} />
-      <div className="flex justify-center items-center">
-        <form className="search z-[1] psearch bg-slate-100 rounded-3xl mt-4 p-2 flex items-center w-[30%] justify-between pr-4">
-          <input
-            className="ml-2 w-[90%] outline-none border-none bg-transparent focus:border-sky-100"
-            type="text"
-            placeholder="Search Products"
-          />
-          <input type="submit" className="hidden" id="submit" />{" "}
-          <label htmlFor="submit">
-            <i className="bx bx-search text-xl cursor-pointer mt-2"></i>
-          </label>
-        </form>
-      </div>
-      {isLoading? <Test />:<Loader />}
+      <Link
+        to="/search"
+        className="s-home mx-auto search bg-slate-100 rounded-3xl mt-4 p-2 flex items-center w-[30%] justify-between pr-4"
+      >
+        <input
+          className="ml-2 cursor-pointer w-[90%] outline-none border-none bg-transparent focus:border-sky-100"
+          type="text"
+          placeholder="Search Products"
+          disabled
+        />
+        <input type="submit" className="hidden " id="submit" />{" "}
+        <label htmlFor="submit">
+          <i className="bx bx-search text-xl cursor-pointer mt-2"></i>
+        </label>
+      </Link>
+      {isLoading ? <Test /> : <Loader />}
     </div>
   );
 };

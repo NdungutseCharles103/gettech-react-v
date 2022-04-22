@@ -12,7 +12,6 @@ const Navbar = (props) => {
   const [toggle, setToggle] = useState("");
   const { wishCount, cartCount } = props;
   const name = getLocal("username");
-  console.log(name);
 
   const activeHandler = (e) => {
     e.target.classList.add("active");
