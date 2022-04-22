@@ -16,6 +16,8 @@ const Trans = (props) => {
     wishIncrement,
     cartIncrement,
     cartDecrement,
+    quantity,
+    setQuantity,
   } = props;
 
   useEffect(() => {
@@ -58,7 +60,7 @@ const Trans = (props) => {
           />
         </div>
       </div>
-        <h2 className="text-center text-2xl mt-3">Categories</h2>
+      <h2 className="text-center text-2xl mt-3">Categories</h2>
       <div className="cat flex flex-col items-center mt-3">
         <div className="grid homegrid gap-4 auto-col grid-cols-5">
           <Link
@@ -153,6 +155,8 @@ const Trans = (props) => {
         wishIncrement={wishIncrement}
         products={products}
         setProducts={setProducts}
+        quantity={quantity}
+        setQuantity={setQuantity}
       />
     </div>
   );

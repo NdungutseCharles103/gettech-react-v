@@ -16,6 +16,7 @@ const Home = (props) => {
     cartIncrement,
     cartDecrement,
     isHomeLoader,
+    quantity, setQuantity
   } = props;
 
 
@@ -23,7 +24,8 @@ const Home = (props) => {
     <div className="main ">
       {isHomeLoader? <Trans wishCount={wishCount} wishDecrement={wishDecrement} cartCount={cartCount} products={products} setFilter={setFilter}
       category={category} setCategory={setCategory} setProducts={setProducts} wishIncrement={wishIncrement}
-      cartIncrement={cartIncrement} cartDecrement={cartDecrement} isHomeLoader={isHomeLoader}/>
+      cartIncrement={cartIncrement} cartDecrement={cartDecrement} isHomeLoader={isHomeLoader}
+      quantity={quantity} setQuantity={setQuantity} />
        :<HomeLoader />}
     </div>
   );

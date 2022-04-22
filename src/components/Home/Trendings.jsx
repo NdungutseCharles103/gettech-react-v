@@ -7,18 +7,20 @@ const Trendings = (props) => {
   const {
     wishDecrement,
     cartIncrement,
-    wishIncrement ,
+    wishIncrement,
     cartDecrement,
     products,
     setProducts,
+    quantity,
+    setQuantity,
   } = props;
   
   
 
   function Trends(props) {
     const {product,products, cartDecrement, wishIncrement,
-      setProducts,cartIncrement, wishDecrement} = props;
-    const cartHandler = () => {
+      setProducts,cartIncrement, wishDecrement, quantity, setQuantity} = props;
+    const cartHandler = async () => {
       setProducts(
         products.map((pro) => {
           if (pro._id === product._id) {
@@ -32,10 +34,19 @@ const Trendings = (props) => {
       );
       if (!product.cart) {
         cartIncrement();
+        setQuantity(quantity + 1);
+        product.quantity = await quantity + 1;
         product.cart = true;
-        api.put(`/products/${product._id}`, product);
+        console.log(product);
+        /* const res = */ await api.put(`/products/${product._id}`, product);
       } else {
         cartDecrement();
+        setQuantity(quantity - 1);
+        product.quantity = quantity - 1;
+        if (product.quantity <= 0) {
+          setQuantity(0);
+          product.quantity = 0;
+        }
         product.cart = false;
         api.put(`/products/${product._id}`, product);
       }
@@ -108,6 +119,8 @@ mt-3 flex flex-col items-center p-2"
             cartDecrement={cartDecrement}
             wishDecrement={wishDecrement}
             wishIncrement={wishIncrement}
+            quantity={quantity}
+            setQuantity={setQuantity}
           />
         ))}
       </div>

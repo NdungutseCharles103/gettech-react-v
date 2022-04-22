@@ -10,7 +10,7 @@ import { comPrice } from "../components/utilities/two";
 const Products = (props) => {
   const [isProLoader, setProLoader] = useState(false);
   const [sorted, setSorted] = React.useState("");
-  const { cartCount, filter,category,payment, setPayment,counts, updateCounts,
+  const { cartCount, filter,category,payment, setPayment,counts, updateCounts, quantity, setQuantity,
     setCategory, setFilter, wishCount, cartDecrement, wishIncrement, wishDecrement,  cartIncrement, setProducts, products } = props;
  
     useEffect(() => {
@@ -60,6 +60,7 @@ const Products = (props) => {
           <Test  key={product._id} product={product}  setProducts={setProducts} products={products} cartIncrement={cartIncrement}
           cartDecrement={cartDecrement} wishDecrement={wishDecrement} payment={payment} counts={counts} updateCounts={updateCounts}
           wishIncrement={wishIncrement} filter={filter} setFilter={setFilter} setPayment={setPayment} cartCount={cartCount}
+          quantity={quantity} setQuantity={setQuantity}
           />))}
           </div>: <ProLoader />}
     </div>
@@ -69,7 +70,7 @@ const Products = (props) => {
 export default Products;
 
 function Test (props){
-  const {product, cartDecrement,
+  const {product, cartDecrement, quantity, setQuantity,
     wishIncrement, filter, setFilter,cartIncrement, wishDecrement} = props;
   const cartHandler = () => {
     setFilter(
@@ -85,10 +86,18 @@ function Test (props){
     );
     if (!product.cart) {
       cartIncrement()
+      setQuantity(quantity + 1);
+      product.quantity = quantity + 1
       product.cart = true;
       api.put(`/products/${product._id}`, product);
     } else {
       cartDecrement();
+      setQuantity(quantity - 1);
+      product.quantity = quantity - 1;
+      if(product.quantity<=0) {
+        setQuantity(0);
+        product.quantity = 0
+      }
       product.cart = false;
       api.put(`/products/${product._id}`, product);
     }

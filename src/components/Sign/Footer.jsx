@@ -3,23 +3,23 @@ import React from "react";
 const Footer = () => {
   return (
     <div className="flex flex-col footer text-white justify-between p-4 text-md w-full h-[30vh]">
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between w-full text-white">
         <div className="foot flex flex-col">
           <h1>About Us</h1>
-          <a href="/">Testimonials</a>
-          <a href="/">Statistics</a>
+          <a className="text-white" href="/">Testimonials</a>
+          <a className="text-white" href="/">Statistics</a>
         </div>
         <div className="foot flex flex-col">
           <h1>Contact Us</h1>
-          <a href="/">Facebook</a>
-          <a href="/">Instagram</a>
-          <a href="/">Youtube</a>
+          <a className="text-white" href="/">Facebook</a>
+          <a className="text-white" href="/">Instagram</a>
+          <a className="text-white" href="/">Youtube</a>
         </div>
         <div className="foot flex flex-col">
           <h1>Reach Us</h1>
-          <a href="/">Facebook</a>
-          <a href="/">Instagram</a>
-          <a href="/">Youtube</a>
+          <a className="text-white" href="/">Facebook</a>
+          <a className="text-white" href="/">Instagram</a>
+          <a className="text-white" href="/">Youtube</a>
         </div>
         <div className="foot flex flex-col  w-[20%]">
           <h1>Partners</h1>

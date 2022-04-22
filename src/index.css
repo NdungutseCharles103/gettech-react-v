@@ -162,3 +162,7 @@ a{
     text-decoration: none!important;
     color: black !important;
 }
+.foot a{
+    color: rgb(213, 226, 244)!important;
+    margin-top: 20px;
+}

@@ -4,10 +4,12 @@ import { api } from "../utilities/one";
 import Loader from '../Loaders/Loader'
 
 const Cart = (props) => {
-  const { cartCount, wishCount, payment, products, cartDecrement} = props;
+  const { cartCount, wishCount,
+     payment, setPayment, products, cartDecrement} = props;
   const [ onCart, setOnCart] = useState([])
+  
   const [isLoading, setIsLoading] = useState(false)
-     const fetchProducts = async () => {
+     const fetchCart = async () => {
        const data = await api.get("/user/cart");
        const products = await data.data;
        setOnCart(products);
@@ -15,7 +17,7 @@ const Cart = (props) => {
      };
   
      useEffect(()=>{
-       fetchProducts();
+       fetchCart();
      }, [])
 
      const cartRemover = async(e)=>{
@@ -31,6 +33,40 @@ const Cart = (props) => {
      }
             
   function Test() {
+    
+     const quantIncrement = async (e) => {
+       let eid = e.target.id;
+       const id = eid.replace("add", "");
+
+       const prorem = await onCart.find((p) => p._id === id);
+       prorem.quantity += 1;
+       
+       setPayment(payment + prorem.price);
+       console.log(payment + prorem.price);
+       setOnCart([...onCart]);
+
+       const putquanty = await api.put(`/products/${id}`, prorem);
+       console.log(putquanty);
+       // console.log(prorem.quantity+1);
+       
+     };
+     const quantDecrement = async (e) => {
+       let eid = e.target.id;
+       const id = eid.replace("min", "");
+
+       const prorem = await onCart.find((p) => p._id === id);
+       prorem.quantity -= 1;
+       let price = prorem.price
+       if(prorem.quantity < 1)price = 0;
+       if(prorem.quantity < 1) prorem.quantity = 1
+        setPayment(payment - price)
+       setOnCart([...onCart])
+
+       const putquanty = await api.put(`/products/${id}`, prorem);
+       console.log(putquanty);
+       // console.log(prorem.quantity+1);
+       
+     };
   
     if (onCart.length === 0) {
       return (
@@ -95,14 +131,18 @@ const Cart = (props) => {
                       </td>
                       <td>
                         <div className="flex w-full mx-auto items-center justify-center">
-                          <button
+                          <button 
+                            id={`min${c._id}`}
+                            onClick={quantDecrement}
                             title=" Decrease quantity"
                             className="cbtns bg-red-200 px-5"
                           >
                             -
-                          </button>
-                          <p className="cp mx-6">3</p>
-                          <button
+                          </button> 
+                          <p className="cp mx-6">{c.quantity}</p>
+                          <button 
+                            id={`add${c._id}`}
+                            onClick={quantIncrement}
                             title=" Increase quantity"
                             className="cbtns bg-green-200 px-5"
                           >
