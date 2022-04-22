@@ -71,7 +71,7 @@ const Cart = (props) => {
   
     if (onCart.length === 0) {
       return (
-        <div className="w-full mt-4 flex items-center justify-center">
+        <div className="w-full h-[70vh] mt-4 flex items-center justify-center">
           <img
             className="w-[10%]"
             src={require("../../Images/empty.png")}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Body, Main, Logo } from "./signupcss";
 import "./signup.css";
-import Footer from "./Footer";
 import Checkbox from "@mui/material/Checkbox";
 import { Link } from "react-router-dom";
 import { logUser, getuname, getpassw } from "../utilities/form";
@@ -59,7 +58,6 @@ const Login = () => {
             </Form>
         </Main>
       </Body>
-      <Footer />
     </div>
   );
 };

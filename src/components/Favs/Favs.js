@@ -64,7 +64,7 @@ const Favs = (props) => {
   
     if (onWish.length === 0) {
       return (
-        <div className="w-full mt-4 flex items-center justify-center">
+        <div className="w-full h-[70vh] mt-4 flex items-center justify-center">
           <img
             className="w-[10%]"
             src={require("../../Images/wish.jpg")}

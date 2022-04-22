@@ -12,6 +12,7 @@ import Login from './components/Sign/Login'
 import Account from "./components/account/Account";
 import { api } from './components/utilities/one';
 import Search from "./components/search/search";
+import Footer from "./components/Sign/Footer";
 
 function App() {
   const [category, setCategory] = useState("all");
@@ -328,6 +329,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );

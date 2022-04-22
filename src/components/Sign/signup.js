@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Form, Body, Main, Logo,} from './signupcss';
 import  './signup.css';
-import Footer from './Footer';
 import Checkbox from '@mui/material/Checkbox';
 import { Link } from 'react-router-dom';
 import { regUser, getuname, getemail, getpassw } from '../utilities/form';
@@ -78,7 +77,6 @@ const Signup = () => {
           <img src={require('../../Images/download.png')} alt=''></img>
         </div>
       </Body>  
-        <Footer />
     </div>
   );
 }
