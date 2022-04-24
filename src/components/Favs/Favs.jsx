@@ -3,6 +3,7 @@ import Nav from "../Navbar";
 import { api } from "../utilities/one";
 import Loader from '../Loaders/Loader'
 import { Link } from "react-router-dom";
+import wishimg from "../../Images/wish.jpg";
 
 const Favs = (props) => {
   const { cartCount, wishCount, products, cartIncrement, wishDecrement} = props;
@@ -67,7 +68,7 @@ const Favs = (props) => {
         <div className="w-full h-[70vh] mt-4 flex items-center justify-center">
           <img
             className="w-[10%]"
-            src={require("../../Images/wish.jpg")}
+            src={wishimg}
             alt=""
           />
           <p>The Wishlist is Empty. Please search for something</p>

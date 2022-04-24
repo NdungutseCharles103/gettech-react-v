@@ -30,7 +30,6 @@ function Search(props) {
         <Navbar cartCount={cartCount} wishCount={wishCount} />
         <SearchForm products={products} searchRes={searchRes}  setSearchRes={setSearchRes}/>
       </div>
-      <h2 className="text-center w-full my-3 text-xl">Search Results</h2>
       <div className="grid px-2 pro auto-col grid-cols-6 gap-4">
         {searchRes.map((product) => (
           <Results

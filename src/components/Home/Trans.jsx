@@ -2,6 +2,12 @@ import React, { useEffect } from "react";
 import Navbar from "../Navbar";
 import Trendings from "./Trendings";
 import { Link } from "react-router-dom";
+import homeimg from "../../Images/home.jpg";
+import introimg from "../../Images/intro.png";
+import gameimg from "../../Images/gaming.jpg";
+import phoneimg from "../../Images/phone-pc.jpg";
+import acessimg from "../../Images/acess.jpg";
+import otherimg from "../../Images/others.jpg";
 
 const Trans = (props) => {
   const {
@@ -57,7 +63,7 @@ const Trans = (props) => {
           </div>
           <img
             className="w-[30%]"
-            src={require("../../Images/intro.png")}
+            src={introimg}
             alt=""
           />
         </div>
@@ -76,7 +82,7 @@ const Trans = (props) => {
             >
               <img
                 className="w-full"
-                src={require("../../Images/home.jpg")}
+                src={homeimg}
                 alt=""
               />
               <p>Home Appliances</p>
@@ -93,7 +99,7 @@ const Trans = (props) => {
             >
               <img
                 className="w-full"
-                src={require("../../Images/gaming.jpg")}
+                src={gameimg}
                 alt=""
               />
               <p>Gaming</p>
@@ -108,7 +114,7 @@ const Trans = (props) => {
             <div className="flex flex-col items-center py-2 justify-between h-full">
               <img
                 className="w-full"
-                src={require("../../Images/phone-pc.jpg")}
+                src={phoneimg}
                 alt=""
               />
               <p>Phones and Pcs</p>
@@ -125,7 +131,7 @@ const Trans = (props) => {
             >
               <img
                 className="w-full"
-                src={require("../../Images/acess.jpg")}
+                src={acessimg}
                 alt=""
               />
               <p>Accesories</p>
@@ -142,7 +148,7 @@ const Trans = (props) => {
             >
               <img
                 className="w-full"
-                src={require("../../Images/others.jpg")}
+                src={otherimg}
                 alt=""
               />
               <p>Others</p>

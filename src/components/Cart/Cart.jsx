@@ -3,6 +3,7 @@ import Nav from "../Navbar";
 import { api } from "../utilities/one";
 import Loader from '../Loaders/Loader'
 import { Link } from "react-router-dom";
+import emptyimg from "../../Images/empty.png";
 
 const Cart = (props) => {
   const { cartCount, wishCount,
@@ -74,7 +75,7 @@ const Cart = (props) => {
         <div className="w-full h-[70vh] mt-4 flex items-center justify-center">
           <img
             className="w-[10%]"
-            src={require("../../Images/empty.png")}
+            src={emptyimg}
             alt=""
           />
           <p>The Cart is Empty. Please search for something</p>

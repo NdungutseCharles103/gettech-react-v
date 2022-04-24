@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Products } from "./utilities/one";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { getLocal } from "./utilities/useLocal";
+import logo from '../Images/logo.png'
 
 const Navbar = (props) => {
   // const [active, seActive] = useState("")
@@ -21,7 +22,7 @@ const Navbar = (props) => {
     <nav className="navbar z-50 bg-slate-100 text-black h-[60px] flex items-center justify-center sticky top-0">
       <div className="navbar__container items-center justify-between w-[90%] max-w-[1500px] flex px-6">
         <Link to="/" id="navbar__logo" className="w-[80px]">
-          <img src={require("../Images/logo.png")} alt="" />
+          <img src={logo} alt="" />
         </Link>
         <div
           className="navbar__toggle"
