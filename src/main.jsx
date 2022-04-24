@@ -6,7 +6,7 @@ import "./components/styles/responsive.css";
 import App from "./App";
 // import "@fortawesome/fontawesome-free/css/all.css";
 // import { Provider } from 'react-redux';
-import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.css";
 
 ReactDOM.render(
   <React.StrictMode>
