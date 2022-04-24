@@ -95,7 +95,7 @@ const Cart = (props) => {
             </button>
           </div>
           <div className=" overflow-auto">
-            <div className="table w-full mt-4   overflow-scroll">
+            <div className="table w-full mt-4  overflow-scroll">
               <table className="w-full mt-8 cwish">
                 <thead>
                   <tr>
