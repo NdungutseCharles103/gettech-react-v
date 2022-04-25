@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom';
 
 const Filter = (props) => {
-    const { products, setFilter,category, setCategory} = props;
+    const { products,filter, setFilter,category, setCategory} = props;
 
     useEffect(()=>{
         if(category === 'all'){
@@ -12,7 +12,7 @@ const Filter = (props) => {
         const filtered = products.filter((pro)=> pro.category.includes(category))
         setFilter(filtered)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[category])
+    },[category, filter])
   return (
     <div className="s-filter w-full flex flex-col items-center justify-center">
       <Link

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import emptyimg from "../../Images/empty.png";
 
 const Cart = (props) => {
-  const { cartCount, wishCount,
+  const { cartCount, wishCount, cartIncrement,
      payment, setPayment, products, cartDecrement} = props;
   const [ onCart, setOnCart] = useState([])
   
@@ -46,10 +46,10 @@ const Cart = (props) => {
        setPayment(payment + prorem.price);
        console.log(payment + prorem.price);
        setOnCart([...onCart]);
+       cartIncrement()
 
        const putquanty = await api.put(`/products/${id}`, prorem);
        console.log(putquanty);
-       // console.log(prorem.quantity+1);
        
      };
      const quantDecrement = async (e) => {
@@ -63,6 +63,7 @@ const Cart = (props) => {
        if(prorem.quantity < 1) prorem.quantity = 1
         setPayment(payment - price)
        setOnCart([...onCart])
+       cartDecrement()
 
        const putquanty = await api.put(`/products/${id}`, prorem);
        console.log(putquanty);

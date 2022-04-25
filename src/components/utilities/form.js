@@ -22,13 +22,17 @@ export const regUser = async (e) => {
     password: password,
   };
   console.log(newUser);
-
-  const done = await api.post("/user/register", newUser);
-  console.log(done);
-  if(done){
-       window.localStorage.setItem("username", JSON.stringify(username));
-       window.location.replace("https://hitech1.vercel.app/");
+  try {
+    const done = await api.post("/user/register", newUser);
+    console.log(done);
+    if (done) {
+      window.localStorage.setItem("username", JSON.stringify(username));
+      window.location.replace("https://hitech1.vercel.app/");
     }
+  } catch (error) {
+    console.log(error.message);
+  }
+  
 };
 
 
@@ -42,6 +46,9 @@ export const logUser = async (e) => {
     const done = await api.post('/user/login', backUser);
     console.log(done);
     if(done){
-         window.localStorage.setItem("username", JSON.stringify(username));
-         window.location.replace("https://hitech1.vercel.app/");}
+      window.localStorage.setItem("username", JSON.stringify(username));
+      window.location.replace("https://hitech1.vercel.app/");
+    }else{
+      console.log;
+    }
 }

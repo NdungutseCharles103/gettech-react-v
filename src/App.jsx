@@ -13,6 +13,7 @@ import Account from "./components/account/Account";
 import { api } from './components/utilities/one';
 import Search from "./components/search/search";
 import Footer from "./components/Sign/Footer";
+import ProductPreview from "./components/preview/productPrev";
 
 function App() {
   const [category, setCategory] = useState("all");
@@ -23,7 +24,7 @@ function App() {
   const [filter, setFilter] = useState([]);
   const [payment, setPayment] = useState(0)
   const [isHomeLoader, setHomeLoader] = useState(false);
-  const [quantity, setQuantity ] = useState([])
+  const [quantity, setQuantity ] = useState([]);
   
 
   const fetchProducts = async () => {
@@ -169,6 +170,10 @@ function App() {
           <Route
             path="/account"
             element={<Account cartCount={cartCount} wishCount={wishCount} />}
+          />
+          <Route
+            path="/preview"
+            element={<ProductPreview cartCount={cartCount} wishCount={wishCount} />}
           />
           <Route
             path="/search"
