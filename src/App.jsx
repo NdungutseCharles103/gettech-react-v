@@ -90,7 +90,7 @@ function App() {
       <div className="App flex flex-col w-full">
         <Routes>
           <Route
-            path="/"
+            path="/hitech"
             element={
               <Home
                 cartIncrement={cartIncrement}
@@ -138,7 +138,7 @@ function App() {
             }
           />
           <Route
-            path="/cart"
+            path="/hitech/cart"
             element={
               <Cart
                 cartCount={cartCount}
@@ -173,7 +173,9 @@ function App() {
           />
           <Route
             path="/preview"
-            element={<ProductPreview cartCount={cartCount} wishCount={wishCount} />}
+            element={
+              <ProductPreview cartCount={cartCount} wishCount={wishCount} />
+            }
           />
           <Route
             path="/search"

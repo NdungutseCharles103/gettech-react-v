@@ -39,7 +39,7 @@ const Navbar = (props) => {
           <li className="ml-7">
             <Link
               onClick={activeHandler}
-              to="/"
+              to="/hitech"
               className="navbar__links"
               id="home-page"
             >
@@ -56,7 +56,7 @@ const Navbar = (props) => {
             </Link>
             {/* {show?<Dropdown />:''} */}
           </li>
-          <Link to="/cart">
+          <Link to="/hitech/cart">
             <IconButton
               title="Cart"
               className="ml-7 navitem"
