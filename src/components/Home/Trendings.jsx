@@ -94,7 +94,7 @@ mt-3 flex flex-col items-center p-2"
             title={wishBtnTitle}
             className={`flex rbtns p-2 text-3xl bg-slate-300 items-center rounded-full  ${wishBtnClass}`}
           ></button>
-          <p className='flex items-center'>{product.price}</p>
+          <p className='flex items-center'>${product.price}</p>
           <button
             onClick={cartHandler}
             title={cartBtnTitle}

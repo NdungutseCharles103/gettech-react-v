@@ -21,7 +21,7 @@ const Home = (props) => {
 
 
   return (
-    <div className="main ">
+    <div className="main mb-7">
       {isHomeLoader? <Trans wishCount={wishCount} wishDecrement={wishDecrement} cartCount={cartCount} products={products} setFilter={setFilter}
       category={category} setCategory={setCategory} setProducts={setProducts} wishIncrement={wishIncrement}
       cartIncrement={cartIncrement} cartDecrement={cartDecrement} isHomeLoader={isHomeLoader}

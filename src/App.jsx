@@ -171,10 +171,10 @@ function App() {
             path="/account"
             element={<Account cartCount={cartCount} wishCount={wishCount} />}
           />
-          {/* <Route
+          <Route
             path="/preview"
             element={<ProductPreview cartCount={cartCount} wishCount={wishCount} />}
-          /> */}
+          />
           <Route
             path="/search"
             element={
@@ -334,7 +334,7 @@ function App() {
             }
           />
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </BrowserRouter>
   );

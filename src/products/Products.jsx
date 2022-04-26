@@ -49,7 +49,7 @@ const Products = (props) => {
   },[])
 
   return (
-    <div className="">
+    <div className="mb-7">
       <Nav className='z-10' cartCount={cartCount} wishCount={wishCount} />
       <Filter  filter={filter} setFilter={setFilter} products={products} category={category} setCategory={setCategory}/>
       <div className="w-full flex items-center justify-center">
@@ -141,7 +141,7 @@ mt-3 flex flex-col items-center p-2 w-full"
   className={`flex rbtns p-2 text-3xl bg-slate-300 items-center rounded-full  ${wishBtnClass}`}
 >
 </button>
-<p className='flex items-center'>{product.price}</p>
+<p className='flex items-center'>${product.price}</p>
 <button onClick={cartHandler} title={cartBtnTitle}
   className={`flex lbtns text-3xl items-center p-2 ml-2 bg-blue-600 rounded-full ${cartBtnClass}`}
 >
