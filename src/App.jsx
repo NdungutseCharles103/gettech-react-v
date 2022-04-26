@@ -14,6 +14,7 @@ import { api } from './components/utilities/one';
 import Search from "./components/search/search";
 import Footer from "./components/Sign/Footer";
 import ProductPreview from "./components/preview/productPrev";
+import Wrong from "./components/Wrong";
 
 function App() {
   const [category, setCategory] = useState("all");
@@ -113,7 +114,7 @@ function App() {
             }
           />
           <Route
-            path="/products"
+            path="products"
             element={
               <Products
                 filter={filter}
@@ -138,7 +139,7 @@ function App() {
             }
           />
           <Route
-            path="/cart"
+            path="cart"
             element={
               <Cart
                 cartCount={cartCount}
@@ -154,7 +155,7 @@ function App() {
             }
           />
           <Route
-            path="/wishlist"
+            path="wishlist"
             element={
               <Favs
                 cartCount={cartCount}
@@ -168,15 +169,17 @@ function App() {
             }
           />
           <Route
-            path="/account"
+            path="account"
             element={<Account cartCount={cartCount} wishCount={wishCount} />}
           />
           <Route
-            path="/preview"
-            element={<ProductPreview cartCount={cartCount} wishCount={wishCount} />}
+            path="preview"
+            element={
+              <ProductPreview cartCount={cartCount} wishCount={wishCount} />
+            }
           />
           <Route
-            path="/search"
+            path="search"
             element={
               <Search
                 counts={counts}
@@ -196,12 +199,12 @@ function App() {
               />
             }
           />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/addproduct" element={<AddProduct />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="login" element={<Login />} />
+          <Route path="addproduct" element={<AddProduct />} />
           {/* crazzy stufss*/}
           <Route
-            path="/products/gaming"
+            path="products/gaming"
             element={
               <Products
                 filter={filter}
@@ -220,7 +223,7 @@ function App() {
             }
           />
           <Route
-            path="/products/all"
+            path="products/all"
             element={
               <Products
                 filter={filter}
@@ -257,8 +260,9 @@ function App() {
               />
             }
           />
+          <Route  path="*" element={<Wrong />} />
           <Route
-            path="/products/pcs"
+            path="products/pcs"
             element={
               <Products
                 filter={filter}
@@ -277,7 +281,7 @@ function App() {
             }
           />
           <Route
-            path="/products/others"
+            path="products/others"
             element={
               <Products
                 filter={filter}
@@ -296,7 +300,7 @@ function App() {
             }
           />
           <Route
-            path="/products/accessories"
+            path="products/accessories"
             element={
               <Products
                 filter={filter}
@@ -315,7 +319,7 @@ function App() {
             }
           />
           <Route
-            path="/products/home"
+            path="products/home"
             element={
               <Products
                 filter={filter}
