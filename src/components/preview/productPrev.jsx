@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Navbar from '../Navbar'
 import Related from './Related';
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Product from './product';
 import { api } from '../utilities/one'
 import { useState } from 'react';
@@ -11,7 +11,7 @@ function ProductPreview(props) {
      cartIncrement, cartDecrement, products }= props
   const [product, setProduct] = useState({})  
 
-  const history 
+  const navigate = useNavigate();
   let params = useParams();
 
     const getProduct = async()=> {
@@ -27,8 +27,9 @@ function ProductPreview(props) {
   return (
     <div className="w-full mb-11">
       <Navbar cartCount={cartCount} wishCount={wishCount} />
-      <div className=" mt-7">
-        <i title='go back' className="bx bx-arrow-back bg-slate-200 p-1 hover:bg-slate-500
+      <div onClick={()=> navigate(-1)} className=" mt-7">
+        <i title='go back'
+        className="bx bx-arrow-back bg-slate-200 p-1 hover:bg-slate-500
         translate-y-7 ml-[8%] cursor-pointer rounded-full text-black duration-300"></i>
         <h1 className="text-center font-semibold text-xl">Product Preview</h1>
       </div>

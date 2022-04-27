@@ -118,14 +118,15 @@ const Cart = (props) => {
                   {onCart.map((c) => (
                     <tr key={c._id} className={c._id}>
                       <td className="flex w-full items-center justify-center flex-col">
-                        <div className="flex w-full items-center justify-center flex-col py-2">
+                        <Link to={`/preview/${c._id}`} 
+                        className="flex w-full cursor-pointer items-center justify-center flex-col py-2">
                           <img
                             className="w-[90px] mx-auto"
                             src={c.image}
                             alt=""
                           />
                           <p className="w-full text-center">{c.name}</p>
-                        </div>
+                        </Link>
                       </td>
                       <td>
                         <div className="flex w-full items-center justify-center">
