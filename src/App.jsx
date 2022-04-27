@@ -15,6 +15,8 @@ import Search from "./components/search/search";
 import Footer from "./components/Sign/Footer";
 import ProductPreview from "./components/preview/productPrev";
 import Wrong from "./components/Wrong";
+import Category from "./products/categories/Category";
+
 
 function App() {
   const [category, setCategory] = useState("all");
@@ -173,9 +175,17 @@ function App() {
             element={<Account cartCount={cartCount} wishCount={wishCount} />}
           />
           <Route
-            path="preview"
+            path="preview/:product_id"
             element={
-              <ProductPreview cartCount={cartCount} wishCount={wishCount} />
+              <ProductPreview
+                cartCount={cartCount}
+                wishCount={wishCount}
+                products={products}
+                cartIncrement={cartIncrement}
+                cartDecrement={cartDecrement}
+                wishDecrement={wishDecrement}
+                wishIncrement={wishIncrement}
+              />
             }
           />
           <Route
@@ -199,144 +209,35 @@ function App() {
               />
             }
           />
+          <Route
+            path="products/:product_cat"
+            element={
+              <Category
+                filter={filter}
+                category={category}
+                setCategory={setCategory}
+                setFilter={setFilter}
+                counts={counts}
+                wishDecrement={wishDecrement}
+                cartDecrement={cartDecrement}
+                wishIncrement={wishIncrement}
+                setProducts={setProducts}
+                cartIncrement={cartIncrement}
+                cartCount={cartCount}
+                setPayment={setPayment}
+                wishCount={wishCount}
+                payment={payment}
+                products={products}
+                updateCounts={updateCounts}
+                quantity={quantity}
+                setQuantity={setQuantity}
+              />
+            }
+          />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
           <Route path="addproduct" element={<AddProduct />} />
-          {/* crazzy stufss*/}
-          <Route
-            path="products/gaming"
-            element={
-              <Products
-                filter={filter}
-                setFilter={setFilter}
-                wishDecrement={wishDecrement}
-                cartDecrement={cartDecrement}
-                category={category}
-                setCategory={setCategory}
-                wishIncrement={wishIncrement}
-                setProducts={setProducts}
-                cartIncrement={cartIncrement}
-                cartCount={cartCount}
-                wishCount={wishCount}
-                products={products}
-              />
-            }
-          />
-          <Route
-            path="products/all"
-            element={
-              <Products
-                filter={filter}
-                setFilter={setFilter}
-                wishDecrement={wishDecrement}
-                cartDecrement={cartDecrement}
-                category={category}
-                setCategory={setCategory}
-                wishIncrement={wishIncrement}
-                setProducts={setProducts}
-                cartIncrement={cartIncrement}
-                cartCount={cartCount}
-                wishCount={wishCount}
-                products={products}
-              />
-            }
-          />
-          <Route
-            path="/products/phones"
-            element={
-              <Products
-                filter={filter}
-                setFilter={setFilter}
-                wishDecrement={wishDecrement}
-                cartDecrement={cartDecrement}
-                category={category}
-                setCategory={setCategory}
-                wishIncrement={wishIncrement}
-                setProducts={setProducts}
-                cartIncrement={cartIncrement}
-                cartCount={cartCount}
-                wishCount={wishCount}
-                products={products}
-              />
-            }
-          />
-          <Route  path="*" element={<Wrong />} />
-          <Route
-            path="products/pcs"
-            element={
-              <Products
-                filter={filter}
-                setFilter={setFilter}
-                wishDecrement={wishDecrement}
-                cartDecrement={cartDecrement}
-                category={category}
-                setCategory={setCategory}
-                wishIncrement={wishIncrement}
-                setProducts={setProducts}
-                cartIncrement={cartIncrement}
-                cartCount={cartCount}
-                wishCount={wishCount}
-                products={products}
-              />
-            }
-          />
-          <Route
-            path="products/others"
-            element={
-              <Products
-                filter={filter}
-                setFilter={setFilter}
-                wishDecrement={wishDecrement}
-                cartDecrement={cartDecrement}
-                category={category}
-                setCategory={setCategory}
-                wishIncrement={wishIncrement}
-                setProducts={setProducts}
-                cartIncrement={cartIncrement}
-                cartCount={cartCount}
-                wishCount={wishCount}
-                products={products}
-              />
-            }
-          />
-          <Route
-            path="products/accessories"
-            element={
-              <Products
-                filter={filter}
-                setFilter={setFilter}
-                wishDecrement={wishDecrement}
-                cartDecrement={cartDecrement}
-                category={category}
-                setCategory={setCategory}
-                wishIncrement={wishIncrement}
-                setProducts={setProducts}
-                cartIncrement={cartIncrement}
-                cartCount={cartCount}
-                wishCount={wishCount}
-                products={products}
-              />
-            }
-          />
-          <Route
-            path="products/home"
-            element={
-              <Products
-                filter={filter}
-                setFilter={setFilter}
-                wishDecrement={wishDecrement}
-                cartDecrement={cartDecrement}
-                category={category}
-                setCategory={setCategory}
-                wishIncrement={wishIncrement}
-                setProducts={setProducts}
-                cartIncrement={cartIncrement}
-                cartCount={cartCount}
-                wishCount={wishCount}
-                products={products}
-              />
-            }
-          />
+          <Route path="*" element={<Wrong />} />
         </Routes>
         <Footer />
       </div>

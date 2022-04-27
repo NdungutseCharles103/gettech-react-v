@@ -2,6 +2,7 @@ import { api } from '../utilities/one';
 import React from 'react'
 // import products from "../../products/Models";
 import './style.css'
+import { Link } from 'react-router-dom';
 
 const Trendings = (props) => {
   const {
@@ -84,17 +85,17 @@ const Trendings = (props) => {
         className="card text-sm  justify-between  bg-slate-100 cursor-pointer hover:scale-[1.05] duration-300 shadow-xl
 mt-3 flex flex-col items-center p-2"
       >
-        <div className="flex h-[65%] items-center flex-col w-full bg-white">
+        <Link title='click to for more details' to={`/preview/${product._id}`} className="flex h-[65%] items-center flex-col w-full bg-white">
           <img className="h-full" src={product.image} alt="" />
-        </div>
-        <p className="py-2 text-center">{product.name}</p>
+        </Link>
+        <Link to={`/preview/${product._id}`} className="py-2 text-center">{product.name}</Link>
         <div className="acts flex item-center w-full px-2 justify-between">
           <button
             onClick={wishHandler}
             title={wishBtnTitle}
             className={`flex rbtns p-2 text-3xl bg-slate-300 items-center rounded-full  ${wishBtnClass}`}
           ></button>
-          <p className='flex items-center'>${product.price}</p>
+          <Link to={`/preview/${product._id}`} className='flex items-center'>${product.price}</Link>
           <button
             onClick={cartHandler}
             title={cartBtnTitle}

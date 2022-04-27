@@ -1,18 +1,9 @@
 import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom';
 
-const Filter = (props) => {
-    const { products,filter, setFilter,category, setCategory} = props;
+const Filter = () => {
+    // const { products,filter, setFilter,category} = props;
 
-    useEffect(()=>{
-        if(category === 'all'){
-            setFilter(products);
-            return
-        }
-        const filtered = products.filter((pro)=> pro.category.includes(category))
-        setFilter(filtered)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[category, filter])
   return (
     <div className="s-filter w-full flex flex-col items-center justify-center">
       <Link
@@ -33,7 +24,6 @@ const Filter = (props) => {
       <div className="filter flex items-center">
         <Link to="/products/all">
           <p
-            onClick={() => setCategory("all")}
             className="ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer"
           >
             All
@@ -41,7 +31,6 @@ const Filter = (props) => {
         </Link>
         <Link to="/products/home">
           <p
-            onClick={() => setCategory("home")}
             className="ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer"
           >
             Home equipments
@@ -49,15 +38,13 @@ const Filter = (props) => {
         </Link>
         <Link to="/products/phones">
           <p
-            onClick={() => setCategory("Phones")}
             className="ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer"
           >
             Phones
           </p>
         </Link>
-        <Link to="/products/pcs">
+        <Link to="/products/Pcs">
           <p
-            onClick={() => setCategory("Pcs")}
             className="ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer"
           >
             Computers
@@ -65,7 +52,6 @@ const Filter = (props) => {
         </Link>
         <Link to="/products/gaming">
           <p
-            onClick={() => setCategory("gaming")}
             className="ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer"
           >
             Gaming
@@ -73,7 +59,6 @@ const Filter = (props) => {
         </Link>
         <Link to="/products/accessories">
           <p
-            onClick={() => setCategory("accessories")}
             className="ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer"
           >
             Accessories
@@ -81,7 +66,6 @@ const Filter = (props) => {
         </Link>
         <Link to="/products/others">
           <p
-            onClick={() => setCategory("others")}
             className="ml-7 py-2 hover:text-blue-600 duration-300 mt-3 cursor-pointer"
           >
             Others
