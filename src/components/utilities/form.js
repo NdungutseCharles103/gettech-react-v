@@ -49,6 +49,6 @@ export const logUser = async (e) => {
       window.localStorage.setItem("username", JSON.stringify(username));
       window.location.replace("https://hitech1.vercel.app/");
     }else{
-      console.log;
+      console.error("Failed to login");
     }
 }
