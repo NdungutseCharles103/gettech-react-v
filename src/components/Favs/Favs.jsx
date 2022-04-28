@@ -4,6 +4,7 @@ import { api } from "../utilities/one";
 import Loader from '../Loaders/Loader'
 import { Link } from "react-router-dom";
 import wishimg from "../../Images/wish.jpg";
+import Footer from "../Sign/Footer";
 
 const Favs = (props) => {
   const { cartCount, wishCount, products, cartIncrement, wishDecrement} = props;
@@ -161,25 +162,28 @@ const Favs = (props) => {
     }
   }
   return (
-    <div>
-      <Nav cartCount={cartCount} wishCount={wishCount} />
-      <Link
-        to="/search"
-        className="s-home mx-auto search bg-slate-100 rounded-3xl mt-4 p-2 flex items-center w-[30%] justify-between pr-4"
-      >
-        <input
-          className="ml-2 cursor-pointer w-[90%] outline-none border-none bg-transparent focus:border-sky-100"
-          type="text"
-          placeholder="Search Products"
-          disabled
-        />
-        <input type="submit" className="hidden " id="submit" />{" "}
-        <label htmlFor="submit">
-          <i className="bx bx-search text-xl cursor-pointer mt-2"></i>
-        </label>
-      </Link>
-      {isLoading ? <Test /> : <Loader />}
-    </div>
+    <>
+      <div>
+        <Nav cartCount={cartCount} wishCount={wishCount} />
+        <Link
+          to="/search"
+          className="s-home mx-auto search bg-slate-100 rounded-3xl mt-4 p-2 flex items-center w-[30%] justify-between pr-4"
+        >
+          <input
+            className="ml-2 cursor-pointer w-[90%] outline-none border-none bg-transparent focus:border-sky-100"
+            type="text"
+            placeholder="Search Products"
+            disabled
+          />
+          <input type="submit" className="hidden " id="submit" />{" "}
+          <label htmlFor="submit">
+            <i className="bx bx-search text-xl cursor-pointer mt-2"></i>
+          </label>
+        </Link>
+        {isLoading ? <Test /> : <Loader />}
+      </div>
+      <Footer />
+    </>
   );
 };
 

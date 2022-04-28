@@ -7,11 +7,13 @@ function Related(props) {
 
   return (
     <>
-      {relProducts.length !== 0 ? (
-        relProducts.map((rel) => (
-          <div key={rel._id}
-           className="mt-4 overflow-x-auto overflow-y-hidden gap-2 grid grid-flow-col auto-cols-[27%] px-2">
-            <div className="card text-sm  justify-between  bg-slate-100 cursor-pointer hover:scale-[1.05] duration-300 shadow-xl mt-3 flex flex-col items-center p-2">
+      <div className="mt-4 related overflow-x-auto overflow-y-hidden gap-2 grid grid-flow-col auto-cols-[20%] px-2">
+        {relProducts.length !== 0 ? (
+          relProducts.map((rel) => (
+            <div
+              key={rel._id}
+              className="card text-sm  justify-between  bg-slate-100 cursor-pointer hover:scale-[1.05] duration-300 shadow-xl mt-3 flex flex-col items-center p-2"
+            >
               <div className="flex h-[65%] items-center flex-col w-full bg-white">
                 <img className="h-full" src={rel.image} alt="" />
               </div>
@@ -22,11 +24,13 @@ function Related(props) {
                 </p>
               </div>
             </div>
+          ))
+        ) : (
+          <div className="text-center">
+            Sorry. No other related products found!
           </div>
-        ))
-      ) : (
-        <div className="text-center">Sorry. No other related products found!</div>
-      )}
+        )}
+      </div>
     </>
   );
 }

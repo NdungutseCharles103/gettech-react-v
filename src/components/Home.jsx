@@ -1,6 +1,7 @@
 import React from "react";
 import HomeLoader from "./Loaders/HomeLoader";
 import Trans from "./Home/Trans";
+import Footer from "./Sign/Footer";
 
 const Home = (props) => {
   const {
@@ -21,13 +22,31 @@ const Home = (props) => {
 
 
   return (
-    <div className="main mb-7">
-      {isHomeLoader? <Trans wishCount={wishCount} wishDecrement={wishDecrement} cartCount={cartCount} products={products} setFilter={setFilter}
-      category={category} setCategory={setCategory} setProducts={setProducts} wishIncrement={wishIncrement}
-      cartIncrement={cartIncrement} cartDecrement={cartDecrement} isHomeLoader={isHomeLoader}
-      quantity={quantity} setQuantity={setQuantity} />
-       :<HomeLoader />}
-    </div>
+    <>
+      <div className="main mb-7">
+        {isHomeLoader ? (
+          <Trans
+            wishCount={wishCount}
+            wishDecrement={wishDecrement}
+            cartCount={cartCount}
+            products={products}
+            setFilter={setFilter}
+            category={category}
+            setCategory={setCategory}
+            setProducts={setProducts}
+            wishIncrement={wishIncrement}
+            cartIncrement={cartIncrement}
+            cartDecrement={cartDecrement}
+            isHomeLoader={isHomeLoader}
+            quantity={quantity}
+            setQuantity={setQuantity}
+          />
+        ) : (
+          <HomeLoader />
+        )}
+      </div>
+      <Footer />
+    </>
   );
 };
 

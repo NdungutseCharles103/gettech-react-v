@@ -107,3 +107,13 @@ td{
 .prorev1:hover{
   background-color: rgba(90, 34, 34, 0.74);
 }
+@media screen and (max-width: 1000px) {
+  .related {
+    grid-auto-columns: 30%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .related {
+    grid-auto-columns: 200px;
+  }
+}

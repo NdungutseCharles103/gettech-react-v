@@ -1,15 +1,15 @@
-import React from 'react';
-import Navbar from '../Navbar';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Navbar from "../Navbar";
+import DashBoard from "./dashboard/dashboard";
 
 const Account = (props) => {
-    const {cartCount, wishCount} = props
+  const { cartCount, wishCount } = props;
   return (
     <div>
-        <Navbar cartCount={cartCount} wishCount={wishCount} />
-        <Link to="/login">Log out</Link>
+      <Navbar cartCount={cartCount} wishCount={wishCount} />
+      <DashBoard />
     </div>
-  )
-}
+  );
+};
 
-export default Account
+export default Account;

@@ -7,10 +7,12 @@ import ProLoader from "../components/Loaders/ProLoader";
 import { compDates } from "../components/utilities/two";
 import { comPrice } from "../components/utilities/two";
 import { Link, useParams } from "react-router-dom";
+import Footer from '../components/Sign/Footer'
 
 const Products = (props) => {
   const [isProLoader, setProLoader] = useState(false);
   const [sorted, setSorted] = React.useState("");
+  const [ inproducts, setInProducts ] = useState([])
   const {
     cartCount,
     filter,
@@ -56,7 +58,8 @@ const Products = (props) => {
 
   const fetchProducts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/products");
-    await data.json();
+   const pros = await data.json();
+    setInProducts(pros)
     console.log(data);
     setProLoader(true);
   };
@@ -65,45 +68,48 @@ const Products = (props) => {
   }, []);
 
   return (
-    <div className="mb-7">
-      <Nav className="z-10" cartCount={cartCount} wishCount={wishCount} />
-      <Filter products={products} />
-      <div className="w-full flex items-center justify-center">
-        <Sort
-          filter={products}
-          setFilter={setFilter}
-          sorted={sorted}
-          setSorted={setSorted}
-        />
-      </div>
-      {isProLoader ? (
-        <div className="grid px-2 pro auto-col grid-cols-6 gap-4">
-          {filter.map((product) => (
-            <Test
-              key={product._id}
-              product={product}
-              setProducts={setProducts}
-              products={products}
-              cartIncrement={cartIncrement}
-              cartDecrement={cartDecrement}
-              wishDecrement={wishDecrement}
-              payment={payment}
-              counts={counts}
-              updateCounts={updateCounts}
-              wishIncrement={wishIncrement}
-              filter={filter}
-              setFilter={setFilter}
-              setPayment={setPayment}
-              cartCount={cartCount}
-              quantity={quantity}
-              setQuantity={setQuantity}
-            />
-          ))}
+    <>
+      <div className="mb-7">
+        <Nav className="z-10" cartCount={cartCount} wishCount={wishCount} />
+        <Filter products={products} />
+        <div className="w-full flex items-center justify-center">
+          <Sort
+            filter={products}
+            setFilter={setFilter}
+            sorted={sorted}
+            setSorted={setSorted}
+          />
         </div>
-      ) : (
-        <ProLoader />
-      )}
-    </div>
+        {isProLoader ? (
+          <div className="grid px-2 pro auto-col grid-cols-6 gap-4">
+            {inproducts.map((product) => (
+              <Test
+                key={product._id}
+                product={product}
+                setProducts={setProducts}
+                products={products}
+                cartIncrement={cartIncrement}
+                cartDecrement={cartDecrement}
+                wishDecrement={wishDecrement}
+                payment={payment}
+                counts={counts}
+                updateCounts={updateCounts}
+                wishIncrement={wishIncrement}
+                filter={filter}
+                setFilter={setFilter}
+                setPayment={setPayment}
+                cartCount={cartCount}
+                quantity={quantity}
+                setQuantity={setQuantity}
+              />
+            ))}
+          </div>
+        ) : (
+          <ProLoader />
+        )}
+      </div>
+      <Footer />
+    </>
   );
 };
 

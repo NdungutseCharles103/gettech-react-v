@@ -80,11 +80,18 @@ const Navbar = (props) => {
             </IconButton>
           </Link>
           {name === "" || name === undefined ? (
-            <li className="ml-7">
-              <Link to="/signup" className="">
-                Sign Up
-              </Link>
-            </li>
+            <>
+              <li className="ml-7">
+                <Link to="/login" className="">
+                  Login
+                </Link>
+              </li>
+              <li className="ml-7">
+                <Link to="/signup" className="">
+                  Sign Up
+                </Link>
+              </li>
+            </>
           ) : (
             <li className="ml-9 flex w-[35px] h-[35px]">
               <Link to="/account" className="">

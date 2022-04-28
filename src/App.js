@@ -12,7 +12,6 @@ import Login from './components/Sign/Login'
 import Account from "./components/account/Account";
 import { api } from './components/utilities/one';
 import Search from "./components/search/search";
-import Footer from "./components/Sign/Footer";
 import ProductPreview from "./components/preview/productPrev";
 import Wrong from "./components/Wrong";
 import Category from "./products/categories/Category";
@@ -239,7 +238,6 @@ function App() {
           <Route path="addproduct" element={<AddProduct />} />
           <Route path="*" element={<Wrong />} />
         </Routes>
-        <Footer />
       </div>
     </BrowserRouter>
   );
