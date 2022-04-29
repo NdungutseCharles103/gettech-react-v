@@ -4,7 +4,6 @@ import './loader.css'
 const HomeLoader = () => {
   return (
     <div className="h-[100vh] flex flex-col w-full">
-      <div className="flex anim w-full h-[60px]"></div>
       <div className="flex items-center justify-center mt-4">
         <div className="anim w-[30%] rounded-3xl h-[40px]"></div>
       </div>

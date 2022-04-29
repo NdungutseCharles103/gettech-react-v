@@ -1,5 +1,7 @@
 import React from 'react'
 
+const username =JSON.parse(localStorage.getItem('username'));
+
 function Profile() {
   return (
     <div className="border-[1px] p-6 border-slate-200">
@@ -9,7 +11,7 @@ function Profile() {
           src="https://img.icons8.com/ios-glyphs/60/user--v1.pn"
           alt=""
         />
-        <p>Level One</p>
+        <p>{username}</p>
         <div className="flex items-center">
           <i className="bx bx-star"></i>
           <p>5.0</p>

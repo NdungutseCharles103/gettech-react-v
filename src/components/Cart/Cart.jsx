@@ -34,9 +34,10 @@ const Cart = (props) => {
     const id = e.target.id;
     const parent = document.getElementsByClassName(id);
     // parent[0].style.display = "none";
-    cartDecrement();
     const prorem = await products.find((p) => p._id === id);
+    await cartDecrement(prorem.quantity);
     prorem.cart = false;
+    prorem.quantity = 1;
     const remove = await api.put(`/products/${id}`, prorem);
     console.log(remove);
     setOnCart(onCart.filter(p => p._id !== id))

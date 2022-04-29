@@ -38,7 +38,6 @@ const Trans = (props) => {
 
   return (
     <div className="main">
-      <Navbar cartCount={cartCount} wishCount={wishCount}/>
       <div className="flex flex-col overflow-x-hidden">
         <div className="flex items-center justify-center w-full">
           <Link to="/search"

@@ -2,6 +2,7 @@ import React from "react";
 import HomeLoader from "./Loaders/HomeLoader";
 import Trans from "./Home/Trans";
 import Footer from "./Sign/Footer";
+import Navbar from "./Navbar";
 
 const Home = (props) => {
   const {
@@ -24,6 +25,7 @@ const Home = (props) => {
   return (
     <>
       <div className="main mb-7">
+        <Navbar cartCount={cartCount} wishCount={wishCount} />
         {isHomeLoader ? (
           <Trans
             wishCount={wishCount}

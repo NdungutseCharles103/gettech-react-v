@@ -19,6 +19,7 @@ import Category from "./products/categories/Category";
 
 function App() {
   const [category, setCategory] = useState("all");
+  const text ="Hello World"
   const [cartCount, setCartCount] = useState(0);
   const [wishCount, setWishCount] = useState(0);
   const [counts, setCounts] = useState([])
@@ -53,10 +54,6 @@ function App() {
     fetchCounts();
   }, [])
   
-  // useEffect(()=>{
-  //   api.put(`/user/counts/${counts[0].id}`, counts[0]);
-  // }, [counts])
-
   const updateCounts = async (id, newdata) => {
     const response = await api.put(`/user/counts/${id}`, newdata);
      console.log(response);
@@ -68,11 +65,17 @@ function App() {
     counts[0].cart = cartCount + 1
     updateCounts(counts[0]._id, counts[0]);
   };
-  const cartDecrement = () => {
+  const cartDecrement = (qua) => {
+    if (qua) {
+      setCartCount(cartCount-qua)
+      counts[0].cart = cartCount - qua;
+      updateCounts(counts[0]._id, counts[0]);
+    }else{
     setCartCount((prevCount) =>
       prevCount <= 0 ? (prevCount = 0) : prevCount - 1);
     counts[0].cart = cartCount - 1;
     updateCounts(counts[0]._id, counts[0]);
+    }
   };
 
   const wishIncrement = () => {
@@ -234,7 +237,11 @@ function App() {
             }
           />
           <Route path="signup" element={<Signup />} />
-          <Route path="login" element={<Login />} />
+          <Route path="allmenu" element={<Signup />} />
+          <Route path="messages" element={<Signup />} />
+          <Route path="shop" element={<Signup />} />
+          <Route path="listed" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
           <Route path="addproduct" element={<AddProduct />} />
           <Route path="*" element={<Wrong />} />
         </Routes>

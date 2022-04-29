@@ -38,7 +38,7 @@ export const regUser = async (e) => {
 
 export const logUser = async (e) => {
     e.preventDefault();
-    console.log(`${username}, ${email}, ${password}`);
+    console.log(`${username}, ${password}`);
     const backUser = {
         username: username,
         password: password
