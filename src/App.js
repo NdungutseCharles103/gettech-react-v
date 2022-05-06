@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import "boxicons/css/boxicons.css";
 import Home from "./components/Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AddProduct from "./products/AddProduct";
 import Products from "./products/Products";
 import Cart from "./components/Cart/Cart";
@@ -15,11 +15,11 @@ import Search from "./components/search/search";
 import ProductPreview from "./components/preview/productPrev";
 import Wrong from "./components/Wrong";
 import Category from "./products/categories/Category";
+import { useSelector } from "react-redux";
 
 
 function App() {
   const [category, setCategory] = useState("all");
-  const text ="Hello World"
   const [cartCount, setCartCount] = useState(0);
   const [wishCount, setWishCount] = useState(0);
   const [counts, setCounts] = useState([])
@@ -28,6 +28,8 @@ function App() {
   const [payment, setPayment] = useState(0)
   const [isHomeLoader, setHomeLoader] = useState(false);
   const [quantity, setQuantity ] = useState([]);
+
+  const user = useSelector((state)=> state.user.currentUser)
   
 
   const fetchProducts = async () => {
@@ -236,12 +238,18 @@ function App() {
               />
             }
           />
-          <Route path="signup" element={<Signup />} />
+          <Route
+            path="signup"
+            element={user ? <Navigate replace to="/" /> : <Login />}
+          />
           <Route path="allmenu" element={<Signup />} />
           <Route path="messages" element={<Signup />} />
           <Route path="shop" element={<Signup />} />
           <Route path="listed" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={user ? <Navigate replace to="/" /> : <Login />}
+          />
           <Route path="addproduct" element={<AddProduct />} />
           <Route path="*" element={<Wrong />} />
         </Routes>
