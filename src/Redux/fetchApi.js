@@ -10,12 +10,9 @@ export const login = async (dispatch, user)=>{
     try {
         const res = await api.post('/user/login', user);
         const test = await res.data
-        // if (test!=='No user found' || test !== '') {
-            
-        // }
-        dispatch(loginSuccess(res.data))
-        console.log(res.data);
-        return test;
+        if(test.token)dispatch(loginSuccess(res.data.token));
+        
+        if(!test.token) dispatch(loginFailure(test));
     } catch (error) {
         console.log(error);
         dispatch(loginFailure())

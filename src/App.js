@@ -35,14 +35,14 @@ function App() {
   const fetchProducts = async () => {
     const res = await api.get('/products');
     const products = await res.data
-    // console.log(res.data.accessToken);
+    console.log(res.data.message);
     setProducts(products)
     setFilter(products)
     setHomeLoader(true)
   };
   const fetchCounts = async () => {
-    const data = await fetch("https://hitech1.herokuapp.com/user/counts");
-    const counts = await data.json()
+    const res = await api.get("/user/counts");
+    const counts = await res.data
     setCounts(counts)
     setPayment(counts[0].payment)
     if (counts[0].cart < 0) counts[0].cart = 0;
@@ -241,7 +241,7 @@ function App() {
           />
           <Route
             path="signup"
-            element={user? <Navigate replace to="/" /> : <Login />}
+            element={user ? <Navigate replace to="/" /> : <Login />}
           />
           <Route path="allmenu" element={<Signup />} />
           <Route path="messages" element={<Signup />} />
@@ -249,7 +249,7 @@ function App() {
           <Route path="listed" element={<Signup />} />
           <Route
             path="/login"
-            element={<Login />}
+            element={user ? <Navigate replace to="/" /> : <Login />}
           />
           <Route path="addproduct" element={<AddProduct />} />
           <Route path="*" element={<Wrong />} />

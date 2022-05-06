@@ -12,10 +12,9 @@ import styled from "styled-components";
 
 const Login = () => {
   const dispatch = useDispatch()
-  const { isFetching, error } = useSelector((state)=> state.user)
+  const { isFetching, error, status } = useSelector((state)=> state.user)
     const label = { inputProps: { "aria-label": "Checkbox demo" } };
     const [loginInfo, setLoginInfo] = useState({username: '', password: ''})
-    const [status, setStatus] = useState('')
     const [values, setValues] = useState({
       password: "",
       showPassword: false,
@@ -36,12 +35,7 @@ const Login = () => {
 
     const handleClick = async(e)=>{
       e.preventDefault();
-      const res = await login(dispatch, loginInfo)
-      if (res === "No user found" || res === "Invalid password") {
-        setStatus(res)
-      }else{
-        setStatus('')
-      }
+      await login(dispatch, loginInfo)
     }
 
   return (
@@ -92,7 +86,7 @@ const Login = () => {
                   value="Login"
                   disabled={isFetching}/>
               </div>
-              <p className="text-red-400">{status}</p>
+              <p className="text-red-400 text-center">{status.message}</p>
              {error && <p className="text-red-400">something went wrong</p>}
               <div className="alt mt-2 text-black flex">
                 <p>Don't have an account?</p>
