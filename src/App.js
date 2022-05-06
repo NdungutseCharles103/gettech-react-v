@@ -33,8 +33,9 @@ function App() {
   
 
   const fetchProducts = async () => {
-    const data = await fetch("https://hitech1.herokuapp.com/products");
-    const products = await data.json();
+    const res = await api.get('/products');
+    const products = await res.data
+    // console.log(res.data.accessToken);
     setProducts(products)
     setFilter(products)
     setHomeLoader(true)
@@ -240,7 +241,7 @@ function App() {
           />
           <Route
             path="signup"
-            element={user ? <Navigate replace to="/" /> : <Login />}
+            element={user? <Navigate replace to="/" /> : <Login />}
           />
           <Route path="allmenu" element={<Signup />} />
           <Route path="messages" element={<Signup />} />
@@ -248,7 +249,7 @@ function App() {
           <Route path="listed" element={<Signup />} />
           <Route
             path="/login"
-            element={user ? <Navigate replace to="/" /> : <Login />}
+            element={<Login />}
           />
           <Route path="addproduct" element={<AddProduct />} />
           <Route path="*" element={<Wrong />} />
