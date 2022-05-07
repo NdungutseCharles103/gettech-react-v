@@ -7,15 +7,15 @@ import ProLoader from "../components/Loaders/ProLoader";
 import { compDates } from "../components/utilities/two";
 import { comPrice } from "../components/utilities/two";
 import { Link, useParams } from "react-router-dom";
-import Footer from '../components/Sign/Footer'
+import Footer from "../components/Sign/Footer";
 
 const Products = (props) => {
   const [isProLoader, setProLoader] = useState(false);
   const [sorted, setSorted] = React.useState("");
-  const [ inproducts, setInProducts ] = useState([])
   const {
     cartCount,
     filter,
+    userid,
     payment,
     setPayment,
     counts,
@@ -58,9 +58,7 @@ const Products = (props) => {
 
   const fetchProducts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/products");
-   const pros = await data.json();
-    setInProducts(pros)
-    console.log(data);
+    const pros = await data.json();
     setProLoader(true);
   };
   useEffect(() => {
@@ -82,10 +80,11 @@ const Products = (props) => {
         </div>
         {isProLoader ? (
           <div className="grid px-2 pro auto-col grid-cols-6 gap-4">
-            {inproducts.map((product) => (
+            {filter.map((product) => (
               <Test
                 key={product._id}
                 product={product}
+                userid={userid}
                 setProducts={setProducts}
                 products={products}
                 cartIncrement={cartIncrement}
@@ -117,6 +116,7 @@ export default Products;
 
 function Test(props) {
   const {
+    userid,
     product,
     cartDecrement,
     quantity,
@@ -127,6 +127,22 @@ function Test(props) {
     cartIncrement,
     wishDecrement,
   } = props;
+
+  const smChange =()=>{
+    setFilter(
+      filter.map((pro) => {
+        if (pro._id === product._id) {
+          return {
+            ...pro,
+            cart: !pro.cart,
+            quantity: pro.quantity
+          };
+        }
+        return pro;
+      })
+    );
+  }
+
   const cartHandler = () => {
     setFilter(
       filter.map((pro) => {
@@ -141,20 +157,12 @@ function Test(props) {
     );
     if (!product.cart) {
       cartIncrement();
-      setQuantity(quantity + 1);
-      product.quantity = quantity + 1;
       product.cart = true;
-      api.put(`/products/${product._id}`, product);
+      api.put(`/user/${userid}/newUpdates`, {products: filter});
     } else {
       cartDecrement();
-      setQuantity(quantity - 1);
-      product.quantity = quantity - 1;
-      if (product.quantity <= 0) {
-        setQuantity(0);
-        product.quantity = 0;
-      }
       product.cart = false;
-      api.put(`/products/${product._id}`, product);
+      api.put(`/user/${userid}/newUpdates`, {products: filter});
     }
   };
   const wishHandler = () => {
@@ -172,11 +180,11 @@ function Test(props) {
     if (!product.wish) {
       wishIncrement();
       product.wish = true;
-      api.put(`/products/${product._id}`, product);
+      api.put(`/user/${userid}/newUpdates`, {products: filter});
     } else {
       wishDecrement();
       product.wish = false;
-      api.put(`/products/${product._id}`, product);
+      api.put(`/user/${userid}/newUpdates`, {products: filter});
     }
   };
   const cartBtnClass = product.cart ? "bx bx-x added" : "bx bx-cart-add";
@@ -192,17 +200,25 @@ function Test(props) {
       className="card text-sm  justify-between  bg-slate-100 cursor-pointer hover:scale-[1.05] duration-300 shadow-xl
 mt-3 flex flex-col items-center p-2 w-full"
     >
-      <Link title="click for more details" to={`/preview/${product._id}`} className="flex h-[65%] items-center flex-col w-full bg-white">
+      <Link
+        title="click for more details"
+        to={`/preview/${product._id}`}
+        className="flex h-[65%] items-center flex-col w-full bg-white"
+      >
         <img className="h-full" src={product.image} alt="" />
       </Link>
-      <Link to={`/preview/${product._id}`} className="py-2 text-center">{product.name}</Link>
+      <Link to={`/preview/${product._id}`} className="py-2 text-center">
+        {product.name}
+      </Link>
       <div className="acts mx-auto flex items-center w-full px-2 justify-between">
         <button
           onClick={wishHandler}
           title={wishBtnTitle}
           className={`flex rbtns p-2 text-3xl bg-slate-300 items-center rounded-full  ${wishBtnClass}`}
         ></button>
-        <Link to={`/preview/${product._id}`} className="flex items-center">${product.price}</Link>
+        <Link to={`/preview/${product._id}`} className="flex items-center">
+          ${product.price}
+        </Link>
         <button
           onClick={cartHandler}
           title={cartBtnTitle}

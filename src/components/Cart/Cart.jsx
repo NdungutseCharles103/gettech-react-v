@@ -15,14 +15,17 @@ const Cart = (props) => {
     setPayment,
     products,
     cartDecrement,
+    userid
   } = props;
   const [onCart, setOnCart] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const fetchCart = async () => {
-    const data = await api.get("/user/cart");
+    const data = await api.get(`/user/${userid}/products`);
     const products = await data.data;
-    setOnCart(products);
+    console.log(products)
+    const cartItems = products.filter(pro => pro.cart === true)
+    setOnCart(cartItems);
     setIsLoading(true);
   };
 
@@ -38,7 +41,7 @@ const Cart = (props) => {
     await cartDecrement(prorem.quantity);
     prorem.cart = false;
     prorem.quantity = 1;
-    const remove = await api.put(`/products/${id}`, prorem);
+    const remove = await api.put(`/user/${userid}/newUpdates`, prorem);
     console.log(remove);
     setOnCart(onCart.filter(p => p._id !== id))
   };

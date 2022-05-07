@@ -7,12 +7,15 @@ import { Products } from "./utilities/one";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { getLocal } from "./utilities/useLocal";
 import logo from '../Images/logo.png'
+import { useSelector } from "react-redux";
+import jwt_decode from "jwt-decode";
 
 const Navbar = (props) => {
   // const [active, seActive] = useState("")
   const [toggle, setToggle] = useState("");
   const { wishCount, cartCount } = props;
-  const name = getLocal("username");
+  const user = useSelector(state=> state.user.currentUser)
+  // const userdetails = jwt_decode(user)
 
   const activeHandler = (e) => {
     e.target.classList.add("active");
@@ -79,7 +82,7 @@ const Navbar = (props) => {
               </Badge>
             </IconButton>
           </Link>
-          {name === "" || name === undefined ? (
+          {user === "" || user === undefined ? (
             <>
               <li className="ml-7">
                 <Link to="/login" className="">
@@ -96,7 +99,7 @@ const Navbar = (props) => {
             <li className="ml-9 flex w-[35px] h-[35px]">
               <Link to="/account" className="">
                 <div
-                  title={name}
+                  // title={userdetails.name}
                   className="flex rounded-full h-full w-full bg-slate-400 items-center justify-center"
                 >
                   <img

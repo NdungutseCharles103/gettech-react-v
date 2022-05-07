@@ -6,11 +6,13 @@ import Navbar from "./Navbar";
 
 const Home = (props) => {
   const {
+    userid,
     wishCount,
     wishDecrement,
     cartCount,
     products,
     setFilter,
+    filter,
     category,
     setCategory,
     setProducts,
@@ -28,10 +30,12 @@ const Home = (props) => {
         <Navbar cartCount={cartCount} wishCount={wishCount} />
         {isHomeLoader ? (
           <Trans
+            userid={userid}
             wishCount={wishCount}
             wishDecrement={wishDecrement}
             cartCount={cartCount}
             products={products}
+            filter={filter}
             setFilter={setFilter}
             category={category}
             setCategory={setCategory}

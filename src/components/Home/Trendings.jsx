@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 
 const Trendings = (props) => {
   const {
+    userid,
+    filter,
     wishDecrement,
     cartIncrement,
     wishIncrement,
@@ -13,16 +15,17 @@ const Trendings = (props) => {
     products,
     setProducts,
     quantity,
+    setFilter,
     setQuantity,
   } = props;
   
   
 
   function Trends(props) {
-    const {product,products, cartDecrement, wishIncrement,
+    const {product,products, cartDecrement, wishIncrement, userid, filter,setFilter,
       setProducts,cartIncrement, wishDecrement, quantity, setQuantity} = props;
     const cartHandler = async () => {
-      setProducts(
+      setFilter(
         products.map((pro) => {
           if (pro._id === product._id) {
             return {
@@ -35,26 +38,17 @@ const Trendings = (props) => {
       );
       if (!product.cart) {
         cartIncrement();
-        setQuantity(quantity + 1);
-        product.quantity = await quantity + 1;
         product.cart = true;
-        console.log(product);
-        /* const res = */ await api.put(`/products/${product._id}`, product);
+        api.put(`/user/${userid}/newUpdates`, { products: filter });
       } else {
         cartDecrement();
-        setQuantity(quantity - 1);
-        product.quantity = quantity - 1;
-        if (product.quantity <= 0) {
-          setQuantity(0);
-          product.quantity = 0;
-        }
         product.cart = false;
-        api.put(`/products/${product._id}`, product);
+        api.put(`/user/${userid}/newUpdates`, { products: filter });
       }
     };
     const wishHandler = () => {
-      setProducts(
-        products.map((pro) => {
+      setFilter(
+        filter.map((pro) => {
           if (pro._id === product._id) {
             return {
               ...pro,
@@ -112,10 +106,13 @@ mt-3 flex flex-col items-center p-2"
       <div className="grid pro auto-col grid-cols-6 gap-4">
         {products.map((product) => (
           <Trends
+          userid={userid}
             key={product._id}
             setProducts={setProducts}
             product={product}
             products={products}
+            filter={filter}
+            setFilter={setFilter}
             cartIncrement={cartIncrement}
             cartDecrement={cartDecrement}
             wishDecrement={wishDecrement}

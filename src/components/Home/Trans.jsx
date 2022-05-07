@@ -11,10 +11,10 @@ import otherimg from "../../Images/others.jpg";
 
 const Trans = (props) => {
   const {
-    wishCount,
+    userid,
     wishDecrement,
-    cartCount,
     products,
+    filter,
     setFilter,
     category,
     setCategory,
@@ -156,11 +156,14 @@ const Trans = (props) => {
         </div>
       </div>
       <Trendings
+        userid={userid}
         cartIncrement={cartIncrement}
         wishDecrement={wishDecrement}
         cartDecrement={cartDecrement}
         wishIncrement={wishIncrement}
         products={products}
+        filter={filter}
+        setFilter={setFilter}
         setProducts={setProducts}
         quantity={quantity}
         setQuantity={setQuantity}

@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function SideNav() {
+function SideNav({active}) {
+
+
   return (
     <div className="flex flex-col w-[60px] items-center justify-between h-[92vh] bg-stone-100 py-6">
       <div className="navicons h-[40%] flex flex-col items-center">
