@@ -8,8 +8,12 @@ import { compDates } from "../components/utilities/two";
 import { comPrice } from "../components/utilities/two";
 import { Link, useParams } from "react-router-dom";
 import Footer from "../components/Sign/Footer";
+import { useSelector } from "react-redux";
+import { compareAndUpdate } from "../components/utilities/two";
+
 
 const Products = (props) => {
+const local = useSelector((state) => state.user.isLocal);
   const [isProLoader, setProLoader] = useState(false);
   const [sorted, setSorted] = React.useState("");
   const {
@@ -20,8 +24,6 @@ const Products = (props) => {
     setPayment,
     counts,
     updateCounts,
-    quantity,
-    setQuantity,
     setFilter,
     wishCount,
     cartDecrement,
@@ -55,7 +57,7 @@ const Products = (props) => {
         break;
     }
   };
-
+  console.log(filter);
   const fetchProducts = async () => {
     const data = await fetch("https://hitech1.herokuapp.com/products");
     const pros = await data.json();
@@ -84,6 +86,7 @@ const Products = (props) => {
               <Test
                 key={product._id}
                 product={product}
+                local={local}
                 userid={userid}
                 setProducts={setProducts}
                 products={products}
@@ -98,8 +101,6 @@ const Products = (props) => {
                 setFilter={setFilter}
                 setPayment={setPayment}
                 cartCount={cartCount}
-                quantity={quantity}
-                setQuantity={setQuantity}
               />
             ))}
           </div>
@@ -116,11 +117,10 @@ export default Products;
 
 function Test(props) {
   const {
+    local,
     userid,
     product,
     cartDecrement,
-    quantity,
-    setQuantity,
     wishIncrement,
     filter,
     setFilter,
@@ -143,7 +143,7 @@ function Test(props) {
     );
   }
 
-  const cartHandler = () => {
+  const cartHandler = async() => {
     setFilter(
       filter.map((pro) => {
         if (pro._id === product._id) {
@@ -156,16 +156,30 @@ function Test(props) {
       })
     );
     if (!product.cart) {
-      cartIncrement();
+      cartIncrement(product.price);
       product.cart = true;
-      api.put(`/user/${userid}/newUpdates`, {products: filter});
+      const upPro = await compareAndUpdate(product, filter);
+      if (!local) {
+        await api.put(`/user/${userid}/newUpdates`, {
+          products: upPro,
+        });
+      } else {
+        localStorage.setItem("products", JSON.stringify(upPro));
+      }
     } else {
-      cartDecrement();
+      cartDecrement(1, product.price);
       product.cart = false;
-      api.put(`/user/${userid}/newUpdates`, {products: filter});
+      const upPro = await compareAndUpdate(product, filter);
+            if (!local) {
+              await api.put(`/user/${userid}/newUpdates`, {
+                products: upPro,
+              });
+            } else {
+              localStorage.setItem("products", JSON.stringify(upPro));
+            }
     }
   };
-  const wishHandler = () => {
+  const wishHandler = async() => {
     setFilter(
       filter.map((pro) => {
         if (pro._id === product._id) {
@@ -180,11 +194,25 @@ function Test(props) {
     if (!product.wish) {
       wishIncrement();
       product.wish = true;
-      api.put(`/user/${userid}/newUpdates`, {products: filter});
+      const upPro = await compareAndUpdate(product, filter);
+            if (!local) {
+              await api.put(`/user/${userid}/newUpdates`, {
+                products: upPro,
+              });
+            } else {
+              localStorage.setItem("products", JSON.stringify(upPro));
+            }
     } else {
       wishDecrement();
       product.wish = false;
-      api.put(`/user/${userid}/newUpdates`, {products: filter});
+      const upPro = await compareAndUpdate(product, filter);
+            if (!local) {
+              await api.put(`/user/${userid}/newUpdates`, {
+                products: upPro,
+              });
+            } else {
+              localStorage.setItem("products", JSON.stringify(upPro));
+            }
     }
   };
   const cartBtnClass = product.cart ? "bx bx-x added" : "bx bx-cart-add";

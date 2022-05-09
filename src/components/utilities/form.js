@@ -27,7 +27,7 @@ export const regUser = async (e) => {
     console.log(done);
     if (done) {
       window.localStorage.setItem("username", JSON.stringify(username));
-      window.location.replace("https://hitech1.vercel.app/");
+      window.location.replace("https://hitech1.vercel.app/login");
     }
   } catch (error) {
     console.log(error.message);

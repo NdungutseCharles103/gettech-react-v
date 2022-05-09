@@ -3,8 +3,12 @@ import React from 'react'
 // import products from "../../products/Models";
 import './style.css'
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { compareAndUpdate } from "../utilities/two";
+
 
 const Trendings = (props) => {
+const local = useSelector((state) => state.user.isLocal);
   const {
     userid,
     filter,
@@ -22,8 +26,7 @@ const Trendings = (props) => {
   
 
   function Trends(props) {
-    const {product,products, cartDecrement, wishIncrement, userid, filter,setFilter,
-      setProducts,cartIncrement, wishDecrement, quantity, setQuantity} = props;
+    const {product,products, cartDecrement, wishIncrement, userid, filter,setFilter,cartIncrement, wishDecrement} = props;
     const cartHandler = async () => {
       setFilter(
         products.map((pro) => {
@@ -37,16 +40,30 @@ const Trendings = (props) => {
         })
       );
       if (!product.cart) {
-        cartIncrement();
+        cartIncrement(product.price);
         product.cart = true;
-        api.put(`/user/${userid}/newUpdates`, { products: filter });
+        const upPro = await compareAndUpdate(product, filter);
+        if (!local) {
+          await api.put(`/user/${userid}/newUpdates`, {
+            products: upPro,
+          });
+        } else {
+          localStorage.setItem("products", JSON.stringify(upPro));
+        }
       } else {
-        cartDecrement();
+        cartDecrement(1, product.price);
         product.cart = false;
-        api.put(`/user/${userid}/newUpdates`, { products: filter });
+        const upPro = await compareAndUpdate(product, filter);
+        if (!local) {
+          await api.put(`/user/${userid}/newUpdates`, {
+            products: upPro,
+          });
+        } else {
+          localStorage.setItem("products", JSON.stringify(upPro));
+        }
       }
     };
-    const wishHandler = () => {
+    const wishHandler = async() => {
       setFilter(
         filter.map((pro) => {
           if (pro._id === product._id) {
@@ -61,11 +78,25 @@ const Trendings = (props) => {
       if (!product.wish) {
         wishIncrement();
         product.wish = true
-        api.put(`/products/${product._id}`, product)
+        const upPro = await compareAndUpdate(product, filter);
+        if (!local) {
+          await api.put(`/user/${userid}/newUpdates`, {
+            products: upPro,
+          });
+        } else {
+          localStorage.setItem("products", JSON.stringify(upPro));
+        }
       } else {
         wishDecrement();
         product.wish = false;
-        api.put(`/products/${product._id}`, product);
+        const upPro = await compareAndUpdate(product, filter);
+        if (!local) {
+          await api.put(`/user/${userid}/newUpdates`, {
+            products: upPro,
+          });
+        } else {
+          localStorage.setItem("products", JSON.stringify(upPro));
+        }
       }
     };
     const cartBtnClass = product.cart ? 'bx bx-x added' : 'bx bx-cart-add';

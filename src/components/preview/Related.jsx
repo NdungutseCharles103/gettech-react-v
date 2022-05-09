@@ -3,6 +3,8 @@ import photo from "../../Images/acess.jpg";
 
 function Related(props) {
   const {product, products } = props
+  console.log(products);
+  console.log(product);
   const relProducts = products.filter(p => p.category === product.category && p._id !== product._id)
 
   return (

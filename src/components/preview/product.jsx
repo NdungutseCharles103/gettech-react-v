@@ -1,21 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import { api } from '../utilities/one'
+import { compareAndUpdate } from '../utilities/two'
+import { useSelector } from "react-redux";
 
 function Product(props) {
-    const { product, cartIncrement, setCartText,
+  const local = useSelector((state) => state.user.isLocal);
+    const { product, cartIncrement, userid,filter,
          cartDecrement,wishIncrement, wishDecrement } = props
 
     const cartHandler = async(prod)=>{
       if (!product.cart) {
             product.cart = true
             cartIncrement()
-            const res = await api.put(`/products/${product._id}`, product);
-            console.log(res);
+            const fin = []
+            fin[0]= product
+            const upPro = await compareAndUpdate(fin, filter);
+            console.log(upPro);
+            if (!local) {
+              await api.put(`/user/${userid}/newUpdates`, {
+                products: upPro,
+              });
+            } else {
+              localStorage.setItem("products", JSON.stringify(upPro));
+            }
         } else if(product.cart) {
             product.cart = false
             cartDecrement()
-            const res = await api.put(`/products/${product._id}`, product);
-            console.log(res);
+            const upPro = await compareAndUpdate(product, filter);
+            if (!local) {
+              await api.put(`/user/${userid}/newUpdates`, {
+                products: upPro,
+              });
+            } else {
+              localStorage.setItem("products", JSON.stringify(upPro));
+            }
         }
     
     }
@@ -24,18 +42,29 @@ function Product(props) {
         if (product.wish === false) {
             product.wish = true
             wishIncrement()
-            const res = await api.put(`/products/${product._id}`, product);
-            console.log(res);
+            const upPro = await compareAndUpdate(product, filter);
+            if (!local) {
+              await api.put(`/user/${userid}/newUpdates`, {
+                products: upPro,
+              });
+            } else {
+              localStorage.setItem("products", JSON.stringify(upPro));
+            }
         } else if(product.wish === true) {
             product.wish = false
             wishDecrement()
-            const res = await api.put(`/products/${product._id}`, product);
-            console.log(res);
-
+            const upPro = await compareAndUpdate(product, filter);
+            if (!local) {
+              await api.put(`/user/${userid}/newUpdates`, {
+                products: upPro,
+              });
+            } else {
+              localStorage.setItem("products", JSON.stringify(upPro));
+            }
         }
      
     }
-
+    console.log(product);
   return (
     <div className="flex w-full ">
       <div className="flex flex-col mt-11 w-[45%">

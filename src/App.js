@@ -8,72 +8,79 @@ import Products from "./products/Products";
 import Cart from "./components/Cart/Cart";
 import Favs from "./components/Favs/Favs";
 import Signup from "./components/Sign/signup";
-import Login from './components/Sign/Login'
+import Login from "./components/Sign/Login";
 import Account from "./components/account/Account";
-import { api } from './components/utilities/one';
+import { api } from "./components/utilities/one";
 import Search from "./components/search/search";
 import ProductPreview from "./components/preview/productPrev";
 import Wrong from "./components/Wrong";
 import Category from "./products/categories/Category";
 import { useSelector } from "react-redux";
-import { compareAndUpdate, getUserPro, getUserCounts } from './components/utilities/two'
+import {
+  compareAndUpdate,
+  getUserPro,
+  getUserCounts,
+} from "./components/utilities/two";
 import jwtDecode from "jwt-decode";
 
-
 function App() {
+  const local = useSelector((state) => state.user.isLocal);
   const [category, setCategory] = useState("all");
   const [cartCount, setCartCount] = useState(0);
   const [wishCount, setWishCount] = useState(0);
-  const [counts, setCounts] = useState([])
-  const [products, setProducts] = useState([])
+  const [counts, setCounts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState([]);
-  const [payment, setPayment] = useState(0)
+  const [payment, setPayment] = useState(0);
   const [isHomeLoader, setHomeLoader] = useState(false);
-  const [quantity, setQuantity ] = useState([]);
-  const local = useSelector((state) => state.user.isLocal);
-  
-  const user = useSelector((state)=> state.user.currentUser)
-  const userid = jwtDecode(user)._id
+  const [quantity, setQuantity] = useState([]);
 
+  const user = useSelector((state) => state.user.currentUser);
+  let userid;
+  if (user) {
+    userid = jwtDecode(user)._id;
+  }
   const fetchProducts = async () => {
-    const res = await api.get('/products');
-    const products = await res.data
-    const userPro = await getUserPro(userid)
-    console.log(userPro);
-    const localProducts = await JSON.parse(localStorage.getItem('products'))
+    const res = await api.get("/products");
+    console.log(res);
+    const fetched = await res.data;
+    const localProducts = await JSON.parse(localStorage.getItem("products"));
     if (local) {
       if (localProducts) {
+        console.log(fetched);
         setProducts(localProducts);
-      }else{
-        localStorage.setItem("products", JSON.stringify(products));
-        setProducts(products);
-        setFilter(products);
+        setFilter(localProducts);
+      } else {
+        console.log(fetched);
+        setFilter(fetched);
+        setProducts(fetched);
+        localStorage.setItem("products", JSON.stringify(fetched));
       }
     } else {
-      const fin = compareAndUpdate(userPro, products)
-      console.log(fin);
+      const userPro = await getUserPro(userid);
+      const fin = compareAndUpdate(userPro, fetched);
       setProducts(fin);
       setFilter(fin);
     }
-    setHomeLoader(true)
+    setHomeLoader(true);
   };
   const fetchCounts = async () => {
     const res = await api.get("/user/counts");
-    const fecounts = await res.data
-    const usercounts = await getUserCounts(userid);
-    const localCounts = JSON.parse(localStorage.getItem('counts'))
+    const fecounts = await res.data;
     if (local) {
+      const localCounts = JSON.parse(localStorage.getItem("counts"));
+      console.log(localCounts);
       if (localCounts) {
-        setCounts(localCounts)
         setCounts(localCounts);
-        setPayment(localCounts[0].payment);
-        if (localCounts[0].cart < 0) localCounts[0].cart = 0;
-        setCartCount(localCounts[0].cart);
-        if (localCounts[0].wish < 0) localCounts[0].wish = 0;
-        setWishCount(localCounts[0].wish);
+        setCounts(localCounts);
+        setPayment(localCounts.payment);
+        if (localCounts.cart < 0) localCounts.cart = 0;
+        setCartCount(localCounts.cart);
+        if (localCounts.wish < 0) localCounts.wish = 0;
+        setWishCount(localCounts.wish);
       } else {
-        localStorage.setItem('counts', JSON.stringify(counts))
-        setCounts(fecounts)
+        localStorage.setItem("counts", JSON.stringify(fecounts[0]));
+        setCounts(fecounts);
         setPayment(fecounts[0].payment);
         if (fecounts[0].cart < 0) fecounts[0].cart = 0;
         setCartCount(fecounts[0].cart);
@@ -81,7 +88,8 @@ function App() {
         setWishCount(fecounts[0].wish);
       }
     } else {
-      const fin = compareAndUpdate(usercounts, fecounts)
+      const usercounts = await getUserCounts(userid);
+      const fin = compareAndUpdate(usercounts, fecounts);
       setCounts(fin);
       setPayment(fin[0].payment);
       if (fin[0].cart < 0) fin[0].cart = 0;
@@ -89,59 +97,80 @@ function App() {
       if (fin[0].wish < 0) fin[0].wish = 0;
       setWishCount(fin[0].wish);
     }
-    
-  }
-  useEffect(()=>{
+  };
+  useEffect(() => {
     fetchProducts();
-  }, [])
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchCounts();
-  }, [])
-  
+  }, []);
+
   const updateCounts = async (newdata) => {
     if (local) {
-      localStorage.setItem('counts', JSON.stringify(newdata))
+      localStorage.setItem("counts", JSON.stringify(newdata));
     } else {
+      let cou = [...newdata]
       const newUpdates = {
-        counts: newdata
-      }
+        counts: cou,
+      };
       const response = await api.put(`/user/${userid}/newUpdates`, newUpdates);
       console.log(response);
     }
-  }
-
-  const cartIncrement = async () => {
-    setCartCount((prevCount) => prevCount + 1);
-    counts[0].payment = payment
-    counts[0].cart = cartCount + 1
-    updateCounts(counts[0]);
   };
-  const cartDecrement = (qua) => {
+
+  const cartIncrement = async (pay) => {
+    console.log(pay);
+    if (pay) {
+      setCartCount((prevCount) => prevCount + 1);
+      if(local){
+        counts.payment = pay;
+        setPayment(payment + pay);
+        counts.cart = cartCount + 1;
+      }else{
+        counts[0].payment = pay;
+        setPayment(payment + pay);
+        counts[0].cart = cartCount + 1;
+      }
+        updateCounts(counts);
+      
+    } else {
+       setCartCount((prevCount) => prevCount + 1);
+       counts.payment = payment;
+       counts.cart = cartCount + 1;
+       updateCounts(counts);
+    }
+   
+  };
+  const cartDecrement = (qua, pay) => {
     if (qua) {
-      setCartCount(cartCount-qua)
-      counts[0].cart = cartCount - qua;
-      updateCounts(counts[0]);
-    }else{
-    setCartCount((prevCount) =>
-      prevCount <= 0 ? (prevCount = 0) : prevCount - 1);
-    counts[0].cart = cartCount - 1;
-    updateCounts(counts[0]);
+      setCartCount(cartCount - qua);
+      counts.cart = cartCount - qua;
+      counts.payment = pay
+      setPayment(payment-pay)
+      updateCounts(counts);
+    }
+    else {
+      setCartCount((prevCount) =>
+        prevCount <= 0 ? (prevCount = 0) : prevCount - 1
+      );
+      counts.cart = cartCount - 1;
+      updateCounts(counts);
     }
   };
 
   const wishIncrement = () => {
     setWishCount((prevCount) => prevCount + 1);
-    counts[0].wish = wishCount + 1;
-    updateCounts(counts[0]);
+    counts.wish = wishCount + 1;
+    updateCounts(counts);
   };
   const wishDecrement = () => {
     setWishCount((prevCount) =>
-      prevCount <= 0 ? (prevCount = 0) : prevCount - 1);
-    counts[0].wish = wishCount - 1;
-    updateCounts(counts[0]);
+      prevCount <= 0 ? (prevCount = 0) : prevCount - 1
+    );
+    counts.wish = wishCount - 1;
+    updateCounts(counts);
   };
-  
   return (
     <BrowserRouter>
       <div className="App flex flex-col w-full">
@@ -164,7 +193,7 @@ function App() {
                 products={products}
                 filter={filter}
                 setFilter={setFilter}
-                setProducts={setProducts}
+                setProducts={setFilter}
                 quantity={quantity}
                 setQuantity={setQuantity}
               />
@@ -183,7 +212,7 @@ function App() {
                 wishDecrement={wishDecrement}
                 cartDecrement={cartDecrement}
                 wishIncrement={wishIncrement}
-                setProducts={setProducts}
+                setProducts={setFilter}
                 cartIncrement={cartIncrement}
                 cartCount={cartCount}
                 setPayment={setPayment}
@@ -205,7 +234,7 @@ function App() {
                 wishIncrement={wishIncrement}
                 cartDecrement={cartDecrement}
                 wishDecrement={wishDecrement}
-                products={products}
+                products={filter}
                 wishCount={wishCount}
                 cartIncrement={cartIncrement}
                 payment={payment}
@@ -217,28 +246,35 @@ function App() {
             path="wishlist"
             element={
               <Favs
-                 userid={userid}
+                userid={userid}
                 cartCount={cartCount}
                 wishIncrement={wishIncrement}
                 cartDecrement={cartDecrement}
                 wishDecrement={wishDecrement}
                 wishCount={wishCount}
                 cartIncrement={cartIncrement}
-                products={products}
+                products={filter}
               />
             }
           />
           <Route
             path="account"
-            element={!user?<Navigate replace to='/login' /> : <Account cartCount={cartCount} wishCount={wishCount} />}
+            element={
+              !user ? (
+                <Navigate replace to="/login" />
+              ) : (
+                <Account cartCount={cartCount} wishCount={wishCount} />
+              )
+            }
           />
           <Route
             path="preview/:product_id"
             element={
               <ProductPreview
+                userid={userid}
                 cartCount={cartCount}
                 wishCount={wishCount}
-                products={products}
+                filter={filter}
                 cartIncrement={cartIncrement}
                 cartDecrement={cartDecrement}
                 wishDecrement={wishDecrement}
@@ -250,6 +286,7 @@ function App() {
             path="search"
             element={
               <Search
+                userid={userid}
                 counts={counts}
                 wishDecrement={wishDecrement}
                 cartDecrement={cartDecrement}
@@ -294,11 +331,10 @@ function App() {
           />
           <Route
             path="signup"
-            element={user ? <Navigate replace to="/" /> : <Login />}
+            element={user ? <Navigate replace to="/" /> : <Signup />}
           />
           <Route path="allmenu" element={<Signup />} />
           <Route path="messages" element={<Signup />} />
-          <Route path="shop" element={<Signup />} />
           <Route path="listed" element={<Signup />} />
           <Route
             path="/login"

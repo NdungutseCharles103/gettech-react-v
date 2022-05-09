@@ -5,19 +5,29 @@ import { useParams, useNavigate } from "react-router-dom";
 import Product from './product';
 import { api } from '../utilities/one'
 import { useState } from 'react';
+import { useSelector } from "react-redux";
 
 function ProductPreview(props) {
-  const {cartCount, wishCount, wishDecrement, wishIncrement,
-     cartIncrement, cartDecrement, products }= props
-  const [product, setProduct] = useState({})  
+  const local = useSelector((state) => state.user.isLocal);
+  const {cartCount, wishCount,userid, wishDecrement, wishIncrement,
+     cartIncrement, cartDecrement, filter }= props
+  const [product, setProduct] = useState(undefined)  
 
   const navigate = useNavigate();
   let params = useParams();
+  console.log(product);
 
     const getProduct = async()=> {
-      const res = await api.get(`/products/${params.product_id}`);
-      setProduct(res.data)
-      
+      if (local) {
+        const pro = filter.filter(p=> p._id === params.product_id)
+        console.log(pro);
+        setProduct(pro[0])
+      } else {
+        const data = await api.get(`/user/${userid}/products`);
+        const products = await data.data;
+        const pro = await products.filter(p=> p._id === params.product_id)
+        setProduct(pro[0]);
+      }
     }
 
     useEffect(() => {
@@ -40,7 +50,9 @@ function ProductPreview(props) {
         <h1 className=" text-center font-semibold text-xl mt-2">
           Related Products
         </h1>
-        <Related product={product} products={products} />
+        {product !== undefined?
+        <Related product={product} products={filter} />
+        : ''}
       </div>
     </div>
   );

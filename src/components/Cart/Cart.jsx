@@ -5,8 +5,11 @@ import Loader from "../Loaders/Loader";
 import { Link } from "react-router-dom";
 import emptyimg from "../../Images/empty.png";
 import Footer from "../Sign/Footer";
+import { useSelector } from "react-redux";
+import { compareAndUpdate } from '../utilities/two'
 
 const Cart = (props) => {
+  const local = useSelector((state) => state.user.isLocal);
   const {
     cartCount,
     wishCount,
@@ -15,35 +18,49 @@ const Cart = (props) => {
     setPayment,
     products,
     cartDecrement,
-    userid
+    userid,
   } = props;
   const [onCart, setOnCart] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
+
   const fetchCart = async () => {
-    const data = await api.get(`/user/${userid}/products`);
-    const products = await data.data;
-    console.log(products)
-    const cartItems = products.filter(pro => pro.cart === true)
-    setOnCart(cartItems);
-    setIsLoading(true);
+    if (local) {
+        const cartItems = await products.filter((pro) => pro.cart === true);
+        setOnCart(cartItems);
+        setIsLoading(true);
+    } else {
+      const data = await api.get(`/user/${userid}/products`);
+      const products = await data.data;
+      console.log(products);
+      const cartItems = await products.filter((pro) => pro.cart === true);
+      setOnCart(cartItems);
+      setIsLoading(true);
+    }
   };
+
 
   useEffect(() => {
     fetchCart();
-  }, []);
+  }, [products]);
 
   const cartRemover = async (e) => {
-    const id = e.target.id;
-    const parent = document.getElementsByClassName(id);
-    // parent[0].style.display = "none";
+    const id = e.target.id;;
     const prorem = await products.find((p) => p._id === id);
-    await cartDecrement(prorem.quantity);
+    await cartDecrement(prorem.quantity, prorem.price*prorem.quantity);
     prorem.cart = false;
     prorem.quantity = 1;
-    const remove = await api.put(`/user/${userid}/newUpdates`, prorem);
-    console.log(remove);
-    setOnCart(onCart.filter(p => p._id !== id))
+    console.log(prorem)
+    const upPro = await compareAndUpdate(prorem, products)
+    
+    if(!local){
+      const remove = await api.put(`/user/${userid}/newUpdates`, {products: upPro});
+      console.log(remove);
+      setOnCart(onCart.filter((p) => p._id !== id));
+    }else{
+      localStorage.setItem('products', JSON.stringify(upPro))
+      setOnCart(onCart.filter((p) => p._id !== id));
+    }
   };
 
   function Test() {
@@ -55,17 +72,18 @@ const Cart = (props) => {
       prorem.quantity += 1;
 
       setPayment(payment + prorem.price);
-      console.log(payment + prorem.price);
       setOnCart([...onCart]);
-      cartIncrement();
-
-      const putquanty = await api.put(`/products/${id}`, prorem);
-      console.log(putquanty);
+      cartIncrement(payment + prorem.price);
+      if (!local) {
+        const remove = await api.put(`/user/${userid}/newUpdates`, products);
+        console.log(remove);
+      } else {
+        localStorage.setItem("products", JSON.stringify(products));
+      }
     };
     const quantDecrement = async (e) => {
       let eid = e.target.id;
       const id = eid.replace("min", "");
-
       const prorem = await onCart.find((p) => p._id === id);
       prorem.quantity -= 1;
       let price = prorem.price;
@@ -73,11 +91,13 @@ const Cart = (props) => {
       if (prorem.quantity < 1) prorem.quantity = 1;
       setPayment(payment - price);
       setOnCart([...onCart]);
-      cartDecrement();
+      cartDecrement(prorem.quantity, payment - price);
 
-      const putquanty = await api.put(`/products/${id}`, prorem);
-      console.log(putquanty);
-      // console.log(prorem.quantity+1);
+      if (!local) {
+        const remove = await api.put(`/user/${userid}/newUpdates`, products);
+      } else {
+        localStorage.setItem("products", JSON.stringify(products));
+      }
     };
 
     if (onCart.length === 0) {

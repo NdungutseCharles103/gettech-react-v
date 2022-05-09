@@ -12,6 +12,7 @@ function Search(props) {
   const {
     cartCount,
     counts,
+    userid,
     updateCounts,
     quantity,
     setQuantity,
@@ -34,6 +35,7 @@ function Search(props) {
         {searchRes.map((product) => (
           <Results
             key={product._id}
+            userid={userid}
             product={product}
             setProducts={setProducts}
             products={products}
