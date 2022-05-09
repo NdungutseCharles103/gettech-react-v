@@ -10,6 +10,7 @@ import { compareAndUpdate } from "../utilities/two";
 const Trendings = (props) => {
 const local = useSelector((state) => state.user.isLocal);
   const {
+    payment,
     userid,
     filter,
     wishDecrement,
@@ -40,9 +41,10 @@ const local = useSelector((state) => state.user.isLocal);
         })
       );
       if (!product.cart) {
-        cartIncrement(product.price);
+        cartIncrement(payment+product.price);
         product.cart = true;
         const upPro = await compareAndUpdate(product, filter);
+        console.log(product);
         if (!local) {
           await api.put(`/user/${userid}/newUpdates`, {
             products: upPro,
@@ -51,7 +53,7 @@ const local = useSelector((state) => state.user.isLocal);
           localStorage.setItem("products", JSON.stringify(upPro));
         }
       } else {
-        cartDecrement(1, product.price);
+        cartDecrement(1, payment+product.price);
         product.cart = false;
         const upPro = await compareAndUpdate(product, filter);
         if (!local) {

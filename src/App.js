@@ -69,7 +69,6 @@ function App() {
     const fecounts = await res.data;
     if (local) {
       const localCounts = JSON.parse(localStorage.getItem("counts"));
-      console.log(localCounts);
       if (localCounts) {
         setCounts(localCounts);
         setCounts(localCounts);
@@ -80,7 +79,7 @@ function App() {
         setWishCount(localCounts.wish);
       } else {
         localStorage.setItem("counts", JSON.stringify(fecounts[0]));
-        setCounts(fecounts);
+        setCounts(fecounts[0]);
         setPayment(fecounts[0].payment);
         if (fecounts[0].cart < 0) fecounts[0].cart = 0;
         setCartCount(fecounts[0].cart);
@@ -90,7 +89,8 @@ function App() {
     } else {
       const usercounts = await getUserCounts(userid);
       const fin = compareAndUpdate(usercounts, fecounts);
-      setCounts(fin);
+      setCounts(fin[0]);
+      console.log(fin);
       setPayment(fin[0].payment);
       if (fin[0].cart < 0) fin[0].cart = 0;
       setCartCount(fin[0].cart);
@@ -107,10 +107,11 @@ function App() {
   }, []);
 
   const updateCounts = async (newdata) => {
+    console.log(newdata);
     if (local) {
       localStorage.setItem("counts", JSON.stringify(newdata));
     } else {
-      let cou = [...newdata]
+      let cou = [{...newdata}]
       const newUpdates = {
         counts: cou,
       };
@@ -128,9 +129,9 @@ function App() {
         setPayment(payment + pay);
         counts.cart = cartCount + 1;
       }else{
-        counts[0].payment = pay;
-        setPayment(payment + pay);
-        counts[0].cart = cartCount + 1;
+        counts.payment = pay;
+        setPayment(pay);
+        counts.cart = cartCount + 1;
       }
         updateCounts(counts);
       
@@ -146,8 +147,8 @@ function App() {
     if (qua) {
       setCartCount(cartCount - qua);
       counts.cart = cartCount - qua;
-      counts.payment = pay
-      setPayment(payment-pay)
+      console.log(counts.payment, pay);
+      counts.payment -= pay
       updateCounts(counts);
     }
     else {
@@ -196,6 +197,7 @@ function App() {
                 setProducts={setFilter}
                 quantity={quantity}
                 setQuantity={setQuantity}
+                payment={payment}
               />
             }
           />
@@ -271,6 +273,7 @@ function App() {
             path="preview/:product_id"
             element={
               <ProductPreview
+                payment={payment}
                 userid={userid}
                 cartCount={cartCount}
                 wishCount={wishCount}

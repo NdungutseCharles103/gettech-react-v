@@ -8,6 +8,8 @@ import Footer from "../Sign/Footer";
 import { useSelector } from "react-redux";
 import { compareAndUpdate } from '../utilities/two'
 
+//unfinished, payment local(good) and sate(bad)
+
 const Cart = (props) => {
   const local = useSelector((state) => state.user.isLocal);
   const {
@@ -54,9 +56,9 @@ const Cart = (props) => {
     const upPro = await compareAndUpdate(prorem, products)
     
     if(!local){
+      setOnCart(onCart.filter((p) => p._id !== id));
       const remove = await api.put(`/user/${userid}/newUpdates`, {products: upPro});
       console.log(remove);
-      setOnCart(onCart.filter((p) => p._id !== id));
     }else{
       localStorage.setItem('products', JSON.stringify(upPro))
       setOnCart(onCart.filter((p) => p._id !== id));
@@ -74,11 +76,13 @@ const Cart = (props) => {
       setPayment(payment + prorem.price);
       setOnCart([...onCart]);
       cartIncrement(payment + prorem.price);
+      const final = compareAndUpdate([{ ...prorem }], products);
+      console.log(final);
       if (!local) {
-        const remove = await api.put(`/user/${userid}/newUpdates`, products);
+        const remove = await api.put(`/user/${userid}/newUpdates`, {products: final});
         console.log(remove);
       } else {
-        localStorage.setItem("products", JSON.stringify(products));
+        localStorage.setItem("products", JSON.stringify(final));
       }
     };
     const quantDecrement = async (e) => {
@@ -89,14 +93,19 @@ const Cart = (props) => {
       let price = prorem.price;
       if (prorem.quantity < 1) price = 0;
       if (prorem.quantity < 1) prorem.quantity = 1;
-      setPayment(payment - price);
+      console.log( payment- price);
+      setPayment(payment- price);
       setOnCart([...onCart]);
       cartDecrement(prorem.quantity, payment - price);
 
+      const final = compareAndUpdate([{...prorem}], products)
+      console.log(final);
       if (!local) {
-        const remove = await api.put(`/user/${userid}/newUpdates`, products);
+        const remove = await api.put(`/user/${userid}/newUpdates`, {
+          products: final,
+        });
       } else {
-        localStorage.setItem("products", JSON.stringify(products));
+        localStorage.setItem("products", JSON.stringify(final));
       }
     };
 

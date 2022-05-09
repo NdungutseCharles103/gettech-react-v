@@ -8,6 +8,7 @@ const Home = (props) => {
   const {
     userid,
     wishCount,
+    payment,
     wishDecrement,
     cartCount,
     products,
@@ -30,6 +31,7 @@ const Home = (props) => {
         <Navbar cartCount={cartCount} wishCount={wishCount} />
         {isHomeLoader ? (
           <Trans
+            payment={payment}
             userid={userid}
             wishCount={wishCount}
             wishDecrement={wishDecrement}

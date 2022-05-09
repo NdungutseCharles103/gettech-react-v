@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 function ProductPreview(props) {
   const local = useSelector((state) => state.user.isLocal);
   const {cartCount, wishCount,userid, wishDecrement, wishIncrement,
-     cartIncrement, cartDecrement, filter }= props
+     cartIncrement, cartDecrement, filter, payment }= props
   const [product, setProduct] = useState(undefined)  
 
   const navigate = useNavigate();
@@ -44,8 +44,9 @@ function ProductPreview(props) {
         <h1 className="text-center font-semibold text-xl">Product Preview</h1>
       </div>
       {product !== undefined ?< Product wishIncrement={wishIncrement} setProduct={setProduct}
-       product={product} wishDecrement={wishDecrement}
-      cartIncrement={cartIncrement} cartDecrement={cartDecrement} />: <div></div>}
+       product={product} wishDecrement={wishDecrement} filter={filter} userid={userid}
+      cartIncrement={cartIncrement} cartDecrement={cartDecrement}
+      payment={payment} />: <div></div>}
       <div className="flex flex-col mt-11">
         <h1 className=" text-center font-semibold text-xl mt-2">
           Related Products

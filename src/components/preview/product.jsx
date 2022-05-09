@@ -5,27 +5,27 @@ import { useSelector } from "react-redux";
 
 function Product(props) {
   const local = useSelector((state) => state.user.isLocal);
-    const { product, cartIncrement, userid,filter,
+    const { product, cartIncrement, userid,filter,payment,
          cartDecrement,wishIncrement, wishDecrement } = props
 
     const cartHandler = async(prod)=>{
       if (!product.cart) {
             product.cart = true
-            cartIncrement()
-            const fin = []
-            fin[0]= product
-            const upPro = await compareAndUpdate(fin, filter);
-            console.log(upPro);
+            cartIncrement(payment + product.price);
+            const final = [{ ...product }];
+            const upPro = await compareAndUpdate(final, filter);
+            console.log(final, upPro);
             if (!local) {
-              await api.put(`/user/${userid}/newUpdates`, {
+             const res =  await api.put(`/user/${userid}/newUpdates`, {
                 products: upPro,
               });
+              console.log(res);
             } else {
               localStorage.setItem("products", JSON.stringify(upPro));
             }
         } else if(product.cart) {
             product.cart = false
-            cartDecrement()
+            cartDecrement(1, payment + product.price);
             const upPro = await compareAndUpdate(product, filter);
             if (!local) {
               await api.put(`/user/${userid}/newUpdates`, {

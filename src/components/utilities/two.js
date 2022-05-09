@@ -20,7 +20,7 @@ export function compDates(a, b) {
 }
 
 export const compareAndUpdate = (a, b)=>{
-console.log(b);
+  console.log(a, b);
 for(let i=0; i<a.length; i++){
     for(let j=0; j<b.length; j++){
         if(a[i]._id === b[j]._id){
@@ -40,5 +40,6 @@ export const getUserPro = async (id)=>{
 export const getUserCounts = async (id)=>{
   const res = await api.get(`/user/${id}/counts`)
   const count = await res.data
+  console.log(res);
   return count
 }

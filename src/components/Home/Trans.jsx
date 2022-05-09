@@ -17,6 +17,7 @@ const Trans = (props) => {
     filter,
     setFilter,
     category,
+    payment,
     setCategory,
     setProducts,
     wishIncrement,
@@ -166,6 +167,7 @@ const Trans = (props) => {
         setFilter={setFilter}
         setProducts={setProducts}
         quantity={quantity}
+        payment={payment}
         setQuantity={setQuantity}
       />
     </div>
