@@ -2,7 +2,7 @@ import axios from "axios";
 import { getLocal } from "./useLocal";
 
 export const api = axios.create({
-  baseURL: `http://localhost:8080`,
+  baseURL: `https://hitech1.herokuapp.com`,
 });
 
 export const Products = async () => {
