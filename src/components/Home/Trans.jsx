@@ -41,31 +41,32 @@ const Trans = (props) => {
     <div className="main">
       <div className="flex flex-col overflow-x-hidden">
         <div className="flex items-center justify-center w-full">
-          <Link to="/search"
-          className="s-home search bg-slate-100 rounded-3xl mt-4 p-2 flex items-center w-[30%] justify-between pr-4">
-              <input
-                className="ml-2 cursor-pointer w-[90%] outline-none border-none bg-transparent focus:border-sky-100"
-                type="text"
-                placeholder="Search Products"
-                disabled
-              />
-              <input type="submit" className="hidden " id="submit" />{" "}
-              <label htmlFor="submit">
-                <i className="bx bx-search text-xl cursor-pointer mt-2"></i>
-              </label>
+          <Link
+            to="/search"
+            className="s-home search bg-slate-100 rounded-3xl mt-4 p-2 flex items-center w-[30%] justify-between pr-4"
+          >
+            <input
+              className="ml-2 cursor-pointer w-[90%] outline-none border-none bg-transparent focus:border-sky-100"
+              type="text"
+              placeholder="Search Products"
+              disabled
+            />
+            <input type="submit" className="hidden " id="submit" />{" "}
+            <label htmlFor="submit">
+              <i className="bx bx-search text-xl cursor-pointer mt-2"></i>
+            </label>
           </Link>
         </div>
         <div className="flex items-center px-10 mt-7 intro">
-          <div className="w-[70%]">
-            <span className="text-3xl intro-s">
-              Home of All Technological products, Trends and Tech Tips
-            </span>
+          <div className="w-[60%]">
+            <img src={require("../../Images/beaut.png")} alt="" />
           </div>
-          <img
-            className="w-[30%]"
-            src={introimg}
-            alt=""
-          />
+          <div className="w-[40%] flex flex-col">
+            {/* <p className="text-xl intro-s">
+              Home of All Technological products, Trends and Tech Tips
+            </p> */}
+            <img className="w-[100%]" src={introimg} alt="" />
+          </div>
         </div>
       </div>
       <h2 className="text-center text-2xl mt-3">Categories</h2>
@@ -80,11 +81,7 @@ const Trans = (props) => {
               onClick={() => setCategory("home")}
               className="flex flex-col items-center py-2 justify-between h-full"
             >
-              <img
-                className="w-full"
-                src={homeimg}
-                alt=""
-              />
+              <img className="w-full" src={homeimg} alt="" />
               <p>Home Appliances</p>
             </div>
           </Link>
@@ -97,11 +94,7 @@ const Trans = (props) => {
               onClick={() => setCategory("gaming")}
               className="flex flex-col items-center py-2 justify-between h-full"
             >
-              <img
-                className="w-full"
-                src={gameimg}
-                alt=""
-              />
+              <img className="w-full" src={gameimg} alt="" />
               <p>Gaming</p>
             </div>
           </Link>
@@ -112,11 +105,7 @@ const Trans = (props) => {
             mt-3 flex gap-3 flex-col items-center px-2"
           >
             <div className="flex flex-col items-center py-2 justify-between h-full">
-              <img
-                className="w-full"
-                src={phoneimg}
-                alt=""
-              />
+              <img className="w-full" src={phoneimg} alt="" />
               <p>Phones and Pcs</p>
             </div>
           </Link>
@@ -129,11 +118,7 @@ const Trans = (props) => {
               onClick={() => setCategory("accessories")}
               className="flex flex-col items-center py-2 justify-between h-full"
             >
-              <img
-                className="w-full"
-                src={acessimg}
-                alt=""
-              />
+              <img className="w-full" src={acessimg} alt="" />
               <p>Accesories</p>
             </div>
           </Link>
@@ -146,11 +131,7 @@ const Trans = (props) => {
               onClick={() => setCategory("others")}
               className="flex flex-col items-center py-2 justify-between h-full"
             >
-              <img
-                className="w-full"
-                src={otherimg}
-                alt=""
-              />
+              <img className="w-full" src={otherimg} alt="" />
               <p>Others</p>
             </div>
           </Link>

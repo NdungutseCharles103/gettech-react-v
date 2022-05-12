@@ -125,9 +125,9 @@ const Cart = (props) => {
           <div className="flex w-full items-center justify-center mt-7">
             <p>Products: {onCart.length}</p>
             <p className="mx-[20px]">Total Cost: {payment} USD</p>
-            <button className="px-2 py-1 bg-blue-600 text-white">
-              Order Now
-            </button>
+            <Link to={`/order`} className="px-2 py-1 bg-blue-600 text-white">
+              <p className="text-white">Order Now</p>
+            </Link>
           </div>
           <div className=" overflow-auto">
             <div className="table w-full mt-4  overflow-scroll">

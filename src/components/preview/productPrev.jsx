@@ -52,7 +52,7 @@ function ProductPreview(props) {
           Related Products
         </h1>
         {product !== undefined?
-        <Related product={product} products={filter} />
+        <Related product={product} products={filter} setProduct={setProduct} />
         : ''}
       </div>
     </div>

@@ -22,6 +22,7 @@ import {
   getUserCounts,
 } from "./components/utilities/two";
 import jwtDecode from "jwt-decode";
+import Order from "./components/orders/Order";
 
 function App() {
   const local = useSelector((state) => state.user.isLocal);
@@ -336,7 +337,8 @@ function App() {
             path="signup"
             element={user ? <Navigate replace to="/" /> : <Signup />}
           />
-          <Route path="allmenu" element={<Signup />} />
+          <Route path="order" element={user?<Order
+           products={filter} userid={userid} />:<Navigate replace to='/login' />} />
           <Route path="messages" element={<Signup />} />
           <Route path="listed" element={<Signup />} />
           <Route
