@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 function Order({products, userid}) {
   const local = useSelector((state) => state.user.isLocal);
   const [orders, setOrders] = useState([])
+  const [orderDetais, setOrderDetails] = useState({subtotal: 0, VAT: 0, totalPyment: 0})
 
   const getProducts = async()=>{
     if (local) {
@@ -15,9 +16,11 @@ function Order({products, userid}) {
     } else {
       const data = await api.get(`/user/${userid}/products`);
       const products = await data.data;
-      console.log(products);
       const cartItems = await products.filter((pro) => pro.cart === true);
-      setOrders(products);
+      setOrders(cartItems);
+      const totalarr = cartItems.map(item=> item.price*item.quantity)
+      const subtotal = totalarr.reduce((a,b)=> a+b)
+      console.log(subtotal);
       // setIsLoading(true);
     }
   }
