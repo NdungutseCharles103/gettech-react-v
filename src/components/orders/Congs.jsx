@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { BsBagCheckFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-// import { useStateContext } from "../context/StateContext";
 import { runFireworks } from "./utils";
 
 const Success = () => {
-//   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
 
   useEffect(() => {
     runFireworks();
   }, []);
+
+  const reload =()=>{
+    window.location.replace('http://localhost:4040/')
+  }
 
   return (
     <div className=" items-center absolute bg-black bg-opacity-30 justify-center w-full h-screen flex ">
@@ -26,8 +28,8 @@ const Success = () => {
           </a>
         </p>
         <p className="email-msg">Check your email inbox for the receipt.</p>
-        <Link to="/">
           <button
+          onClick={reload}
             type="button"
             width="300px"
             className="py-2 
@@ -35,7 +37,6 @@ const Success = () => {
           >
             Continue Shopping
           </button>
-        </Link>
       </div>
     </div>
   );

@@ -5,8 +5,12 @@ import { useSelector } from "react-redux";
 
 function Order({products, userid}) {
   const local = useSelector((state) => state.user.isLocal);
+  const user = useSelector((state) => state.user.currentUser);
   const [orders, setOrders] = useState([])
-  const [orderDetais, setOrderDetails] = useState({subtotal: 0, VAT: 0, totalPyment: 0})
+  const [disabled, setDisabled]= useState(false)
+  const [orderDetails, setOrderDetails] = useState({subtotal: 0, VAT: 0, totalPyment: 0})
+  const [address, setAddress] = useState('')
+  const [isuccess, setSuccess] = useState(false)
 
   const getProducts = async()=>{
     if (local) {
@@ -20,9 +24,31 @@ function Order({products, userid}) {
       setOrders(cartItems);
       const totalarr = cartItems.map(item=> item.price*item.quantity)
       const subtotal = totalarr.reduce((a,b)=> a+b)
-      console.log(subtotal);
-      // setIsLoading(true);
+      const vat = subtotal*0.18;
+      const total = Math.round(subtotal+vat)
+      setOrderDetails({subtotal: subtotal, VAT: vat, totalPyment: total})
     }
+  }
+
+  const submitOrder = async(e)=>{
+    setDisabled(true)
+    e.preventDefault();
+    const newOrder = {
+      userId: userid,
+      products: orders,
+      amount: orderDetails.totalPyment,
+      address: address,
+    }
+    const res = await api.post('/order/newOrder', newOrder,{
+      headers: {
+        'accessToken': user
+      }
+    })
+    if(res.status === 200){
+       setSuccess(true)
+       const res = await api.put(`/user/${userid}/newUpdates`, {products: [], counts: [{cart: 0, wish: 0, payment: 0}]})
+       console.log(res);
+      }
   }
 
   useEffect(() => {
@@ -66,14 +92,20 @@ function Order({products, userid}) {
             These inputs doesn't require real life cards just fill for only to
             continue
           </p>
-          <div className="w-4/5">
+          <form className="w-4/5" onSubmit={submitOrder}>
             <div className="flex flex-col mt-3">
               <label htmlFor="">Email address</label>
               <input
                 className="w-full border focus:border-blue-700 focus:ring-1 focus:ring-sky-500 mt-1 h-[40px] px-2 rounded-md outline-none text-black"
                 type="text"
                 placeholder="Enter your email"
-              />
+              required/>
+            </div>
+            <div className="flex flex-col mt-3">
+              <label htmlFor="">Your location address</label>
+              <input onChange={(e)=> setAddress(e.target.value)}
+                className="w-full border focus:border-blue-700 focus:ring-1 focus:ring-sky-500 mt-1 h-[40px] px-2 rounded-md outline-none text-black"
+                type="text"  placeholder="Enter your address" required/>
             </div>
             <div className="flex flex-col mt-3">
               <label htmlFor="">Card details </label>
@@ -84,7 +116,7 @@ function Order({products, userid}) {
                 placeholder="Card Number(12-16 numbers)            MM/YY  CVC"
                 maxLength={16}
                 minLength={12}
-              />
+              required/>
             </div>
             <div className="flex flex-col mt-3">
               <label htmlFor="">Cardholder name</label>
@@ -96,28 +128,27 @@ function Order({products, userid}) {
             </div>
             <div className="w-full flex justify-between mt-4 items-center px-4">
               <p> SubTotal</p>
-              <p>$</p>
+              <p>${orderDetails.subtotal} </p>
             </div>
             <div className="w-full flex justify-between mt-4 items-center px-4">
               <p>VAT(18%)</p>
-              <p>$</p>
+              <p>${orderDetails.VAT}</p>
             </div>
             <div className="w-full flex justify-between mt-4 items-center px-4">
               <p> Total Payment</p>
-              <p>$</p>
+              <p>${orderDetails.totalPyment}</p>
             </div>
             <div className="w-full flex">
-              <button
+              <input
                 type="submit"
-                className="px-3 py-2 bg-blue-500 mx-auto mt-8 w-1/3"
-              >
-                Buy Now
-              </button>
+                className={`px-3 py-2 bg-blue-500 mx-auto
+                 mt-8 w-1/3 ${disabled?'cursor-not-allowed':'cursor-pointer'} `}
+              value="Buy Now" disabled={disabled}/>
             </div>
-          </div>
+          </form>
         </div>
       </div>
-      {/* <Success /> */}
+      {isuccess?<Success />:''}
     </div>
   );
 }

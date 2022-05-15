@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
 
 const Navbar = (props) => {
-  // const [active, seActive] = useState("")
   const [toggle, setToggle] = useState("");
   const { wishCount, cartCount } = props;
   const user = useSelector(state=> state.user.currentUser)
@@ -57,7 +56,6 @@ const Navbar = (props) => {
             >
               Products
             </Link>
-            {/* {show?<Dropdown />:''} */}
           </li>
           <Link to="/cart">
             <IconButton

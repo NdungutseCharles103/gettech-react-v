@@ -20,7 +20,7 @@ function SideNav({active}) {
       </div>
       <div className=" flex flex-col items-center">
         <i className="cursor-pointer bx bx-cog text-2xl mb-5"></i>
-        <Link to="/login">
+        <Link to="/login" onClick={()=> localStorage.clear()}>
           <i className="cursor-pointer bx bx-log-out text-2xl"></i>
         </Link>
       </div>

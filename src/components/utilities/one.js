@@ -4,7 +4,8 @@ import { getLocal } from "./useLocal";
 export const api = axios.create({
   baseURL: `https://hitech1.herokuapp.com`,
 });
-
+//https://hitech1.herokuapp.com
+//http://localhost:8080
 export const Products = async () => {
   const get = await api.get("/products");
   const res = await get.data;
