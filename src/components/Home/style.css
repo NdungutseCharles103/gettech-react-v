@@ -15,3 +15,8 @@
 .rbtns{
     transform: scale(0.8) translateX(0%);
 }
+
+.startbtn:hover{
+    background: linear-gradient(to right, rgb(99, 37, 224), rgb(141, 60, 240));
+
+}

@@ -135,7 +135,7 @@ mt-3 flex flex-col items-center p-2"
 
   return (
     <div className="flex trend flex-col mt-3 overflow-hidden">
-      <h1 className="text-center text-2xl">Trendings</h1>
+      <h1 className="text-center text-2xl  font-semibold">Trendings</h1>
       <div className="grid pro auto-col grid-cols-6 gap-4">
         {products.map((product) => (
           <Trends

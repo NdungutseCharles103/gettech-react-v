@@ -3,6 +3,7 @@ import HomeLoader from "./Loaders/HomeLoader";
 import Trans from "./Home/Trans";
 import Footer from "./Sign/Footer";
 import Navbar from "./Navbar";
+import Partners from "./Home/Partners";
 
 const Home = (props) => {
   const {
@@ -53,6 +54,7 @@ const Home = (props) => {
           <HomeLoader />
         )}
       </div>
+      <Partners />
       <Footer />
     </>
   );

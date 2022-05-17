@@ -8,6 +8,7 @@ import gameimg from "../../Images/gaming.jpg";
 import phoneimg from "../../Images/phone-pc.jpg";
 import acessimg from "../../Images/acess.jpg";
 import otherimg from "../../Images/others.jpg";
+import Floats from "./Floats";
 
 const Trans = (props) => {
   const {
@@ -57,19 +58,9 @@ const Trans = (props) => {
             </label>
           </Link>
         </div>
-        <div className="flex items-center px-10 mt-7 intro">
-          <div className="w-[60%]">
-            <img src={require("../../Images/beaut.png")} alt="" />
-          </div>
-          <div className="w-[40%] flex flex-col">
-            {/* <p className="text-xl intro-s">
-              Home of All Technological products, Trends and Tech Tips
-            </p> */}
-            <img className="w-[100%]" src={introimg} alt="" />
-          </div>
-        </div>
+        <Floats />
       </div>
-      <h2 className="text-center text-2xl mt-3">Categories</h2>
+      <h2 className="text-center font-semibold text-2xl mt-3">Categories</h2>
       <div className="cat flex flex-col items-center mt-3">
         <div className="grid homegrid gap-4 auto-col grid-cols-5">
           <Link
