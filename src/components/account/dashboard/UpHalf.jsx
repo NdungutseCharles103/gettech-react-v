@@ -5,8 +5,8 @@ import { useUser } from '../../../contexts/userContext'
 function UpHalf() {
   const { orders } = useUser()
 
-  const moneySpent = 0
-
+  const Amount = orders.map(o=> o.amount)
+  const moneySpent = Amount.reduce((a,b)=> a+b)
 
   return (
     <div className=" border-slate-200 border-[1px] p-[2%] w-[70%] ">
@@ -23,7 +23,7 @@ function UpHalf() {
           <i className="bx bx-pie-chart p-2 text-3xl bg-yellow-200 rounded-md"></i>
           <div className="flex flex-col ml-2">
             <p>Spent</p>
-            <h1 className="font-bold">$23434</h1>
+            <h1 className="font-bold">${moneySpent}</h1>
           </div>
         </div>
         <div className="border-slate-200 border-[1px] p-1 flex cursor-pointer">
