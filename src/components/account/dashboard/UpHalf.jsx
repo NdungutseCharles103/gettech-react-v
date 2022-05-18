@@ -1,11 +1,13 @@
 import React from 'react'
 import Chart from './charts/Chart';
-import { useSelector } from "react-redux";
-import jwtDecode from 'jwt-decode';
+import { useUser } from '../../../contexts/userContext'
 
 function UpHalf() {
-  const user = useSelector((state) => state.user.currentUser);
-  const userDetails = jwtDecode(user)
+  const { orders } = useUser()
+
+  const moneySpent = 0
+
+
   return (
     <div className=" border-slate-200 border-[1px] p-[2%] w-[70%] ">
       <h1>Earnings</h1>

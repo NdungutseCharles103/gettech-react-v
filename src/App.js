@@ -43,7 +43,6 @@ function App() {
   }
   const fetchProducts = async () => {
     const res = await api.get("/products");
-    console.log(res);
     const fetched = await res.data;
     const localProducts = await JSON.parse(localStorage.getItem("products"));
     if (local) {
@@ -91,7 +90,6 @@ function App() {
       const usercounts = await getUserCounts(userid);
       const fin = compareAndUpdate(usercounts, fecounts);
       setCounts(fin[0]);
-      console.log(fin);
       setPayment(fin[0].payment);
       if (fin[0].cart < 0) fin[0].cart = 0;
       setCartCount(fin[0].cart);
