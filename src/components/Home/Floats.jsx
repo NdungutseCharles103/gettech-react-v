@@ -18,8 +18,8 @@ function Floats() {
           </h1>
           <p className="mt-3">Buying and selling of technlogical
                products using internet</p>
-            <Link to={user?'/products':'/signup'} className=" cursor-pointer
-            flex flex-col items-center shadow-md startbtn duration-900 bg-gradient-to-r text-slate-200 mt-3
+            <Link to={user?'/products':'/signup'} className=" cursor-pointer mt-11
+            flex flex-col items-center shadow-md startbtn duration-900 bg-gradient-to-r text-slate-200
             rounded-3xl py-2 text-xl font-semibold w-[200px] from-blue-500 to-blue-700">
                <p className="text-slate-200"> {user?'Start Shopping':'Get Started'}</p></Link>
       </div>
@@ -31,23 +31,23 @@ function Floats() {
         <div className="flex flex-col w-full items-center justify-center">
             <div className="bg-green-200 p-[5%]
              shadow-lg rounded-3xl">
-                <FaUserShield className="text-[10em] " />
+                <FaUserShield className="text-[8em] " />
             </div>
-            <p className="text-2xl font-semibold mt-4">Free Shopping</p>
+            <p className="text-xl font-semibold mt-4">Free Shopping</p>
         </div>
         <div className="flex flex-col w-full items-center justify-center">
             <div className="bg-yellow-100 p-[5%]
              shadow-lg rounded-3xl">
-                <FaShippingFast className="text-[10em] " />
+                <FaShippingFast className="text-[8em] " />
             </div>
-            <p className="text-2xl font-semibold mt-4">Fast Delivery</p>
+            <p className="text-xl font-semibold mt-4">Fast Delivery</p>
         </div>
         <div className="flex flex-col w-full items-center justify-center">
             <div className="bg-violet-200 p-[5%]
              shadow-lg rounded-3xl">
-                <FaDollarSign className="text-[10em] " />
+                <FaDollarSign className="text-[8em] " />
             </div>
-            <p className="text-2xl font-semibold mt-4">Make Money</p>
+            <p className="text-xl font-semibold mt-4">Make Money</p>
         </div>
     </div>
     </>

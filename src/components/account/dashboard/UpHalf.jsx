@@ -1,12 +1,18 @@
-import React from 'react'
-import Chart from './charts/Chart';
-import { useUser } from '../../../contexts/userContext'
+import React, { useEffect, useState } from "react";
+import Chart from "./charts/Chart";
+import { useUser } from "../../../contexts/userContext";
 
 function UpHalf() {
-  const { orders } = useUser()
+  const [moneySpent, setMoneySpent] = useState(0);
+  const { orders } = useUser();
 
-  const Amount = orders.map(o=> o.amount)
-  const moneySpent = Amount.reduce((a,b)=> a+b)
+  useEffect(() => {
+    if (orders.length !== 0) {
+      const Amount = orders.map((o) => o.amount);
+      const moneySpent = Amount.reduce((a, b) => a + b);
+      setMoneySpent(moneySpent);
+    }
+  }, []);
 
   return (
     <div className=" border-slate-200 border-[1px] p-[2%] w-[70%] ">
@@ -39,4 +45,4 @@ function UpHalf() {
   );
 }
 
-export default UpHalf
+export default UpHalf;
