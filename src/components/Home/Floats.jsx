@@ -12,15 +12,15 @@ function Floats() {
       <>
     <div className="flex items-center px-[7%] mt-7 intro ">
       <div className="w-[45%] flex flex-col">
-          <h1 className="text-[4em] text-gray-800 font-bold">
+          <h1 className="text-[2em] text-gray-800 font-bold">
               Every Purchase Will Be Made
               With Pleasure
           </h1>
           <p className="mt-3">Buying and selling of technlogical
                products using internet</p>
-            <Link to={user?'/products':'/signup'} className=" shadow-violet-900 cursor-pointer
+            <Link to={user?'/products':'/signup'} className=" cursor-pointer
             flex flex-col items-center shadow-md startbtn duration-900 bg-gradient-to-r text-slate-200 mt-3
-            rounded-3xl py-2 text-xl font-semibold w-[200px] from-blue-400 to-violet-900">
+            rounded-3xl py-2 text-xl font-semibold w-[200px] from-blue-500 to-blue-700">
                <p className="text-slate-200"> {user?'Start Shopping':'Get Started'}</p></Link>
       </div>
       <div className="w-[55%] flex items-center flex-col">

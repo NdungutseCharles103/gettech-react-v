@@ -15,7 +15,7 @@ function ProductPreview(props) {
 
   const navigate = useNavigate();
   let params = useParams();
-  console.log(product);
+  // console.log(filter);
 
     const getProduct = async()=> {
       if (local) {
@@ -27,6 +27,7 @@ function ProductPreview(props) {
         const products = await data.data;
         const pro = await products.filter(p=> p._id === params.product_id)
         setProduct(pro[0]);
+        console.log(pro, products, data);
       }
     }
 

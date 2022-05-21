@@ -36,8 +36,8 @@ function Related(props) {
     <>
       <div className="mt-4 related overflow-x-auto overflow-y-hidden gap-2 grid grid-flow-col auto-cols-[20%] px-2">
         {relProducts.length !== 0 ? (
-          relProducts.map((rel) => (
-            <RelProduct rel={rel} />
+          relProducts.map((rel, index) => (
+            <RelProduct rel={rel} key={index} />
           ))
         ) : (
           <div className="text-center">

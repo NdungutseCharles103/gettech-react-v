@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { api } from "../../utilities/one";
-import { BiX } from 'react-icons/bi'
+import { BiX } from 'react-icons/bi';
+import axios from 'axios'
 
 function Upload({userDetails, setIsUpload, setUserImage}) {
   const [image, setImage] = useState("");
@@ -17,7 +18,7 @@ function Upload({userDetails, setIsUpload, setUserImage}) {
     formData.append("file", image);
     formData.append("upload_preset", "charles0");
 
-    const res = await api.post(
+    const res = await axios.post(
       "https://api.cloudinary.com/v1_1/hitech1/image/upload",
       formData
     );

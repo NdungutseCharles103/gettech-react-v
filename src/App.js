@@ -47,11 +47,9 @@ function App() {
     const localProducts = await JSON.parse(localStorage.getItem("products"));
     if (local) {
       if (localProducts) {
-        console.log(fetched);
         setProducts(localProducts);
         setFilter(localProducts);
       } else {
-        console.log(fetched);
         setFilter(fetched);
         setProducts(fetched);
         localStorage.setItem("products", JSON.stringify(fetched));
@@ -61,6 +59,7 @@ function App() {
       const fin = compareAndUpdate(userPro, fetched);
       setProducts(fin);
       setFilter(fin);
+      await api.put(`user/${userid}/newUpdates`,{products: fin})
     }
     setHomeLoader(true);
   };
