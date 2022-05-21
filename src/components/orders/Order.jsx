@@ -39,7 +39,7 @@ function Order({products, userid}) {
       amount: orderDetails.totalPyment,
       address: address,
     }
-    const res = await api.post('/order/newOrder', newOrder,{
+    const res = await api.post('/orders/newOrder', newOrder,{
       headers: {
         'accessToken': user
       }

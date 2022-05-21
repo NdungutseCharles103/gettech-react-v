@@ -4,7 +4,7 @@ function Orders() {
   return (
     <div className="flex flex-col px-[2%]">
       <div className="flex items-center">
-        <p className="cursor-pointer">Acive Order</p>
+        <p className="cursor-pointer">Active Order</p>
         <p className="ml-3 cursor-pointer">Completed</p>
         <p className="ml-3 cursor-pointer">Cancelled</p>
       </div>

@@ -36,11 +36,11 @@ function UpHalf() {
           <i className="bx bxs-time p-2 text-3xl bg-red-200 rounded-md"></i>
           <div className="flex flex-col ml-2">
             <p>Pending</p>
-            <h1 className="font-bold">$23434</h1>
+            <h1 className="font-bold ">$23434</h1>
           </div>
         </div>
       </div>
-      <Chart />
+      <Chart spent={moneySpent} />
     </div>
   );
 }
