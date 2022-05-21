@@ -26,7 +26,8 @@ function Product(props) {
         } else if(product.cart) {
             product.cart = false
             cartDecrement(1, payment + product.price);
-            const upPro = await compareAndUpdate(product, filter);
+            const final = [{ ...product }];
+            const upPro = await compareAndUpdate(final, filter);
             if (!local) {
               await api.put(`/user/${userid}/newUpdates`, {
                 products: upPro,
@@ -42,7 +43,9 @@ function Product(props) {
         if (product.wish === false) {
             product.wish = true
             wishIncrement()
-            const upPro = await compareAndUpdate(product, filter);
+            const final = [{ ...product }];
+            const upPro = await compareAndUpdate(final, filter);
+            console.log(upPro);
             if (!local) {
               await api.put(`/user/${userid}/newUpdates`, {
                 products: upPro,
@@ -53,9 +56,10 @@ function Product(props) {
         } else if(product.wish === true) {
             product.wish = false
             wishDecrement()
-            const upPro = await compareAndUpdate(product, filter);
+            const final = [{ ...product }];
+            const upPro = await compareAndUpdate(final, filter);
             if (!local) {
-              await api.put(`/user/${userid}/newUpdates`, {
+             const res = await api.put(`/user/${userid}/newUpdates`, {
                 products: upPro,
               });
             } else {
