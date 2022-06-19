@@ -16,5 +16,4 @@ export const login = async (dispatch, user)=>{
         console.log(error);
         dispatch(loginFailure())
     }
-    
 }
