@@ -17,6 +17,7 @@
     "canvas-confetti": "^1.5.1",
     "chart.js": "^3.7.1",
     "cloudinary-react": "^1.7.2",
+    "firebase": "^9.8.3",
     "jwt-decode": "^3.1.2",
     "react": "^17.0.0",
     "react-bootstrap": "^2.3.0",
