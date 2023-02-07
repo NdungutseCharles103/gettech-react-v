@@ -2,9 +2,9 @@ import axios from "axios";
 import { getLocal } from "./useLocal";
 
 export const api = axios.create({
-	baseURL: `https://hitech-backend.up.railway.app`,
+	baseURL: `https://hitech-backend.onrender.com`,
 });
-//https://hitech-backend.up.railway.app
+//ttps://hitech-backend.onrender.com
 //http://localhost:8080
 export const Products = async () => {
 	const get = await api.get("/products");

@@ -58,7 +58,7 @@ const Products = (props) => {
 	};
 	console.log(filter);
 	const fetchProducts = async () => {
-		const data = await fetch("https://hitech-backend.up.railway.app/products");
+		const data = await fetch("ttps://hitech-backend.onrender.com/products");
 		const pros = await data.json();
 		setProLoader(true);
 	};
