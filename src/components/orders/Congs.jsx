@@ -10,7 +10,7 @@ const Success = () => {
   }, []);
 
   const reload =()=>{
-    window.location.replace('http://localhost:4040/')
+    window.location.href='/'
   }
 
   return (
